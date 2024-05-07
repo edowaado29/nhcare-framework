@@ -57,6 +57,14 @@ Route::get('/program', function () {
     return view('layanan/program');
 });
 
+Route::get('/tambah_program', function () {
+    return view('layanan/tambah_program');
+});
+
+Route::get('/edit_program', function () {
+    return view('layanan/edit_program');
+});
+
 Route::get('/profile', function () {
     return view('profile/profile');
 });
