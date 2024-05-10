@@ -47,7 +47,6 @@
                   const ErrorNama = '{{ $message }}';
                 </script>
                 @enderror
-
               </div>
               <div class="mb-3">
                 <label for="program_desc" class="form-label text-secondary fs-6">Deskripsi Program <span class="text-danger">*</span></label>

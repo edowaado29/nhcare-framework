@@ -42,7 +42,7 @@
                     @csrf
                     <div class="mb-3">
                       <label for="program_name" class="form-label text-secondary fs-6">Nama Program <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control @error('namaProgram') is-invalid @enderror" id="program_name" name="namaProgram">
+                      <input type="text" class="form-control @error('namaProgram') is-invalid @enderror" id="program_name" name="namaProgram" value="{{ old('namaProgram') }}">
 
                       @error('namaProgram')
                       <script>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="program_desc" class="form-label text-secondary fs-6">Deskripsi Program <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control @error('deskripsiProgram') is-invalid @enderror" id="program_desc" name="deskripsiProgram">
+                      <input type="text" class="form-control @error('deskripsiProgram') is-invalid @enderror" id="program_desc" name="deskripsiProgram" value="{{ old('deskripsiProgram') }}">
 
                       @error('deskripsiProgram')
                       <script>
