@@ -65,7 +65,7 @@
                         <p class="text-x font-weight-bold mb-0">Nama Program</p>
                       </td>
                       <td class="align-middle text-sm">
-                        <a href="" class="btn btn-sm bg-gradient-primary">Detail</a>
+                        <a href="/detail_program" class="btn btn-sm bg-gradient-primary">Detail</a>
                         <a href="/edit_program" class="btn btn-sm bg-gradient-success">Edit</a>
                         <a href="" class="btn btn-sm bg-gradient-danger">Hapus</a>
                       </td>

@@ -12,7 +12,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/dashboard">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/dashboard.png">
+              <img src="./assets/img/dashboard.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
@@ -20,7 +20,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/kedonaturan">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/kedonaturan.png">
+              <img src="./assets/img/kedonaturan.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Kedonaturan</span>
           </a>
@@ -28,7 +28,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/anakasuh">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/anakasuh.png">
+              <img src="./assets/img/anakasuh.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Anak Asuh</span>
           </a>
@@ -36,7 +36,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/donasi">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/donasi.png">
+              <img src="./assets/img/donasi.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Donasi</span>
           </a>
@@ -47,7 +47,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/jabatan">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/jabatan.png">
+              <img src="./assets/img/jabatan.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Jabatan</span>
           </a>
@@ -55,7 +55,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/pegawai">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/pegawai.png">
+              <img src="./assets/img/pegawai.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Pegawai</span>
           </a>
@@ -66,7 +66,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/acara">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/acara.png">
+              <img src="./assets/img/acara.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Acara</span>
           </a>
@@ -74,7 +74,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/absensi">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/absensi.png">
+              <img src="./assets/img/absensi.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Absensi</span>
           </a>
@@ -85,7 +85,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/artikel">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/artikel.png">
+              <img src="./assets/img/artikel.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Artikel</span>
           </a>
@@ -93,7 +93,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/program">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="./assets/img/program.png">
+              <img src="./assets/img/program.png" style="height: 2.75vh;">
             </div>
             <span class="nav-link-text ms-1">Program</span>
           </a>
