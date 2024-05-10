@@ -133,7 +133,7 @@
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',
-      iconColor: 'black',
+      iconColor: 'white',
       customClass: {
         popup: 'colored-toast swal2-icon-error',
       },

@@ -57,8 +57,8 @@ class ProgramController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
-            'namaProgram',
-            'deskripsiProgram',
+            'namaProgram' => 'required',
+            'deskripsiProgram' => 'required',
             'gambarProgram' => 'image|mimes:jpeg,jpg,png|max:2048'
         ]);
 
