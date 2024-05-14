@@ -30,12 +30,12 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6>DATA PEGAWAI</h6>
+              <h6>DATA PENGASUH</h6>
             </div>
             <div class="container mt-3">
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                  <a href="/tambah_pegawai" class="btn btn-sm bg-gradient-primary">Tambah Data</a>
+                  <a href="/tambah_pengasuh" class="btn btn-sm bg-gradient-primary">Tambah Data</a>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <input class="form-control" id="search" type="text" placeholder="Masukkan kata kunci ...">
@@ -73,8 +73,8 @@
                         <p class="text-x font-weight-bold mb-0">Jabatan</p>
                       </td>
                       <td class="align-middle text-sm">
-                        <a href="/detail_pegawai" class="btn btn-sm bg-gradient-primary">Detail</a>
-                        <a href="/edit_pegawai" class="btn btn-sm bg-gradient-success">Edit</a>
+                        <a href="/detail_pengasuh" class="btn btn-sm bg-gradient-primary">Detail</a>
+                        <a href="/edit_pengasuh" class="btn btn-sm bg-gradient-success">Edit</a>
                         <a href="" class="btn btn-sm bg-gradient-danger">Hapus</a>
                       </td>
                     </tr>

@@ -42,7 +42,7 @@
           </a>
         </li>
         <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Kepegawaian</h6>
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Kepengasuhan</h6>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="/jabatan">
@@ -53,11 +53,11 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/pegawai">
+          <a class="nav-link " href="/pengasuh">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/pegawai.png')}}" style="height: 2.75vh;">
             </div>
-            <span class="nav-link-text ms-1">Pegawai</span>
+            <span class="nav-link-text ms-1">Pengasuh</span>
           </a>
         </li>
         <li class="nav-item mt-3">

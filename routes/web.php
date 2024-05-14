@@ -35,11 +35,19 @@ Route::get('/donasi', function () {
 });
 
 Route::get('/jabatan', function () {
-    return view('kepegawaian/jabatan');
+    return view('kepengasuhan/jabatan');
 });
 
-Route::get('/pegawai', function () {
-    return view('kepegawaian/pegawai');
+Route::get('/tambah_jabatan', function () {
+    return view('kepengasuhan/tambah_jabatan');
+});
+
+Route::get('/edit_jabatan', function () {
+    return view('kepengasuhan/edit_jabatan');
+});
+
+Route::get('/pengasuh', function () {
+    return view('kepengasuhan/pengasuh');
 });
 
 Route::get('/acara', function () {
