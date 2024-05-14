@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,21 +35,14 @@ Route::get('/donasi', function () {
     return view('donasi/donasi');
 });
 
-Route::get('/jabatan', function () {
-    return view('kepengasuhan/jabatan');
-});
+//Route Jabatan
+Route::get('/jabatan', [JabatanController::class, 'jabatan'])->name('jabatan');
+Route::get('/tambah_jabatan', [JabatanController::class, 'tambah_jabatan'])->name('tambah_jabatan');
+Route::post('/tambahJabat', [JabatanController::class, 'tambahJabat'])->name('tambahJabat');
+Route::get('/edit_jabatan/{id}', [JabatanController::class, 'edit_jabatan'])->name('edit_jabatan');
+Route::put('/update_jabatan/{id}', [JabatanController::class, 'update_jabatan'])->name('update_jabatan');
+Route::delete('/hapus_jabatan/{id}', [JabatanController::class, 'hapus_jabatan'])->name('hapus_jabatan');
 
-Route::get('/tambah_jabatan', function () {
-    return view('kepengasuhan/tambah_jabatan');
-});
-
-Route::get('/edit_jabatan', function () {
-    return view('kepengasuhan/edit_jabatan');
-});
-
-Route::get('/pengasuh', function () {
-    return view('kepengasuhan/pengasuh');
-});
 
 Route::get('/acara', function () {
     return view('agenda/acara');
@@ -84,6 +78,7 @@ Route::get('/edit_program/{id}', [ProgramController::class, 'edit_program'])->na
 
 Route::put('/update/{id}', [ProgramController::class, 'update'])->name('update');
 Route::delete('/hapus_program/{id}', [ProgramController::class, 'hapus_program'])->name('hapus_program');
+
 
 Route::get('/profile', function () {
     return view('profile/profile');

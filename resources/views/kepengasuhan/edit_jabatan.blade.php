@@ -38,20 +38,22 @@
             <div class="card" style="height: 100%">
               <div class="card-body px-0 pt-0 pb-2 mt-3">
                 <div class="container">
-                  <form action="" method="post">
-                    <div class="mb-3">
-                      <label for="jabatan_name" class="form-label text-secondary fs-6">Nama Jabatan <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="jabatan_name">
-                    </div>
-                    <div class="row mt-4">
-                      <div class="col-6">
-                        <a href="/jabatan" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
-                      </div>
-                      <div class="col-6">
-                        <button type="submit" class="btn btn-sm bg-gradient-success w-100">Tambah</button>
-                      </div>
-                    </div>
-                  </form>
+                <form action="{{ route('update_jabatan', $jabatan->id) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="mb-3">
+                  <label for="jabatan_name" class="form-label text-secondary fs-6">Nama Jabatan <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="jabatan_name" name="nama_jabatan" value="{{ old('nama_jabatan', $jabatan->nama_jabatan) }}">
+                </div>
+                <div class="row mt-4">
+                  <div class="col-6">
+                    <a href="{{ route('jabatan') }}" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
+                  </div>
+                  <div class="col-6">
+                    <button type="submit" class="btn btn-sm bg-gradient-success w-100">Edit</button>
+                  </div>
+                </div>
+              </form>
                 </div>
               </div>
             </div>
@@ -63,26 +65,4 @@
     </div>
   </div>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-  // Check if ErrorImage, ErrorJudul, or ErrorDeskripsi variable exists and display toast message if any of them does
-  if (typeof ErrorNama !== 'undefined' || typeof ErrorDeskripsi !== 'undefined' || typeof ErrorGambar !== 'undefined') {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-right',
-      iconColor: 'white',
-      customClass: {
-        popup: 'colored-toast swal2-icon-error',
-      },
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-    })
-    Toast.fire({
-      icon: 'warning',
-      title: "Form Tidak Boleh Kosong",
-    });
-  }
-</script>
 @endsection
