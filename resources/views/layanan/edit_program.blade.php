@@ -60,7 +60,7 @@
               </div>
               <div class="form-group">
                 <label for="program_img" class="text-secondary fs-6">Gambar Program <span class="text-danger">*</span></label><br>
-                <input type="file" class="form-control-file" id="program_img" name="gambarProgram" onchange="previewImage(event)">
+                <input type="file" class="form-control" id="program_img" name="gambarProgram" onchange="previewImage(event)">
               </div>
               <div class="row mt-4">
                 <div class="col-6">

@@ -64,7 +64,7 @@
 
                     <div class="form-group">
                       <label for="program_img" class="text-secondary fs-6">Gambar Program <span class="text-danger">*</span></label><br>
-                      <input type="file" class="form-control-file @error('gambarProgram') is-invalid @enderror" id="program_img" name="gambarProgram" onchange="previewImage(event)">
+                      <input type="file" class="form-control @error('gambarProgram') is-invalid @enderror" id="program_img" name="gambarProgram" onchange="previewImage(event)">
 
                       @error('gambarProgram')
                       <script>

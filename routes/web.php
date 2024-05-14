@@ -43,6 +43,17 @@ Route::get('/edit_jabatan/{id}', [JabatanController::class, 'edit_jabatan'])->na
 Route::put('/update_jabatan/{id}', [JabatanController::class, 'update_jabatan'])->name('update_jabatan');
 Route::delete('/hapus_jabatan/{id}', [JabatanController::class, 'hapus_jabatan'])->name('hapus_jabatan');
 
+Route::get('/pengasuh', function () {
+    return view('kepengasuhan/pengasuh');
+});
+
+Route::get('/tambah_pengasuh', function () {
+    return view('kepengasuhan/tambah_pengasuh');
+});
+
+Route::get('/edit_pengasuh', function () {
+    return view('kepengasuhan/edit_pengasuh');
+});
 
 Route::get('/acara', function () {
     return view('agenda/acara');
