@@ -2,11 +2,11 @@
 
 @section('content')
 <main class="main-content position-relative border-radius-lg ">
-<style>
-        .colored-toast.swal2-icon-error {
-            background-color: #f27474 !important;
-        }
-    </style>
+  <style>
+    .colored-toast.swal2-icon-error {
+      background-color: #f27474 !important;
+    }
+  </style>
   <!-- Navbar -->
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
     <div class="container-fluid py-1 px-3">
@@ -38,84 +38,101 @@
             <div class="card" style="height: 100%">
               <div class="card-body px-0 pt-0 pb-2 mt-3">
                 <div class="container">
-                  <form action="" method="post">
+                  <form action="{{ route('tambahPeng')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
-                      <label for="nik" class="form-label text-secondary fs-6">NIK <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="nik">
+                      <label for="nbm" class="form-label text-secondary fs-6">NBM <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="nbm" name="nbm" value="{{ old('nbm') }}">
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="nama_pengasuh" class="form-label text-secondary fs-6">Nama Pengasuh <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control @error('nama_pengasuh') is-invalid @enderror" id="nama_pengasuh" name="nama_pengasuh" value="{{ old('nama_pengasuh') }}">
+                      @error('nama_pengasuh')
+                      <script>
+                        const ErrorNama = '{{ $message }}';
+                      </script>
+                      @enderror
                     </div>
                     <div class="mb-3">
-                      <label for="name" class="form-label text-secondary fs-6">Nama <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="name">
+                      <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
+                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki">
+                      <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
+                      <input type="radio" id="perempuan" name="jenis_kelamin" style="margin-left: 3vh;" value="perempuan">
+                      <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
-                        <input type="radio" id="laki-laki" name="jenis_kelamin">
-                        <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
-                        <input type="radio" id="perempuan" name="jenis_kelamin" style="margin-left: 3vh;">
-                        <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
+                      <label for="tempat_lahir" class="form-label text-secondary fs-6">Tempat Lahir <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}">
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="tanggal_lahir" class="form-label text-secondary fs-6">Tanggal Lahir <span class="text-danger">*</span></label>
+                      <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="last_pend" class="form-label text-secondary fs-6">Pendidikan Terakhir</label>
+                      <select class="form-control" id="last_pend" name="pendidikan_terakhir">
+                        <option value="">Pilih Pendidikan Terakhir</option>
+                        <option value="SD">SD</option>
+                        <option value="SMP">SMP/Sederajat</option>
+                        <option value="SMA">SMA/Sederajat</option>
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                      </select>
+                    </div>
+
+                    <div class=" mb-3">
+                      <label for="id_jabatan" class="form-label text-secondary fs-6">Jabatan <span class="text-danger">*</span></label>
+                      <select id="id_jabatan" class="form-control  @error('id_jabatan') is-invalid @enderror" name="id_jabatan">
+                        <option value="">Pilih Jabatan</option>
+                        @foreach($jabatans as $jabatan)
+                        <option value="{{ $jabatan->id }}" {{ old('id_jabatan') == $jabatan->id ? 'selected' : ''}}> {{ $jabatan->nama_jabatan }}</option>
+                        @endforeach
+                      </select>
+                      @error('id_jabatan')
+                      <script>
+                        const ErrorJabat = '{{ $message }}';
+                      </script>
+                      @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="tpt_lahir" class="form-label text-secondary fs-6">Tempat Lahir <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="tpt_lahir">
+                      <label for="alamat" class="form-label text-secondary fs-6">Alamat <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat') }}">
                     </div>
+
                     <div class="mb-3">
-                        <label for="tgl_lahir" class="form-label text-secondary fs-6">Tanggal Lahir <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="tgl_lahir">
+                      <label for="nomor_handphone" class="form-label text-secondary fs-6">Nomor Handphone <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="nomor_handphone" name="nomor_handphone" value="{{ old('nomor_handphone') }}">
                     </div>
+
                     <div class="mb-3">
-                        <label for="last_pend" class="form-label text-secondary fs-6">Pendidikan Terakhir</label>
-                        <select class="form-control" id="last_pend">
-                            <option value="SD">SD</option>
-                            <option value="SMP">SMP/Sederajat</option>
-                            <option value="SMA">SMA/Sederajat</option>
-                            <option value="S1">S1</option>
-                            <option value="S2">S2</option>
-                        </select>
+                      <label for="email" class="form-label text-secondary fs-6">Email <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
                     </div>
+
                     <div class="mb-3">
-                        <label for="jabatan" class="form-label text-secondary fs-6">Jabatan</label>
-                        <select class="form-control" id="jabatan">
-                            <option value="Ketua">Ketua</option>
-                        </select>
+                      <label for="tanggal_masuk" class="form-label text-secondary fs-6">Tanggal Masuk <span class="text-danger">*</span></label>
+                      <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" value="{{ old('tanggal_masuk') }}">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label text-secondary fs-6">Status Kepengasuhan <span class="text-danger">*</span></label><br>
-                        <input type="radio" name="status_kepengasuhan" id="tetap">
-                        <label for="tetap" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Pengasuh Tetap</label>
-                        <input type="radio" name="status_kepengasuhan" id="non_tetap" style="margin-left: 3vh;">
-                        <label for="non_tetap" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Pengasuh Tidak Tetap</label>
-                    </div>
-                    <div class="mb-3">
-                        <label for="alamat" class="form-label text-secondary fs-6">Alamat</label>
-                        <textarea class="form-control" id="alamat" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="no_hp" class="form-label text-secondary fs-6">Nomor Handphone <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="no_hp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label text-secondary fs-6">Email <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="tgl_masuk" class="form-label text-secondary fs-6">Tanggal Masuk <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="tgl_masuk">
+
+                    <div class="form-group">
+                      <label for="foto_kartukeluarga" class="text-secondary fs-6">Foto Kartu Keluarga (KK) <span class="text-danger">*</span></label><br>
+                      <input type="file" class="form-control" id="foto_kartukeluarga" name="foto_kartukeluarga" onchange="kkPreview(event)">
                     </div>
                     <div class="form-group">
-                        <label for="kk_img" class="text-secondary fs-6">Foto Kartu Keluarga (KK) <span class="text-danger">*</span></label><br>
-                        <input type="file" class="form-control" id="kk_img" onchange="kkPreview(event)">
+                      <label for="foto_ktp" class="text-secondary fs-6">Foto Kartu Tanda Penduduk (KTP) <span class="text-danger">*</span></label><br>
+                      <input type="file" class="form-control " id="foto_ktp" name="foto_ktp" onchange="ktpPreview(event)">
                     </div>
                     <div class="form-group">
-                        <label for="ktp_img" class="text-secondary fs-6">Foto Kartu Tanda Penduduk (KTP) <span class="text-danger">*</span></label><br>
-                        <input type="file" class="form-control" id="ktp_img" onchange="ktpPreview(event)">
-                    </div>
-                    <div class="form-group">
-                      <label for="profile_img" class="text-secondary fs-6">Foto Pengasuh <span class="text-danger">*</span></label><br>
-                      <input type="file" class="form-control" id="profile_img" onchange="pengasuhPreview(event)">
+                      <label for="foto_pengasuh" class="text-secondary fs-6">Foto Pengasuh <span class="text-danger">*</span></label><br>
+                      <input type="file" class="form-control" id="foto_pengasuh" name="foto_pengasuh" onchange="pengasuhPreview(event)">
                     </div>
                     <div class="row mt-4">
                       <div class="col-6">
-                        <a href="/pengasuh" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
+                        <a href="{{route('pengasuh')}}" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
                       </div>
                       <div class="col-6">
                         <button type="submit" class="btn btn-sm bg-gradient-success w-100">Tambah</button>
@@ -180,14 +197,14 @@
     image.style.display = 'none';
 
     reader.onload = function() {
-        if (reader.readyState === FileReader.DONE) {
-            image.src = reader.result;
-            image.style.display = 'block';
-        }
+      if (reader.readyState === FileReader.DONE) {
+        image.src = reader.result;
+        image.style.display = 'block';
+      }
     }
 
     if (event.target.files[0]) {
-        reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]);
     }
   }
 
@@ -199,14 +216,14 @@
     image.style.display = 'none';
 
     reader.onload = function() {
-        if (reader.readyState === FileReader.DONE) {
-            image.src = reader.result;
-            image.style.display = 'block';
-        }
+      if (reader.readyState === FileReader.DONE) {
+        image.src = reader.result;
+        image.style.display = 'block';
+      }
     }
 
     if (event.target.files[0]) {
-        reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]);
     }
   }
 
@@ -218,21 +235,20 @@
     image.style.display = 'none';
 
     reader.onload = function() {
-        if (reader.readyState === FileReader.DONE) {
-            image.src = reader.result;
-            image.style.display = 'block';
-        }
+      if (reader.readyState === FileReader.DONE) {
+        image.src = reader.result;
+        image.style.display = 'block';
+      }
     }
 
     if (event.target.files[0]) {
-        reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]);
     }
   }
 </script>
 
 <script>
-  // Check if ErrorImage, ErrorJudul, or ErrorDeskripsi variable exists and display toast message if any of them does
-  if (typeof ErrorNama !== 'undefined' || typeof ErrorDeskripsi !== 'undefined' || typeof ErrorGambar !== 'undefined') {
+  if (typeof ErrorNama !== 'undefined' || typeof ErrorJabat !== 'undefined' || typeof ErrorKK !== 'undefined' || typeof ErrorKTP !== 'undefined' || typeof Errorfoto !== 'undefined') {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',

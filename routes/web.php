@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\PengasuhController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,17 +44,14 @@ Route::get('/edit_jabatan/{id}', [JabatanController::class, 'edit_jabatan'])->na
 Route::put('/update_jabatan/{id}', [JabatanController::class, 'update_jabatan'])->name('update_jabatan');
 Route::delete('/hapus_jabatan/{id}', [JabatanController::class, 'hapus_jabatan'])->name('hapus_jabatan');
 
-Route::get('/pengasuh', function () {
-    return view('kepengasuhan/pengasuh');
-});
+//route pengasuh
+Route::get('/pengasuh', [PengasuhController::class, 'pengasuh'])->name('pengasuh');
+Route::get('/tambah_pengasuh', [PengasuhController::class, 'tambah_pengasuh'])->name('tambah_pengasuh');
+Route::post('/tambahPeng', [PengasuhController::class, 'tambahPeng'])->name('tambahPeng');
+Route::get('/edit_pengasuh/{id}', [PengasuhController::class, 'edit_pengasuh'])->name('edit_pengasuh');
+Route::put('/update_pengasuh/{id}', [PengasuhController::class, 'update_pengasuh'])->name('update_pengasuh');
+Route::delete('/hapus_pengasuh/{id}', [PengasuhController::class, 'hapus_pengasuh'])->name('hapus_pengasuh');
 
-Route::get('/tambah_pengasuh', function () {
-    return view('kepengasuhan/tambah_pengasuh');
-});
-
-Route::get('/edit_pengasuh', function () {
-    return view('kepengasuhan/edit_pengasuh');
-});
 
 Route::get('/acara', function () {
     return view('agenda/acara');

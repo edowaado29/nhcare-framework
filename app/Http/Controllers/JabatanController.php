@@ -25,11 +25,9 @@ class JabatanController extends Controller
         $this->validate($request, [
             'nama_jabatan' => 'required',
         ]);
-
         Jabatan::create([
             'nama_jabatan' => $request->nama_jabatan
         ]);
-
         return redirect()->route('jabatan')->with(['message' => 'Jabatan Berhasil Ditambahkan']);
     }
 
