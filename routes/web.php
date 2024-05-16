@@ -28,6 +28,14 @@ Route::get('/kedonaturan', function () {
     return view('kedonaturan/kedonaturan');
 });
 
+Route::get('/tambah_kedonaturan', function () {
+    return view('kedonaturan/tambah_kedonaturan');
+});
+
+Route::get('/edit_kedonaturan', function () {
+    return view('kedonaturan/edit_kedonaturan');
+});
+
 Route::get('/anakasuh', function () {
     return view('anakasuh/anakasuh');
 });
