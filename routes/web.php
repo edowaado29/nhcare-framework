@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\KedonaturanController;
 use App\Http\Controllers\PengasuhController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
@@ -24,17 +25,15 @@ Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
 
-Route::get('/kedonaturan', function () {
-    return view('kedonaturan/kedonaturan');
-});
+//Route Kedonaturan
+Route::get('/kedonaturan', [KedonaturanController::class, 'kedonaturan'])->name('kedonaturan');
+Route::get('/detail_donatur', [KedonaturanController::class, 'detail_donatur']);
+Route::get('/tambah_donatur', [KedonaturanController::class, 'tambah_donatur'])->name('tambah_donatur');
+Route::post('/tambahDon', [KedonaturanController::class, 'tambahDon'])->name('tambahDon');
+Route::get('/edit_donatur/{id}', [KedonaturanController::class, 'edit_donatur'])->name('edit_donatur');
+Route::put('/update_donatur/{id}', [KedonaturanController::class, 'update_donatur'])->name('update_donatur');
+Route::delete('/hapus_donatur/{id}', [KedonaturanController::class, 'hapus_donatur'])->name('hapus_donatur');
 
-Route::get('/tambah_kedonaturan', function () {
-    return view('kedonaturan/tambah_kedonaturan');
-});
-
-Route::get('/edit_kedonaturan', function () {
-    return view('kedonaturan/edit_kedonaturan');
-});
 
 Route::get('/anakasuh', function () {
     return view('anakasuh/anakasuh');

@@ -2,11 +2,11 @@
 
 @section('content')
 <main class="main-content position-relative border-radius-lg ">
-<style>
-        .colored-toast.swal2-icon-error {
-            background-color: #f27474 !important;
-        }
-    </style>
+  <style>
+    .colored-toast.swal2-icon-error {
+      background-color: #f27474 !important;
+    }
+  </style>
   <!-- Navbar -->
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
     <div class="container-fluid py-1 px-3">
@@ -38,47 +38,69 @@
             <div class="card" style="height: 100%">
               <div class="card-body px-0 pt-0 pb-2 mt-3">
                 <div class="container">
-                <form action="" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                  <label for="name" class="form-label text-secondary fs-6">Nama <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="name">
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label text-secondary fs-6">Email <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="email">
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label text-secondary fs-6">Password <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="password">
-                </div>
-                <div class="mb-3">
-                  <label for="no_hp" class="form-label text-secondary fs-6">Nomor Handphone <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="no_hp">
-                </div>
-                <div class="mb-3">
-                    <label for="alamat" class="form-label text-secondary fs-6">Alamat</label>
-                    <textarea class="form-control" id="alamat" rows="3"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
-                    <input type="radio" id="laki-laki" name="jenis_kelamin">
-                    <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
-                    <input type="radio" id="perempuan" name="jenis_kelamin" style="margin-left: 3vh;">
-                    <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
-                </div>
-                <div class="form-group">
-                    <label for="profile_img" class="text-secondary fs-6">Foto Profil <span class="text-danger">*</span></label><br>
-                    <input type="file" class="form-control" id="profile_img" onchange="previewImage(event)">
-                </div>
-                <div class="row mt-4">
-                  <div class="col-6">
-                    <a href="/kedonaturan" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
-                  </div>
-                  <div class="col-6">
-                    <button type="submit" class="btn btn-sm bg-gradient-success w-100">Edit</button>
-                  </div>
-                </div>
-              </form>
+                  <form action="{{route ('update_donatur', $donatur->id )}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @if (Session::has('fail'))
+                    <script>
+                      const ErrorMessage = "{{ Session::get('fail') }}";
+                    </script>
+                    @endif
+                    @method('PUT')
+                    <input type="hidden" name="id" value="{{old('id', $donatur->id)}}">
+                    <div class="mb-3">
+                      <label for="nama_donatur" class="form-label text-secondary fs-6">Nama <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control @error('nama_donatur') is-invalid @enderror" id="nama_donatur" name="nama_donatur" value="{{old('nama_donatur', $donatur->nama_donatur)}}">
+                      @error('nama_donatur')
+                      <script>
+                        const ErrorNama = '{{ $message }}';
+                      </script>
+                      @enderror
+                    </div>
+                    <div class="mb-3">
+                      <label for="nomor_handphone" class="form-label text-secondary fs-6">Nomor Handphone <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="nomor_handphone" name="nomor_handphone" value="{{ old('nomor_handphone', $donatur->nomor_handphone)}}" onkeypress="return hanyaAngka(event)" oninput="cekPanjangInput(this)">
+                    </div>
+                    <div class="mb-3">
+                      <label for="alamat" class="form-label text-secondary fs-6">Alamat</label>
+                      <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ old('alamat', $donatur->alamat)}}</textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
+                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" {{ old('jenis_kelamin', $donatur->jenis_kelamin) == 'laki-laki' ? 'checked' : '' }}>
+                      <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
+
+                      <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" style="margin-left: 3vh;" {{ old('jenis_kelamin', $donatur->jenis_kelamin) == 'perempuan' ? 'checked' : '' }}>
+                      <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
+                    </div>
+                    <div class="mb-3">
+                      <label for="email" class="form-label text-secondary fs-6">Email <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $donatur->email)}}">
+                      @error('email')
+                      <script>
+                        const ErrorEmail = '{{ $message }}';
+                      </script>
+                      @enderror
+                    </div>
+                    <div class="mb-3 position-relative">
+                      <label for="password" class="form-label text-secondary fs-6">
+                        Password <span class="text-danger">*</span>
+                      </label>
+                      <input type="password" class="form-control @error('passwordd') is-invalid @enderror" id="passwordd" name="passwordd" value="{{old('password')}}">
+                      <i class="fa fa-eye position-absolute" id="togglePassword" style="cursor: pointer; right: 11.9px; top: 46.195px;"></i>
+                    </div>
+                    <div class="form-group">
+                      <label for="foto_donatur" class="text-secondary fs-6">Foto Donatur <span class="text-danger">*</span></label><br>
+                      <input type="file" class="form-control" id="foto_donatur " name="foto_donatur" onchange="previewImage(event)">
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-6">
+                        <a href="{{route('kedonaturan')}}" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
+                      </div>
+                      <div class="col-6">
+                        <button type="submit" class="btn btn-sm bg-gradient-success w-100">Edit</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -90,7 +112,7 @@
                   <div class="mb-3">
                     <div class="preview">
                       <label class="text-secondary fs-6">Pratinjau Foto Profil</label><br>
-                      <img src="{{asset('assets/img/no_image.png')}}" class="mb-3" id="imagePreview" style="width: 100%; height: 400px; border: 2px solid #d4d4d4; border-radius: 10px;">
+                      <img src="{{ $donatur->foto_donatur !== null ? asset('/storage/kedonaturans/' . $donatur->foto_donatur) : asset('/assets/img/no_image.png') }}" class="mb-3" id="imagePreview" style="width: 100%; height: 400px; border: 2px solid #d4d4d4; border-radius: 10px;">
                     </div>
                   </div>
                 </div>
@@ -102,6 +124,36 @@
     </div>
   </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  function hanyaAngka(event) {
+    var angka = (event.which) ? event.which : event.keyCode
+    if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
+      return false;
+    return true;
+  }
+
+  function cekPanjangInput(input) {
+    if (input.value.length > 13) {
+      input.value = input.value.slice(0, 13);
+    }
+  }
+</script>
+
+<script>
+  const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#password');
+
+  togglePassword.addEventListener('click', function(e) {
+    // Toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+
+    // Toggle the eye icon
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>
 
 <script>
   function previewImage(event) {
@@ -112,14 +164,52 @@
     image.style.display = 'none';
 
     reader.onload = function() {
-        if (reader.readyState === FileReader.DONE) {
-            image.src = reader.result;
-            image.style.display = 'block';
-        }
+      if (reader.readyState === FileReader.DONE) {
+        image.src = reader.result;
+        image.style.display = 'block';
+      }
     }
 
     if (event.target.files[0]) {
-        reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+</script>
+
+<script>
+  // Check if ErrorImage, ErrorJudul, or ErrorDeskripsi variable exists and display toast message if any of them does
+  if (typeof ErrorNama !== 'undefined' || typeof ErrorEmail !== 'undefined' || typeof ErrorPassword !== 'undefined' || typeof ErrorMessage !== 'undefined') {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast swal2-icon-error',
+      },
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    })
+    if (typeof ErrorNama !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorNama,
+      });
+    } else if (typeof ErrorEmail !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorEmail,
+      });
+    } else if (typeof ErrorPassword !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorPassword,
+      });
+    } else if (typeof ErrorMessage !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorMessage,
+      });
     }
   }
 </script>
