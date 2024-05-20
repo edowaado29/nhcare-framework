@@ -26,14 +26,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/anakasuh">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="{{asset ('assets/img/anakasuh.png')}}" style="height: 2.75vh;">
-            </div>
-            <span class="nav-link-text ms-1">Anak Asuh</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link " href="/donasi">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/donasi.png')}}" style="height: 2.75vh;">
@@ -61,7 +53,26 @@
           </a>
         </li>
         <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Agenda</h6>
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Asuhan</h6>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/anakasuh">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <img src="{{asset ('assets/img/anakasuh.png')}}" style="height: 2.75vh;">
+            </div>
+            <span class="nav-link-text ms-1">Anak Asuh</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <img src="{{asset ('assets/img/absensi.png')}}" style="height: 2.75vh;">
+            </div>
+            <span class="nav-link-text ms-1">Seleksi Penerima Donasi</span>
+          </a>
+        </li>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Layanan</h6>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="/acara">
@@ -70,17 +81,6 @@
             </div>
             <span class="nav-link-text ms-1">Acara</span>
           </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="/absensi">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="{{asset ('assets/img/absensi.png')}}" style="height: 2.75vh;">
-            </div>
-            <span class="nav-link-text ms-1">Absensi</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Layanan</h6>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="/artikel">

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KedonaturanController;
 use App\Http\Controllers\PengasuhController;
@@ -21,9 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard/dashboard');
-});
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('isLoggedIn');
 
 //Route Kedonaturan
 Route::get('/kedonaturan', [KedonaturanController::class, 'kedonaturan'])->name('kedonaturan');
@@ -34,9 +34,8 @@ Route::get('/edit_donatur/{id}', [KedonaturanController::class, 'edit_donatur'])
 Route::put('/update_donatur/{id}', [KedonaturanController::class, 'update_donatur'])->name('update_donatur');
 Route::delete('/hapus_donatur/{id}', [KedonaturanController::class, 'hapus_donatur'])->name('hapus_donatur');
 
-
 Route::get('/anakasuh', function () {
-    return view('anakasuh/anakasuh');
+    return view('asuhan/anakasuh');
 });
 
 Route::get('/donasi', function () {
@@ -61,28 +60,12 @@ Route::delete('/hapus_pengasuh/{id}', [PengasuhController::class, 'hapus_pengasu
 
 
 Route::get('/acara', function () {
-    return view('agenda/acara');
-});
-
-Route::get('/absensi', function () {
-    return view('agenda/absensi');
+    return view('layanan/acara');
 });
 
 Route::get('/artikel', function () {
     return view('layanan/artikel');
 });
-
-// Route::get('/program', function () {
-//     return view('layanan/program');
-// });
-
-// Route::get('/tambah_program', function () {
-//     return view('layanan/tambah_program');
-// });
-
-// Route::get('/edit_program', function () {
-//     return view('layanan/edit_program');
-// });
 
 Route::get('/program', [ProgramController::class, 'program'])->name('program');
 Route::get('/detail_program', [ProgramController::class, 'detail_program']);
@@ -98,4 +81,10 @@ Route::delete('/hapus_program/{id}', [ProgramController::class, 'hapus_program']
 
 Route::get('/profile', function () {
     return view('profile/profile');
+});
+
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/login','login')->middleware('alreadyLoggedIn');
+    Route::post('/loginUser','loginUser')->name('loginUser');
+    Route::get('/logout','logout');
 });

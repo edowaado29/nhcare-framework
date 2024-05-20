@@ -19,6 +19,14 @@
   <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
+  <style>
+    .colored-toast {
+      background-color: #a5dc86 !important;
+    }
+    .colored-toast.swal2-icon-error {
+            background-color: #f27474 !important;
+        }
+  </style>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -33,6 +41,7 @@
   <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
   <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
   <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 
@@ -125,6 +134,45 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+  @if (Session::has('fail'))
+  <script>
+    const Toast1 = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast swal2-icon-error',
+      },
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    })
+    Toast1.fire({
+      icon: 'success',
+      title: "{{ Session::get('fail') }}"
+    });
+  </script>
+  @endif
+  @if (Session::has('loginSuccess'))
+  <script>
+    const Toast2 = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast',
+      },
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    })
+    Toast2.fire({
+      icon: 'success',
+      title: "{{ Session::get('loginSuccess') }}"
+    });
+  </script>
+  {{ Session::pull('loginSuccess', 'Login Berhasil!') }}
+  @endif
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

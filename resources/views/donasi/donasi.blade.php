@@ -35,7 +35,6 @@
             <div class="container mt-3">
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                  <a href="/tambah_donasi" class="btn btn-sm bg-gradient-primary">Tambah Data</a>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <input class="form-control" id="search" type="text" placeholder="Masukkan kata kunci ...">
@@ -78,8 +77,6 @@
                       </td>
                       <td class="align-middle text-sm">
                         <a href="/detail_kedonaturan" class="btn btn-sm bg-gradient-primary">Detail</a>
-                        <a href="/edit_kedonaturan" class="btn btn-sm bg-gradient-success">Edit</a>
-                        <a href="" class="btn btn-sm bg-gradient-danger">Hapus</a>
                       </td>
                     </tr>
                     <tr>
@@ -104,8 +101,6 @@
                       </td>
                       <td class="align-middle text-sm">
                         <a href="/detail_kedonaturan" class="btn btn-sm bg-gradient-primary">Detail</a>
-                        <a href="/edit_kedonaturan" class="btn btn-sm bg-gradient-success">Edit</a>
-                        <a href="" class="btn btn-sm bg-gradient-danger">Hapus</a>
                       </td>
                     </tr>
                   </tbody>
