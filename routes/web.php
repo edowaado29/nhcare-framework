@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KedonaturanController;
 use App\Http\Controllers\PengasuhController;
@@ -38,9 +40,9 @@ Route::get('/anakasuh', function () {
     return view('asuhan/anakasuh');
 });
 
-Route::get('/donasi', function () {
-    return view('donasi/donasi');
-});
+//route donasi
+Route::get('/donasi', [DonasiController::class, 'donasi'])->name('donasi');
+Route::get('/detail_donasi', [DonasiController::class, 'detail_donasi']);
 
 //Route Jabatan
 Route::get('/jabatan', [JabatanController::class, 'jabatan'])->name('jabatan');
@@ -63,18 +65,21 @@ Route::get('/acara', function () {
     return view('layanan/acara');
 });
 
-Route::get('/artikel', function () {
-    return view('layanan/artikel');
-});
+//route artikel
+Route::get('/artikel', [ArtikelController::class, 'artikel'])->name('artikel');
+Route::get('/detail_artikel', [ArtikelController::class, 'detail_artikel']);
+Route::get('/tambah_artikel', [ArtikelController::class, 'tambah_artikel'])->name('tambah_artikel');
+Route::post('/tambah_artkl', [ArtikelController::class, 'tambah_artkl'])->name('tambah_artkl');
+Route::get('/edit_artikel/{id}', [ArtikelController::class, 'edit_artikel'])->name('edit_artikel');
+Route::put('/update_artikel/{id}', [ArtikelController::class, 'update_artikel'])->name('update_artikel');
+Route::delete('/hapus_artikel/{id}', [ArtikelController::class, 'hapus_artikel'])->name('hapus_artikel');
 
+//route program
 Route::get('/program', [ProgramController::class, 'program'])->name('program');
 Route::get('/detail_program', [ProgramController::class, 'detail_program']);
-
 Route::get('/tambah_program', [ProgramController::class, 'tambah_program'])->name('tambah_program');
-
 Route::post('/tambah', [ProgramController::class, 'tambah'])->name('tambah');
 Route::get('/edit_program/{id}', [ProgramController::class, 'edit_program'])->name('edit_program');
-
 Route::put('/update/{id}', [ProgramController::class, 'update'])->name('update');
 Route::delete('/hapus_program/{id}', [ProgramController::class, 'hapus_program'])->name('hapus_program');
 

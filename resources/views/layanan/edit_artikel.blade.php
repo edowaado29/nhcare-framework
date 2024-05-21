@@ -39,7 +39,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="article_desc" class="form-label text-secondary fs-6">Deskripsi Artikel <span class="text-danger">*</span></label>
-                                <textarea class="form-control" id="article_desc" name="deskripsi_artikel" rows="5">{{ old('deskripsi_artikel') }}</textarea>
+                                <textarea class="form-control" id="article_desc" name="deskripsi_artikel" rows="5">{{ old('deskripsi_artikel', $artikels->deskripsi_artikel) }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="article_img" class="text-secondary fs-6">Gambar Artikel <span class="text-danger">*</span></label><br>
