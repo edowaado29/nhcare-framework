@@ -32,8 +32,14 @@ class ArtikelController extends Controller
     public function tambah_artkl(Request $request): RedirectResponse
     {
         $this->validate($request, [
-            'judul_artikel' => 'Required',
+            'judul_artikel' => 'required',
+            'deskripsi_artikel' => 'required',
             'gambar_artikel' => 'required|image|mimes:jpeg,jpg,png|max:2048'
+        ], 
+        [
+            'judul_artikel.required' => 'Nama program tidak boleh kosong!',
+            'deskripsi_artikel.required' => 'Deskripsi program tidak boleh kosong!',
+            'gambar_artikel.required' => 'Gambar program tidak boleh kosong!'
         ]);
 
         $gambarArtikel = $request->file('gambar_artikel');
@@ -43,8 +49,8 @@ class ArtikelController extends Controller
             'judul_artikel' => $request->judul_artikel,
             'deskripsi_artikel' => $request->deskripsi_artikel,
             'gambar_artikel' => $gambarArtikel->hashName(),
-        ]);
-        return redirect()->route('artikel')->with(['message' => 'Artikel berhasil ditambahkan']);
+        ]); 
+        return redirect()->route('program')->with(['message' => 'Program berhasil ditambahkan']);
     }
 
     public function edit_artikel(string $id): View
@@ -55,10 +61,19 @@ class ArtikelController extends Controller
 
     public function update_artikel(Request $request, $id): RedirectResponse
     {
-        $this->validate($request, [
-            'judul_artikel' => 'required',
-            'gambar_artikel' => 'required|image|mimes:jpeg,jpg,png|max:2048'
-        ]);
+        $this->validate(
+            $request,
+            [
+                'judul_artikel' => 'required',
+                'deskripsi_artikel' => 'required',
+                'gambar_artikel' => 'image|mimes:jpeg,jpg,png|max:2048'
+            ],
+            [
+                'judul_artikel.required' => 'Judul artikel tidak boleh kosong!',
+                'deskripsi_artikel.required' => 'Deskripsi artikel tidak boleh kosong!',
+                'gambar_artikel.required' => 'Gambar artikel tidak boleh kosong!'
+            ]
+        );
 
         $artikels = Artikel::findOrFail($id);
 
@@ -81,13 +96,13 @@ class ArtikelController extends Controller
         }
         return redirect()->route('artikel')->with((['message' => 'Artikel Berhasil Diupdate']));
     }
-    public function hapus_artikel($id): RedirectResponse {
+    public function hapus_artikel($id): RedirectResponse
+    {
         $artikels = Artikel::findOrFail($id);
 
         storage::delete('public/artikels/' . $artikels->gambarArtikel);
 
         $artikels->delete();
-        return redirect()->route('artikel')-> with(['message' => 'Artikel berhasil dihapus']);
+        return redirect()->route('artikel')->with(['message' => 'Artikel berhasil dihapus']);
     }
-    
 }

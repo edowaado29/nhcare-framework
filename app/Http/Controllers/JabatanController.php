@@ -28,7 +28,7 @@ class JabatanController extends Controller
         Jabatan::create([
             'nama_jabatan' => $request->nama_jabatan
         ]);
-        return redirect()->route('jabatan')->with(['message' => 'Jabatan Berhasil Ditambahkan']);
+        return redirect()->route('jabatan')->with(['message' => 'Jabatan berhasil ditambahkan']);
     }
 
     public function edit_jabatan(string $id): View
@@ -47,13 +47,13 @@ class JabatanController extends Controller
         $jabatan->update([
             'nama_jabatan' => $request->nama_jabatan
         ]);
-        return redirect()->route('jabatan')->with(['message' => 'Jabatan Berhasil Diperbarui']);
+        return redirect()->route('jabatan')->with(['message' => 'Jabatan berhasil diedit']);
     }
 
     public function hapus_jabatan($id): RedirectResponse
     {
         $jabatan = Jabatan::findOrFail($id);
         $jabatan->delete();
-        return redirect()->route('jabatan')->with(['message' => 'Data Berhasil Dihapus']);
+        return redirect()->route('jabatan')->with(['message' => 'Jabatan berhasil dihapus']);
     }
 }

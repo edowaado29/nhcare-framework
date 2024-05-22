@@ -30,10 +30,16 @@ class PengasuhController extends Controller
         $this->validate($request, [
             'nama_pengasuh' => 'required',
             'id_jabatan' => 'required',
+            'email' => 'email',
             'foto_kartukeluarga' => 'image|mimes:jpeg,jpg,png|max:2048',
             'foto_ktp' => 'image|mimes:jpeg,jpg,png|max:2048',
             'foto_pengasuh' => 'image|mimes:jpeg,jpg,png|max:2048'
-        ]);
+        ],
+    [
+        'nama_pengasuh.required' => 'Nama pengasuh harus diisi!',
+        'id_jabatan.required' => 'Jabatan pengasuh harus diisi!',
+        'email.email' => 'Email tidak valid'
+    ]);
 
         $fotoKKPath = $request->hasFile('foto_kartukeluarga') ? $request->file('foto_kartukeluarga')->store('public/pengasuhs/KK') : null;
         $fotoKTPPath = $request->hasFile('foto_ktp') ? $request->file('foto_ktp')->store('public/pengasuhs/KTP') : null;
@@ -60,7 +66,7 @@ class PengasuhController extends Controller
             'foto_ktp' => $fotoktp,
             'foto_pengasuh' => $foto,
         ]);
-        return redirect()->route('pengasuh')->with('message', 'Data Berhasil Ditambahkan');
+        return redirect()->route('pengasuh')->with('message', 'Pengasuh berhasil ditambahkan');
     }
 
 
@@ -81,10 +87,16 @@ class PengasuhController extends Controller
     {
         $this->validate($request, [
             'nama_pengasuh' => 'required',
+            'email' => 'email',
             'foto_kartukeluarga' => 'image|mimes:jpeg,jpg,png|max:2048',
             'foto_ktp' => 'image|mimes:jpeg,jpg,png|max:2048',
             'foto_pengasuh' => 'image|mimes:jpeg,jpg,png|max:2048'
-        ]);
+        ],
+    [
+        'nama_pengasuh.required' => 'Nama pengasuh harus diisi!',
+        'id_jabatan.required' => 'Jabatan pengasuh harus diisi!',
+        'email.email' => 'Email tidak valid'
+    ]);
 
         $peng = Pengasuh::findOrFail($id);
 
@@ -130,7 +142,7 @@ class PengasuhController extends Controller
             'foto_pengasuh' => $peng->foto_pengasuh
         ]);
 
-        return redirect()->route('pengasuh')->with('message', 'Data Berhasil Di Edit');
+        return redirect()->route('pengasuh')->with('message', 'Data pengasuh berhasil diedit');
     }
 
     public function hapus_pengasuh($id): RedirectResponse
@@ -143,6 +155,6 @@ class PengasuhController extends Controller
 
         $peng->delete();
 
-        return redirect()->route('pengasuh')->with(['message' => 'Data Berhasil Dihapus']);
+        return redirect()->route('pengasuh')->with(['message' => 'Pengasuh berhasil dihapus']);
     }
 }

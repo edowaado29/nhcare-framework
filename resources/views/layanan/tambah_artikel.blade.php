@@ -43,41 +43,41 @@
                                         <div class="mb-3">
                                             <label for="article_name" class="form-label text-secondary fs-6">Judul Artikel <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control @error('judulArtikel') is-invalid @enderror" id="article_name" name="judul_artikel" value="{{ old('judul_artikel') }}">
-
                                             @error('judulArtikel')
                                             <script>
                                                 const ErrorNama = '{{ $message }}';
                                             </script>
                                             @enderror
                                         </div>
+                                        
                                         <div class="mb-3">
                                             <label for="article_desc" class="form-label text-secondary fs-6">Deskripsi Artikel <span class="text-danger">*</span></label>
                                             <textarea type="text" class="form-control @error('deskripsiArtikel') is-invalid @enderror" id="article_desc" name="deskripsi_artikel" rows="5">{{ old('deskripsi_artikel') }}</textarea>
                                             @error('deskripsiArtikel')
-                                                <script>
-                                                    const ErrorDesk = '{{ $message }}';
-                                                </script>
-                                                @enderror
+                                            <script>
+                                                const ErrorDeskripsi = '{{ $message }}';
+                                            </script>
+                                            @enderror
                                         </div>
 
-                                            <div class="form-group">
-                                                <label for="article_img" class="text-secondary fs-6">Gambar Artikel <span class="text-danger">*</span></label><br>
-                                                <input type="file" class="form-control-file @error('gambarArtikel') is-invalid @enderror" id="article_img" name="gambar_artikel" onchange="previewImage(event)">
+                                        <div class="form-group">
+                                            <label for="article_img" class="text-secondary fs-6">Gambar Artikel <span class="text-danger">*</span></label><br>
+                                            <input type="file" class="form-control-file @error('gambarArtikel') is-invalid @enderror" id="article_img" name="gambar_artikel" onchange="previewImage(event)">
 
-                                                @error('gambarArtikel')
-                                                <script>
-                                                    const ErrorGambar = '{{ $message }}';
-                                                </script>
-                                                @enderror
+                                            @error('gambarArtikel')
+                                            <script>
+                                                const ErrorGambar = '{{ $message }}';
+                                            </script>
+                                            @enderror
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-6">
+                                                <a href="{{route('artikel')}}" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
                                             </div>
-                                            <div class="row mt-4">
-                                                <div class="col-6">
-                                                    <a href="{{route('artikel')}}" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
-                                                </div>
-                                                <div class="col-6">
-                                                    <button type="submit" class="btn btn-sm bg-gradient-success w-100">Tambah</button>
-                                                </div>
+                                            <div class="col-6">
+                                                <button type="submit" class="btn btn-sm bg-gradient-success w-100">Tambah</button>
                                             </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                 <div class="container">
                                     <div class="mb-3">
                                         <div class="preview">
-                                            <label class="text-secondary fs-6">Pratinjau Gambar Program</label><br>
+                                            <label class="text-secondary fs-6">Pratinjau Gambar Artikel</label><br>
                                             <img src="{{asset('assets/img/no_image.png')}}" class="mb-3" id="imagePreview" style="width: 100%; height: 270px; border: 2px solid #d4d4d4; border-radius: 10px;">
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace( 'article_desc' );
+    CKEDITOR.replace('article_desc');
 </script>
 
 <script>
@@ -130,8 +130,7 @@
 </script>
 
 <script>
-    // Check if ErrorImage, ErrorJudul, or ErrorDeskripsi variable exists and display toast message if any of them does
-    if (typeof ErrorNama !== 'undefined' ||typeof ErrorDesk !== 'undefined' || typeof ErrorGambar !== 'undefined') {
+    if (typeof ErrorNama !== 'undefined' || typeof ErrorDeskripsi !== 'undefined' || typeof ErrorGambar !== 'undefined') {
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-right',
@@ -147,6 +146,22 @@
             icon: 'warning',
             title: "Form Tidak Boleh Kosong",
         });
+        if (typeof ErrorNama !== 'undefined') {
+            Toast.fire({
+                icon: 'warning',
+                title: ErrorNama,
+            });
+        } else if (typeof ErrorDeskripsi !== 'undefined') {
+            Toast.fire({
+                icon: 'warning',
+                title: ErrorDeskripsi,
+            });
+        } else if (typeof ErrorGambar !== 'undefined') {
+            Toast.fire({
+                icon: 'warning',
+                title: ErrorGambar,
+            });
+        }
     }
 </script>
 @endsection

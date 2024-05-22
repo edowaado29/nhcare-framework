@@ -35,11 +35,21 @@
                             @method('PUT')
                             <div class="mb-3">
                                 <label for="article_name" class="form-label text-secondary fs-6">Judul Artikel <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="article_name" name="judul_artikel" value="{{ old('judul_artikel', $artikels->judul_artikel) }}">
+                                <input type="text" class="form-control @error('judulArtikel') is-invalid @enderror" id="article_name" name="judul_artikel" value="{{ old('judul_artikel', $artikels->judul_artikel) }}">
+                                @error('judulArtikel')
+                                <script>
+                                    const ErrorNama = '{{ $message }}';
+                                </script>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="article_desc" class="form-label text-secondary fs-6">Deskripsi Artikel <span class="text-danger">*</span></label>
-                                <textarea class="form-control" id="article_desc" name="deskripsi_artikel" rows="5">{{ old('deskripsi_artikel', $artikels->deskripsi_artikel) }}</textarea>
+                                <textarea class="form-control @error('deskripsiArtikel') is-invalid @enderror" id="article_desc" name="deskripsi_artikel" rows="5">{{ old('deskripsi_artikel', $artikels->deskripsi_artikel) }}</textarea>
+                                @error('deskripsiArtikel')
+                                <script>
+                                    const ErrorDeskripsi = '{{ $message }}';
+                                </script>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="article_img" class="text-secondary fs-6">Gambar Artikel <span class="text-danger">*</span></label><br>
@@ -94,6 +104,37 @@
 
         if (event.target.files[0]) {
             reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+</script>
+
+<script>
+    if (typeof ErrorNama !== 'undefined' || typeof ErrorDeskripsi !== 'undefined') {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-right',
+            iconColor: 'white',
+            customClass: {
+                popup: 'colored-toast swal2-icon-error',
+            },
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+        })
+        Toast.fire({
+            icon: 'warning',
+            title: "Form Tidak Boleh Kosong",
+        });
+        if (typeof ErrorNama !== 'undefined') {
+            Toast.fire({
+                icon: 'warning',
+                title: ErrorNama,
+            });
+        } else if (typeof ErrorDeskripsi !== 'undefined') {
+            Toast.fire({
+                icon: 'warning',
+                title: ErrorDeskripsi,
+            });
         }
     }
 </script>

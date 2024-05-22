@@ -34,6 +34,11 @@ class ProgramController extends Controller
             'namaProgram' => 'required',
             'deskripsiProgram' => 'required',
             'gambarProgram' => 'required|image|mimes:jpeg,jpg,png|max:2048'
+        ], 
+        [
+            'namaProgram.required' => 'Nama program tidak boleh kosong!',
+            'deskripsiProgram.required' => 'Deskripsi program tidak boleh kosong!',
+            'gambarProgram.required' => 'Gambar program tidak boleh kosong!'
         ]);
 
         $gambarProgram = $request->file('gambarProgram');
@@ -44,7 +49,7 @@ class ProgramController extends Controller
             'deskripsiProgram' => $request->deskripsiProgram,
             'gambarProgram' => $gambarProgram->hashName()
         ]);
-        return redirect()->route('program')->with(['message' => 'Data Berhasil Ditambahkan']);
+        return redirect()->route('program')->with(['message' => 'Program berhasil ditambahkan']);
     }
 
     public function edit_program(string $id): View
@@ -60,6 +65,11 @@ class ProgramController extends Controller
             'namaProgram' => 'required',
             'deskripsiProgram' => 'required',
             'gambarProgram' => 'image|mimes:jpeg,jpg,png|max:2048'
+        ],
+        [
+            'namaProgram.required' => 'Nama program tidak boleh kosong!',
+            'deskripsiProgram.required' => 'Deskripsi program tidak boleh kosong!',
+            'gambarProgram.required' => 'Gambar program tidak boleh kosong!'
         ]);
 
         $prog = program::findOrFail($id);
@@ -81,7 +91,7 @@ class ProgramController extends Controller
                 'deskripsiProgram' => $request->deskripsiProgram
             ]);
         }
-        return redirect()->route('program')->with((['message' => 'Data Berhasil Diupdate']));
+        return redirect()->route('program')->with((['message' => 'Program berhasil diedit']));
     }
 
     public function hapus_program($id): RedirectResponse
@@ -91,6 +101,6 @@ class ProgramController extends Controller
         Storage::delete('public/programs/' . $prog->gambarProgram);
 
         $prog->delete();
-        return redirect()->route('program')->with(['message' => 'Data Berhasil Dihapus']);
+        return redirect()->route('program')->with(['message' => 'Program berhasil dihapus']);
     }
 }

@@ -43,7 +43,12 @@
                 @method('PUT')
                 <div class="mb-3">
                   <label for="jabatan_name" class="form-label text-secondary fs-6">Nama Jabatan <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="jabatan_name" name="nama_jabatan" value="{{ old('nama_jabatan', $jabatan->nama_jabatan) }}">
+                  <input type="text" class="form-control  @error('nama_jabatan') is-invalid @enderror" id="jabatan_name" name="nama_jabatan" value="{{ old('nama_jabatan', $jabatan->nama_jabatan) }}">
+                  @error('nama_jabatan')
+                      <script>
+                        const ErrorNama = '{{ $message }}';
+                      </script>
+                      @enderror
                 </div>
                 <div class="row mt-4">
                   <div class="col-6">
@@ -65,4 +70,25 @@
     </div>
   </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  if (typeof ErrorNama !== 'undefined') {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast swal2-icon-error',
+      },
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    })
+    Toast.fire({
+      icon: 'warning',
+      title: "Jabatan Tidak Boleh Kosong",
+    });
+  }
+</script>
 @endsection

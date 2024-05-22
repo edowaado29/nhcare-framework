@@ -145,17 +145,17 @@
 </script>
 
 <script>
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#passwordd');
+  const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#passwordd');
 
-    togglePassword.addEventListener('click', function(e) {
-        // Toggle the type attribute
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
+  togglePassword.addEventListener('click', function(e) {
+    // Toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
 
-        // Toggle the eye icon
-        this.classList.toggle('fa-eye-slash');
-    });
+    // Toggle the eye icon
+    this.classList.toggle('fa-eye-slash');
+  });
 </script>
 
 <script>
@@ -193,6 +193,10 @@
       timer: 2000,
       timerProgressBar: true,
     })
+    Toast.fire({
+      icon: 'warning',
+      title: "Form Tidak Boleh Kosong",
+    });
     if (typeof ErrorNama !== 'undefined') {
       Toast.fire({
         icon: 'warning',
@@ -203,12 +207,12 @@
         icon: 'warning',
         title: ErrorEmail,
       });
-    }else if (typeof ErrorPassword !== 'undefined') {
+    } else if (typeof ErrorPassword !== 'undefined') {
       Toast.fire({
         icon: 'warning',
         title: ErrorPassword,
       });
-    }else if (typeof ErrorMessage !== 'undefined') {
+    } else if (typeof ErrorMessage !== 'undefined') {
       Toast.fire({
         icon: 'warning',
         title: ErrorMessage,

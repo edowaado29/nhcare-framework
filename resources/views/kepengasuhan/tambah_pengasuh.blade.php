@@ -105,12 +105,17 @@
 
                     <div class="mb-3">
                       <label for="nomor_handphone" class="form-label text-secondary fs-6">Nomor Handphone <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="nomor_handphone" name="nomor_handphone" value="{{ old('nomor_handphone') }}">
+                      <input type="regex" class="form-control" id="nomor_handphone" name="nomor_handphone" value="{{ old('nomor_handphone')}}" onkeypress="return hanyaAngka(event)" oninput="cekPanjangInput(this)">
                     </div>
 
                     <div class="mb-3">
                       <label for="email" class="form-label text-secondary fs-6">Email <span class="text-danger">*</span></label>
-                      <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+                      <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email')}}">
+                      @error('email')
+                      <script>
+                        const ErrorEmail = '{{ $message }}';
+                      </script>
+                      @enderror
                     </div>
 
                     <div class="mb-3">
@@ -189,6 +194,21 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+  function hanyaAngka(event) {
+    var angka = (event.which) ? event.which : event.keyCode
+    if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
+      return false;
+    return true;
+  }
+
+  function cekPanjangInput(input) {
+    if (input.value.length > 13) {
+      input.value = input.value.slice(0, 13);
+    }
+  }
+</script>
+
+<script>
   function kkPreview(event) {
     const reader = new FileReader();
     const image = document.getElementById('kkPreview');
@@ -248,7 +268,7 @@
 </script>
 
 <script>
-  if (typeof ErrorNama !== 'undefined' || typeof ErrorJabat !== 'undefined' || typeof ErrorKK !== 'undefined' || typeof ErrorKTP !== 'undefined' || typeof Errorfoto !== 'undefined') {
+  if (typeof ErrorNama !== 'undefined' || typeof ErrorJabat !== 'undefined' || typeof ErrorEmail !== 'undefined') {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',
@@ -264,6 +284,22 @@
       icon: 'warning',
       title: "Form Tidak Boleh Kosong",
     });
+    if (typeof ErrorNama !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorNama,
+      });
+    } else if (typeof ErrorJabat !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorJabat,
+      });
+    } else if (typeof ErrorEmail !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorEmail,
+      });
+    }
   }
 </script>
 @endsection

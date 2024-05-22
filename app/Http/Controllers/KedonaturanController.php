@@ -62,7 +62,7 @@ class KedonaturanController extends Controller
                 'password' => Hash::make($request->passwordd),
                 'foto_donatur' => $foto_donatur
             ]);
-            return redirect()->route('kedonaturan')->with(['message' => 'Data Berhasil Ditambahkan']);
+            return redirect()->route('kedonaturan')->with(['message' => 'Donatur berhasil ditambahkan']);
         }
     }
 
@@ -112,7 +112,7 @@ class KedonaturanController extends Controller
                             'email' => $request->email,
                             'foto_donatur' => $foto_donatur->hashName()
                         ]);
-                        return redirect()->route('kedonaturan')->with(['message' => 'Data Berhasil Diedit']);
+                        return redirect()->route('kedonaturan')->with(['message' => 'Data donatur berhasil diedit']);
                     } else {
                         return back()->with('fail', 'Password harus terdiri dari 8-16 karakter');
                     }
@@ -126,7 +126,7 @@ class KedonaturanController extends Controller
                         'password' => Hash::make($request->passwordd),
                         'foto_donatur' => $foto_donatur->hashName()
                     ]);
-                    return redirect()->route('kedonaturan')->with(['message' => 'Data Berhasil Diedit']);
+                    return redirect()->route('kedonaturan')->with(['message' => 'Data donatur berhasil diedit']);
                 }
             } else {
                 if(strlen($request->passwordd) < 8 || strlen($request->passwordd) > 16){
@@ -138,7 +138,7 @@ class KedonaturanController extends Controller
                             'jenis_kelamin' => $request->jenis_kelamin,
                             'email' => $request->email
                         ]);
-                        return redirect()->route('kedonaturan')->with(['message' => 'Data Berhasil Diedit']);
+                        return redirect()->route('kedonaturan')->with(['message' => 'Data donatur berhasil diedit']);
                     } else {
                         return back()->with('fail', 'Password harus terdiri dari 8-16 karakter');
                     }
@@ -151,7 +151,7 @@ class KedonaturanController extends Controller
                         'email' => $request->email,
                         'password' => Hash::make($request->passwordd)
                     ]);
-                    return redirect()->route('kedonaturan')->with(['message' => 'Data Berhasil Diedit']);
+                    return redirect()->route('kedonaturan')->with(['message' => 'Data donatur berhasil diedit']);
                 }
             }
         }
@@ -164,6 +164,6 @@ class KedonaturanController extends Controller
         Storage::delete('public/kedonaturans/' . $donatur->foto_donatur);
 
         $donatur->delete();
-        return redirect()->route('kedonaturan')->with(['message' => 'Data Berhasil Dihapus']);
+        return redirect()->route('kedonaturan')->with(['message' => 'Donatur berhasil dihapus']);
     }
 }

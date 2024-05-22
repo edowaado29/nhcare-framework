@@ -86,7 +86,7 @@
     })
     Toast.fire({
       icon: 'warning',
-      title: "Form Tidak Boleh Kosong",
+      title: "Jabatan Tidak Boleh Kosong",
     });
   }
 </script>

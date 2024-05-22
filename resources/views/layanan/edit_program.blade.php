@@ -48,16 +48,17 @@
                 </script>
                 @enderror
               </div>
+
               <div class="mb-3">
                 <label for="program_desc" class="form-label text-secondary fs-6">Deskripsi Program <span class="text-danger">*</span></label>
-                <input type="text" class="form-control  @error('deskripsiProgram') is-invalid @enderror" id="program_desc" name="deskripsiProgram" value="{{ old('deskripsiProgram', $prog->deskripsiProgram) }}">
-
+                <textarea class="form-control @error('deskripsiProgram') is-invalid @enderror" id="program_desc" name="deskripsiProgram" rows="3">{{ old('deskripsiProgram', $prog->deskripsiProgram)}}</textarea>
                 @error('deskripsiProgram')
                 <script>
                   const ErrorDeskripsi = '{{ $message }}';
                 </script>
                 @enderror
               </div>
+
               <div class="form-group">
                 <label for="program_img" class="text-secondary fs-6">Gambar Program <span class="text-danger">*</span></label><br>
                 <input type="file" class="form-control" id="program_img" name="gambarProgram" onchange="previewImage(event)">
@@ -130,6 +131,17 @@
       icon: 'warning',
       title: "Form Tidak Boleh Kosong",
     });
+    if (typeof ErrorNama !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorNama,
+      });
+    } else if (typeof ErrorDeskripsi !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorDeskripsi,
+      });
   }
+}
 </script>
 @endsection

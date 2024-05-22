@@ -2,11 +2,11 @@
 
 @section('content')
 <main class="main-content position-relative border-radius-lg ">
-<style>
-        .colored-toast.swal2-icon-error {
-            background-color: #f27474 !important;
-        }
-    </style>
+  <style>
+    .colored-toast.swal2-icon-error {
+      background-color: #f27474 !important;
+    }
+  </style>
   <!-- Navbar -->
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
     <div class="container-fluid py-1 px-3">
@@ -49,15 +49,14 @@
                         const ErrorNama = '{{ $message }}';
                       </script>
                       @enderror
-
                     </div>
+
                     <div class="mb-3">
                       <label for="program_desc" class="form-label text-secondary fs-6">Deskripsi Program <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control @error('deskripsiProgram') is-invalid @enderror" id="program_desc" name="deskripsiProgram" value="{{ old('deskripsiProgram') }}">
-
+                      <textarea class="form-control @error('deskripsiProgram') is-invalid @enderror" id="program_desc" name="deskripsiProgram" rows="3">{{ old('deskripsiProgram')}}</textarea>
                       @error('deskripsiProgram')
                       <script>
-                        const ErrorDeskripsi = '{{ $message }}'; 
+                        const ErrorDeskripsi = '{{ $message }}';
                       </script>
                       @enderror
                     </div>
@@ -68,7 +67,7 @@
 
                       @error('gambarProgram')
                       <script>
-                        const ErrorGambar = '{{ $message }}'; 
+                        const ErrorGambar = '{{ $message }}';
                       </script>
                       @enderror
                     </div>
@@ -115,14 +114,14 @@
     image.style.display = 'none';
 
     reader.onload = function() {
-        if (reader.readyState === FileReader.DONE) {
-            image.src = reader.result;
-            image.style.display = 'block';
-        }
+      if (reader.readyState === FileReader.DONE) {
+        image.src = reader.result;
+        image.style.display = 'block';
+      }
     }
 
     if (event.target.files[0]) {
-        reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]);
     }
   }
 </script>
@@ -145,6 +144,22 @@
       icon: 'warning',
       title: "Form Tidak Boleh Kosong",
     });
+    if (typeof ErrorNama !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorNama,
+      });
+    } else if (typeof ErrorDeskripsi !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorDeskripsi,
+      });
+    } else if (typeof ErrorGambar !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorGambar,
+      });
+    }
   }
 </script>
 @endsection

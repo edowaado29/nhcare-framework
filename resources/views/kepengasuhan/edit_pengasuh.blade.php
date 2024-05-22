@@ -43,148 +43,159 @@
                     @method('PUT')
                     <div class="mb-3">
                       <label for="nbm" class="form-label text-secondary fs-6">NBM <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control " id="nbm" name="nbm" value="{{ old('nbm', $peng->nbm) }}">
+                      <input type="text" class="form-control" id="nbm" name="nbm" value="{{ old('nbm', $peng->nbm) }}">
                     </div>
 
                     <div class="mb-3">
                       <label for="nama_pengasuh" class="form-label text-secondary fs-6">Nama Pengasuh <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control " id="nama_pengasuh" name="nama_pengasuh" value="{{ old('nama_pengasuh', $peng->nama_pengasuh) }}">
-                      <div class="mb-3">
-                        <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
-                        <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" {{ old('jenis_kelamin', $peng->jenis_kelamin) == 'laki-laki' ? 'checked' : '' }}>
-                        <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
+                      <input type="text" class="form-control @error('nama_pengasuh') is-invalid @enderror" id="nama_pengasuh" name="nama_pengasuh" value="{{ old('nama_pengasuh', $peng->nama_pengasuh) }}">
+                      @error('nama_pengasuh')
+                      <script>
+                        const ErrorNama = '{{ $message }}';
+                      </script>
+                      @enderror
+                    </div>
 
-                        <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" style="margin-left: 3vh;" {{ old('jenis_kelamin', $peng->jenis_kelamin) == 'perempuan' ? 'checked' : '' }}>
-                        <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
-                      </div>
+                    <div class="mb-3">
+                      <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
+                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" {{ old('jenis_kelamin', $peng->jenis_kelamin) == 'laki-laki' ? 'checked' : '' }}>
+                      <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
 
-                      <div class="mb-3">
-                        <label for="tempat_lahir" class="form-label text-secondary fs-6">Tempat Lahir <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir', $peng->tempat_lahir) }}">
-                      </div>
+                      <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" style="margin-left: 3vh;" {{ old('jenis_kelamin', $peng->jenis_kelamin) == 'perempuan' ? 'checked' : '' }}>
+                      <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
+                    </div>
 
-                      <div class="mb-3">
-                        <label for="tanggal_lahir" class="form-label text-secondary fs-6">Tanggal Lahir <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir', $peng->tanggal_lahir) }}">
-                      </div>
+                    <div class="mb-3">
+                      <label for="tempat_lahir" class="form-label text-secondary fs-6">Tempat Lahir <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir', $peng->tempat_lahir) }}">
+                    </div>
 
-                      <div class="mb-3">
-                        <label for="last_pend" class="form-label text-secondary fs-6">Pendidikan Terakhir</label>
-                        <select class="form-control" id="last_pend" name="pendidikan_terakhir">
-                          <option value="">Pilih Pendidikan Terakhir</option>
-                          <option value="SD" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'SD' ? 'selected' : ''}}>SD</option>
-                          <option value="SMP" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'SMP' ? 'selected' : ''}}>SMP/Sederajat</option>
-                          <option value="SMA" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'SMA' ? 'selected' : ''}}>SMA/Sederajat</option>
-                          <option value="S1" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'S1' ? 'selected' : ''}}>S1</option>
-                          <option value="S2" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'S2' ? 'selected' : ''}}>S2</option>
-                          <option value="S3" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'S3' ? 'selected' : ''}}>S3</option>
-                        </select>
-                      </div>
-                      <div class="mb-3">
-                        <label for="id_jabatan" class="form-label text-secondary fs-6">Jabatan <span class="text-danger">*</span></label>
-                        <select id="id_jabatan" class="form-control @error('id_jabatan') is-invalid @enderror" name="id_jabatan">
-                          <option value="">Pilih Jabatan</option>
-                          @foreach($jabatans as $jabatan)
-                          <option value="{{ $jabatan->id }}" {{ old('id_jabatan', $peng->id_jabatan) == $jabatan->id ? 'selected' : '' }}>
-                            {{ $jabatan->nama_jabatan }}
-                          </option>
-                          @endforeach
-                        </select>
-                        @error('id_jabatan')
-                        <script>
-                          const ErrorJabat = '{{ $message }}';
-                        </script>
-                        @enderror
-                      </div>
+                    <div class="mb-3">
+                      <label for="tanggal_lahir" class="form-label text-secondary fs-6">Tanggal Lahir <span class="text-danger">*</span></label>
+                      <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir', $peng->tanggal_lahir) }}">
+                    </div>
 
-                      <div class="mb-3">
-                        <label for="alamat" class="form-label text-secondary fs-6">Alamat <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat', $peng->alamat) }}">
-                      </div>
+                    <div class="mb-3">
+                      <label for="last_pend" class="form-label text-secondary fs-6">Pendidikan Terakhir</label>
+                      <select class="form-control" id="last_pend" name="pendidikan_terakhir">
+                        <option value="">Pilih Pendidikan Terakhir</option>
+                        <option value="SD" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'SD' ? 'selected' : ''}}>SD</option>
+                        <option value="SMP" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'SMP' ? 'selected' : ''}}>SMP/Sederajat</option>
+                        <option value="SMA" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'SMA' ? 'selected' : ''}}>SMA/Sederajat</option>
+                        <option value="S1" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'S1' ? 'selected' : ''}}>S1</option>
+                        <option value="S2" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'S2' ? 'selected' : ''}}>S2</option>
+                        <option value="S3" {{ old('pendidikan_terakhir', $peng->pendidikan_terakhir) == 'S3' ? 'selected' : ''}}>S3</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="id_jabatan" class="form-label text-secondary fs-6">Jabatan <span class="text-danger">*</span></label>
+                      <select id="id_jabatan" class="form-control @error('id_jabatan') is-invalid @enderror" name="id_jabatan">
+                        <option value="">Pilih Jabatan</option>
+                        @foreach($jabatans as $jabatan)
+                        <option value="{{ $jabatan->id }}" {{ old('id_jabatan', $peng->id_jabatan) == $jabatan->id ? 'selected' : '' }}>
+                          {{ $jabatan->nama_jabatan }}
+                        </option>
+                        @endforeach
+                      </select>
+                      @error('id_jabatan')
+                      <script>
+                        const ErrorJabat = '{{ $message }}';
+                      </script>
+                      @enderror
+                    </div>
 
-                      <div class="mb-3">
-                        <label for="nomor_handphone" class="form-label text-secondary fs-6">Nomor Handphone <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nomor_handphone" name="nomor_handphone" value="{{ old('nomor_handphone', $peng->nomor_handphone) }}">
-                      </div>
+                    <div class="mb-3">
+                      <label for="alamat" class="form-label text-secondary fs-6">Alamat <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat', $peng->alamat) }}">
+                    </div>
 
-                      <div class="mb-3">
-                        <label for="email" class="form-label text-secondary fs-6">Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $peng->email) }}">
-                      </div>
+                    <div class="mb-3">
+                      <label for="nomor_handphone" class="form-label text-secondary fs-6">Nomor Handphone <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="nomor_handphone" name="nomor_handphone" value="{{ old('nomor_handphone', $peng->nomor_handphone) }}">
+                    </div>
 
-                      <div class="mb-3">
-                        <label for="tanggal_masuk" class="form-label text-secondary fs-6">Tanggal Masuk <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" value="{{ old('tanggal_masuk', $peng->tanggal_masuk) }}">
-                      </div>
+                    <div class="mb-3">
+                      <label for="email" class="form-label text-secondary fs-6">Email <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $peng->email) }}">
+                      @error('email')
+                      <script>
+                        const ErrorEmail = '{{ $message }}';
+                      </script>
+                      @enderror
+                    </div>
 
-                      <div class="mb-3">
-                        <label class="form-label text-secondary fs-6">Status Kepengasuhan <span class="text-danger">*</span></label><br>
-                        <input type="radio" name="status_pengasuh" id="aktif" value="aktif" {{ old('status_pengasuh', $peng->status_pengasuh) == 'aktif' ? 'checked' : '' }}>
-                        <label for="aktif" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Aktif</label>
+                    <div class="mb-3">
+                      <label for="tanggal_masuk" class="form-label text-secondary fs-6">Tanggal Masuk <span class="text-danger">*</span></label>
+                      <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" value="{{ old('tanggal_masuk', $peng->tanggal_masuk) }}">
+                    </div>
 
-                        <input type="radio" name="status_pengasuh" id="tidak_aktif" value="tidak_aktif" style="margin-left: 3vh;" {{ old('status_pengasuh', $peng->status_pengasuh) == 'tidak_aktif' ? 'checked' : '' }}>
-                        <label for="tidak_aktif" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Tidak Aktif</label>
-                      </div>
+                    <div class="mb-3">
+                      <label class="form-label text-secondary fs-6">Status Kepengasuhan <span class="text-danger">*</span></label><br>
+                      <input type="radio" name="status_pengasuh" id="aktif" value="aktif" {{ old('status_pengasuh', $peng->status_pengasuh) == 'aktif' ? 'checked' : '' }}>
+                      <label for="aktif" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Aktif</label>
 
-                      <div class="form-group">
-                        <label for="foto_kartukeluarga" class="text-secondary fs-6">Foto Kartu Keluarga (KK) <span class="text-danger">*</span></label><br>
-                        <input type="file" class="form-control" id="foto_kartukeluarga" name="foto_kartukeluarga" onchange="kkPreview(event)">
+                      <input type="radio" name="status_pengasuh" id="tidak_aktif" value="tidak_aktif" style="margin-left: 3vh;" {{ old('status_pengasuh', $peng->status_pengasuh) == 'tidak_aktif' ? 'checked' : '' }}>
+                      <label for="tidak_aktif" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Tidak Aktif</label>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="foto_kartukeluarga" class="text-secondary fs-6">Foto Kartu Keluarga (KK) <span class="text-danger">*</span></label><br>
+                      <input type="file" class="form-control" id="foto_kartukeluarga" name="foto_kartukeluarga" onchange="kkPreview(event)">
+                    </div>
+                    <div class="form-group">
+                      <label for="foto_ktp" class="text-secondary fs-6">Foto Kartu Tanda Penduduk (KTP) <span class="text-danger">*</span></label><br>
+                      <input type="file" class="form-control" id="foto_ktp" name="foto_ktp" onchange="ktpPreview(event)">
+                    </div>
+                    <div class="form-group">
+                      <label for="foto_pengasuh" class="text-secondary fs-6">Foto Pengasuh <span class="text-danger">*</span></label><br>
+                      <input type="file" class="form-control" id="foto_pengasuh" name="foto_pengasuh" onchange="pengasuhPreview(event)">
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-6">
+                        <a href="{{ route('pengasuh') }}" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
                       </div>
-                      <div class="form-group">
-                        <label for="foto_ktp" class="text-secondary fs-6">Foto Kartu Tanda Penduduk (KTP) <span class="text-danger">*</span></label><br>
-                        <input type="file" class="form-control" id="foto_ktp" name="foto_ktp" onchange="ktpPreview(event)">
-                      </div>
-                      <div class="form-group">
-                        <label for="foto_pengasuh" class="text-secondary fs-6">Foto Pengasuh <span class="text-danger">*</span></label><br>
-                        <input type="file" class="form-control" id="foto_pengasuh" name="foto_pengasuh" onchange="pengasuhPreview(event)">
-                      </div>
-                      <div class="row mt-4">
-                        <div class="col-6">
-                          <a href="{{ route('pengasuh') }}" class="btn btn-sm bg-gradient-danger w-100">Kembali</a>
-                        </div>
-                        <div class="col-6">
-                          <button type="submit" class="btn btn-sm bg-gradient-success w-100">Edit</button>
-                        </div>
+                      <div class="col-6">
+                        <button type="submit" class="btn btn-sm bg-gradient-success w-100">Edit</button>
                       </div>
                     </div>
-                  </form>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 mt-3">
+          <div class="card">
+            <div class="card-body px-0 pt-0 pb-2 mt-3">
+              <div class="container">
+                <div class="mb-3">
+                  <div class="preview">
+                    <label class="text-secondary fs-6">Pratinjau Foto Kartu Keluarga (KK)</label><br>
+                    <img src="{{ asset('/storage/pengasuhs/KK/' .$peng->foto_kartukeluarga)}}" class="mb-3" id="kkPreview" style="width: 100%; height: 270px; border: 2px solid #d4d4d4; border-radius: 10px;">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-5 col-md-5 col-sm-12 mt-3">
-            <div class="card">
-              <div class="card-body px-0 pt-0 pb-2 mt-3">
-                <div class="container">
-                  <div class="mb-3">
-                    <div class="preview">
-                      <label class="text-secondary fs-6">Pratinjau Foto Kartu Keluarga (KK)</label><br>
-                      <img src="{{ asset('/storage/pengasuhs/KK/' .$peng->foto_kartukeluarga)}}" class="mb-3" id="kkPreview" style="width: 100%; height: 270px; border: 2px solid #d4d4d4; border-radius: 10px;">
-                    </div>
+          <div class="card mt-4">
+            <div class="card-body px-0 pt-0 pb-2 mt-3">
+              <div class="container">
+                <div class="mb-3">
+                  <div class="preview">
+                    <label class="text-secondary fs-6">Pratinjau Foto Kartu Tanda Penduduk (KTP)</label><br>
+                    <img src="{{ asset('/storage/pengasuhs/KTP/' .$peng->foto_ktp)}}" class="mb-3" id="ktpPreview" style="width: 100%; height: 270px; border: 2px solid #d4d4d4; border-radius: 10px;">
                   </div>
                 </div>
               </div>
             </div>
-            <div class="card mt-4">
-              <div class="card-body px-0 pt-0 pb-2 mt-3">
-                <div class="container">
-                  <div class="mb-3">
-                    <div class="preview">
-                      <label class="text-secondary fs-6">Pratinjau Foto Kartu Tanda Penduduk (KTP)</label><br>
-                      <img src="{{ asset('/storage/pengasuhs/KTP/' .$peng->foto_ktp)}}" class="mb-3" id="ktpPreview" style="width: 100%; height: 270px; border: 2px solid #d4d4d4; border-radius: 10px;">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card mt-4">
-              <div class="card-body px-0 pt-0 pb-2 mt-3">
-                <div class="container">
-                  <div class="mb-3">
-                    <div class="preview">
-                      <label class="text-secondary fs-6">Pratinjau Foto Pengasuh</label><br>
-                      <img src="{{ asset('/storage/pengasuhs/foto/' .$peng->foto_pengasuh)}}" class="mb-3" id="pengasuhPreview" style="width: 100%; height: 400px; border: 2px solid #d4d4d4; border-radius: 10px;">
-                    </div>
+          </div>
+          <div class="card mt-4">
+            <div class="card-body px-0 pt-0 pb-2 mt-3">
+              <div class="container">
+                <div class="mb-3">
+                  <div class="preview">
+                    <label class="text-secondary fs-6">Pratinjau Foto Pengasuh</label><br>
+                    <img src="{{ asset('/storage/pengasuhs/foto/' .$peng->foto_pengasuh)}}" class="mb-3" id="pengasuhPreview" style="width: 100%; height: 400px; border: 2px solid #d4d4d4; border-radius: 10px;">
                   </div>
                 </div>
               </div>
@@ -193,6 +204,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -257,7 +269,7 @@
 </script>
 
 <script>
-  if (typeof ErrorNama !== 'undefined') {
+   if (typeof ErrorNama !== 'undefined' || typeof ErrorJabat !== 'undefined' || typeof ErrorEmail !== 'undefined' ) {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',
@@ -269,27 +281,22 @@
       timer: 2000,
       timerProgressBar: true,
     })
-    Toast.fire({
-      icon: 'warning',
-      title: "Form Tidak Boleh Kosong",
-    });
-  }
-  if (typeof ErrorJabat !== 'undefined') {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-right',
-      iconColor: 'white',
-      customClass: {
-        popup: 'colored-toast swal2-icon-error',
-      },
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-    })
-    Toast.fire({
-      icon: 'warning',
-      title: "Form Tidak Boleh Kosong",
-    });
+    if (typeof ErrorNama !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorNama,
+      });
+    } else if (typeof ErrorJabat !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorJabat,
+      });
+    } else if (typeof ErrorEmail !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorEmail,
+      });
+    }
   }
 </script>
 @endsection
