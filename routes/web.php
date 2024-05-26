@@ -68,9 +68,9 @@ Route::delete('/hapus_pengasuh/{id}', [PengasuhController::class, 'hapus_pengasu
 Route::get('/acara', [AcaraController::class, 'acara'])->name('acara');
 Route::get('/detail_acara', [AcaraController::class, 'detail_acara']);
 Route::get('/tambah_acara', [AcaraController::class, 'tambah_acara'])->name('tambah_acara');
-Route::post('/tambah', [AcaraController::class, 'tambah'])->name('tambah');
+Route::post('/tambahAcr', [AcaraController::class, 'tambahAcr'])->name('tambahAcr');
 Route::get('/edit_acara/{id}', [AcaraController::class, 'edit_acara'])->name('edit_acara');
-Route::put('/update/{id}', [AcaraController::class, 'update'])->name('update');
+Route::put('/updateAcr/{id}', [AcaraController::class, 'updateAcr'])->name('updateAcr');
 Route::delete('/hapus_acara/{id}', [AcaraController::class, 'hapus_acara'])->name('hapus_acara');
 
 //route artikel

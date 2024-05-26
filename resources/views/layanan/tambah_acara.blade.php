@@ -38,7 +38,7 @@
             <div class="card" style="height: 100%">
               <div class="card-body px-0 pt-0 pb-2 mt-3">
                 <div class="container">
-                  <form action="{{ route('tambah')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{ route('tambahAcr')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                       <label for="acara_name" class="form-label text-secondary fs-6">Nama Acara <span class="text-danger">*</span></label>
@@ -62,8 +62,8 @@
                       @enderror
                     </div>
                     <div class="mb-3">
-                      <label for="acara_tanggal" class="form-label text-secondary fs-6">Deskripsi Acara <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control @error('tanggalAcara') is-invalid @enderror" id="acara_tanggal" name="tanggalAcara" value="{{ old('tanggalAcara') }}">
+                      <label for="acara_tanggal" class="form-label text-secondary fs-6">Tanggal Acara <span class="text-danger">*</span></label>
+                      <input type="datetime-local" class="form-control @error('tanggalAcara') is-invalid @enderror" id="acara_tanggal" name="tanggalAcara" value="{{ old('tanggalAcara') }}">
 
                       @error('tanggalAcara')
                       <script>
@@ -139,7 +139,7 @@
 
 <script>
   // Check if ErrorImage, ErrorJudul, or ErrorDeskripsi variable exists and display toast message if any of them does
-  if (typeof ErrorNama !== 'undefined' || typeof ErrorDeskripsi !== 'undefined' || typeof ErrorGambar !== 'undefined') {
+  if (typeof ErrorNama !== 'undefined' || typeof ErrorDeskripsi !== 'undefined' || typeof ErrorDate !== 'undefined' || typeof ErrorGambar !== 'undefined') {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',

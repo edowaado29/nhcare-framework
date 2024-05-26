@@ -28,8 +28,8 @@ class AcaraController extends Controller
         return view('layanan.tambah_acara');
     }
 
-    public function tambah(Request $request): RedirectResponse
-    {
+    public function tambahAcr(Request $request): RedirectResponse
+    {   
         $this->validate($request, [
             'namaAcara' => 'required',
             'deskripsiAcara' => 'required',
@@ -62,7 +62,7 @@ class AcaraController extends Controller
         return view('layanan.edit_acara', compact('acra'));
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function updateAcr(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
             'namaAcara' => 'required',
