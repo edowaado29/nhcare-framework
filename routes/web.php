@@ -7,6 +7,7 @@ use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KedonaturanController;
 use App\Http\Controllers\PengasuhController;
+use App\Http\Controllers\AcaraController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,9 +41,12 @@ Route::get('/anakasuh', function () {
     return view('asuhan/anakasuh');
 });
 
-//route donasi
 Route::get('/donasi', [DonasiController::class, 'donasi'])->name('donasi');
 Route::get('/detail_donasi', [DonasiController::class, 'detail_donasi']);
+
+Route::get('/ranking', function () {
+    return view('asuhan/ranking');
+});
 
 //Route Jabatan
 Route::get('/jabatan', [JabatanController::class, 'jabatan'])->name('jabatan');
@@ -60,10 +64,14 @@ Route::get('/edit_pengasuh/{id}', [PengasuhController::class, 'edit_pengasuh'])-
 Route::put('/update_pengasuh/{id}', [PengasuhController::class, 'update_pengasuh'])->name('update_pengasuh');
 Route::delete('/hapus_pengasuh/{id}', [PengasuhController::class, 'hapus_pengasuh'])->name('hapus_pengasuh');
 
-
-Route::get('/acara', function () {
-    return view('layanan/acara');
-});
+//route acara
+Route::get('/acara', [AcaraController::class, 'acara'])->name('acara');
+Route::get('/detail_acara', [AcaraController::class, 'detail_acara']);
+Route::get('/tambah_acara', [AcaraController::class, 'tambah_acara'])->name('tambah_acara');
+Route::post('/tambah', [AcaraController::class, 'tambah'])->name('tambah');
+Route::get('/edit_acara/{id}', [AcaraController::class, 'edit_acara'])->name('edit_acara');
+Route::put('/update/{id}', [AcaraController::class, 'update'])->name('update');
+Route::delete('/hapus_acara/{id}', [AcaraController::class, 'hapus_acara'])->name('hapus_acara');
 
 //route artikel
 Route::get('/artikel', [ArtikelController::class, 'artikel'])->name('artikel');
@@ -88,6 +96,7 @@ Route::get('/profile', function () {
     return view('profile/profile');
 });
 
+// route auth
 Route::controller(AuthController::class)->group(function(){
     Route::get('/login','login')->middleware('alreadyLoggedIn');
     Route::post('/loginUser','loginUser')->name('loginUser');

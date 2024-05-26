@@ -64,11 +64,11 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/">
+          <a class="nav-link " href="/ranking">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/absensi.png')}}" style="height: 2.75vh;">
             </div>
-            <span class="nav-link-text ms-1">Seleksi Penerima Donasi</span>
+            <span class="nav-link-text ms-1">Ranking</span>
           </a>
         </li>
         <li class="nav-item mt-3">

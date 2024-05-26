@@ -10,7 +10,7 @@
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">Asuhan</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Anak Asuh</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Ranking</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
@@ -30,12 +30,12 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6>DATA ANAK ASUH</h6>
+              <h6>DATA RANKING</h6>
             </div>
             <div class="container mt-3">
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                  <a href="/tambah_anakasuh" class="btn btn-sm bg-gradient-primary">Tambah Data</a>
+                  <a href="/tambah_ranking" class="btn btn-sm bg-gradient-primary">Tambah Data</a>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <input class="form-control" id="search" type="text" placeholder="Masukkan kata kunci ...">
@@ -77,8 +77,8 @@
                         <p class="text-x font-weight-bold mb-0">Keterangan</p>
                       </td>
                       <td class="align-middle text-sm">
-                        <a href="/detail_anakasuh" class="btn btn-sm bg-gradient-primary">Detail</a>
-                        <a href="/edit_anakasuh" class="btn btn-sm bg-gradient-success">Edit</a>
+                        <a href="/detail_ranking" class="btn btn-sm bg-gradient-primary">Detail</a>
+                        <a href="/edit_ranking" class="btn btn-sm bg-gradient-success">Edit</a>
                         <a href="" class="btn btn-sm bg-gradient-danger">Hapus</a>
                       </td>
                     </tr>
@@ -103,8 +103,8 @@
                         <p class="text-x font-weight-bold mb-0">Keterangan</p>
                       </td>
                       <td class="align-middle text-sm">
-                        <a href="/detail_anakasuh" class="btn btn-sm bg-gradient-primary">Detail</a>
-                        <a href="/edit_anakasuh" class="btn btn-sm bg-gradient-success">Edit</a>
+                        <a href="/detail_ranking" class="btn btn-sm bg-gradient-primary">Detail</a>
+                        <a href="/edit_ranking" class="btn btn-sm bg-gradient-success">Edit</a>
                         <a href="" class="btn btn-sm bg-gradient-danger">Hapus</a>
                       </td>
                     </tr>
