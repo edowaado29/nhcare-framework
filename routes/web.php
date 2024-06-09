@@ -8,7 +8,9 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KedonaturanController;
 use App\Http\Controllers\PengasuhController;
 use App\Http\Controllers\AcaraController;
+use App\Http\Controllers\AnakasuhController;
 use App\Http\Controllers\ProgramController;
+use App\Models\Anakasuh;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,17 +32,18 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(
 
 //Route Kedonaturan
 Route::get('/kedonaturan', [KedonaturanController::class, 'kedonaturan'])->name('kedonaturan');
-Route::get('/detail_donatur', [KedonaturanController::class, 'detail_donatur']);
+Route::get('/detail_donatur/{id}', [KedonaturanController::class, 'detail_donatur'])->name('detail_donatur');
 Route::get('/tambah_donatur', [KedonaturanController::class, 'tambah_donatur'])->name('tambah_donatur');
 Route::post('/tambahDon', [KedonaturanController::class, 'tambahDon'])->name('tambahDon');
 Route::get('/edit_donatur/{id}', [KedonaturanController::class, 'edit_donatur'])->name('edit_donatur');
 Route::put('/update_donatur/{id}', [KedonaturanController::class, 'update_donatur'])->name('update_donatur');
 Route::delete('/hapus_donatur/{id}', [KedonaturanController::class, 'hapus_donatur'])->name('hapus_donatur');
 
-Route::get('/anakasuh', function () {
-    return view('asuhan/anakasuh');
-});
+// Route Anak Asuh
+Route::get('/anakasuh', [AnakasuhController::class, 'anakasuh'])->name('anakasuh');
+Route::get('/tambah_anakasuh', [AnakasuhController::class, 'tambah_anakasuh'])->name('tambah_anakasuh');
 
+// Route Donasi
 Route::get('/donasi', [DonasiController::class, 'donasi'])->name('donasi');
 Route::get('/detail_donasi', [DonasiController::class, 'detail_donasi']);
 

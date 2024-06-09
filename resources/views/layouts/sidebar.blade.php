@@ -18,7 +18,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/kedonaturan">
+          <a class="nav-link " href="{{route('kedonaturan')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/kedonaturan.png')}}" style="height: 2.75vh;">
             </div>
@@ -26,7 +26,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/donasi">
+          <a class="nav-link " href="{{route('donasi')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/donasi.png')}}" style="height: 2.75vh;">
             </div>
@@ -37,7 +37,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Kepengasuhan</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/jabatan">
+          <a class="nav-link " href="{{route('jabatan')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/jabatan.png')}}" style="height: 2.75vh;">
             </div>
@@ -45,7 +45,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/pengasuh">
+          <a class="nav-link " href="{{route('pengasuh')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/pegawai.png')}}" style="height: 2.75vh;">
             </div>
@@ -56,7 +56,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Asuhan</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/anakasuh">
+          <a class="nav-link " href="{{route('anakasuh')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/anakasuh.png')}}" style="height: 2.75vh;">
             </div>
@@ -75,7 +75,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Layanan</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/acara">
+          <a class="nav-link " href="{{route('acara')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/acara.png')}}" style="height: 2.75vh;">
             </div>
@@ -83,7 +83,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/artikel">
+          <a class="nav-link " href="{{route('artikel')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/artikel.png')}}" style="height: 2.75vh;">
             </div>
@@ -91,7 +91,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/program">
+          <a class="nav-link " href="{{route('program')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/program.png')}}" style="height: 2.75vh;">
             </div>

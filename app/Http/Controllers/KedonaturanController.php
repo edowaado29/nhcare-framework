@@ -13,7 +13,7 @@ class KedonaturanController extends Controller
 {
     public function kedonaturan(): View
     {
-        $donatur = Kedonaturan::latest()->paginate(5);
+        $donatur = Kedonaturan::all();
         return view('kedonaturan.kedonaturan', compact('donatur'));
     }
 
@@ -21,7 +21,7 @@ class KedonaturanController extends Controller
     {
         $donatur = Kedonaturan::findOrFail($id);
 
-        return view('detail_donatur', compact('donatur'));
+        return view('kedonaturan.detail_kedonaturan', compact('donatur'));
     }
 
     public function tambah_donatur(): View
@@ -44,6 +44,8 @@ class KedonaturanController extends Controller
             'passwordd.required' => 'Password harus diisi!',
             'passwordd.min' => 'Password harus terdiri dari 8-16 karakter',
             'passwordd.max' => 'Password harus terdiri dari 8-16 karakter',
+            'foto_donatur.image' => 'Format foto salah!',
+            'foto_donatur.max' => 'Ukuran foto terlalu besar'
         ]);
 
         $fotoDonaturPath = $request->hasFile('foto_donatur') ? $request->file('foto_donatur')->store('public/kedonaturans') : null;
@@ -69,11 +71,6 @@ class KedonaturanController extends Controller
     public function edit_donatur(string $id): View
     {
         $donatur = Kedonaturan::findOrFail($id);
-
-        if($donatur->foto_donatur == null){
-            
-        }
-
         return view('kedonaturan.edit_kedonaturan', compact('donatur'));
     }
 
@@ -88,14 +85,15 @@ class KedonaturanController extends Controller
             'nama_donatur.required' => 'Nama donatur harus diisi!',
             'email.required' => 'Email harus diisi!',
             'email.email' => 'Email tidak valid!',
+            'foto_donatur.image' => 'Format foto salah!',
+            'foto_donatur.max' => 'Ukuran foto terlalu besar'
         ]);
 
         $donatur = Kedonaturan::findOrFail($id);
 
-        // $getDntr = Kedonaturan::where('email', '=', $request->email)->where('id', '!=', $donatur->id);
         if(Kedonaturan::where('email', '=', $request->email)->where('id', '!=', $request->id)->first()){
             return back()->with('fail', 'Email sudah terdaftar!');
-        } else if(Kedonaturan::where('email', '=', $request->email)->where('id', '=', $request->id)->first()){
+        } else if(Kedonaturan::where('email', '=', $request->email)->where('id', '=', $request->id)->first() || Kedonaturan::where('email', '!=', $request->email)->where('id', '=', $request->id)->first()){
             if ($request->hasFile('foto_donatur')) {
                 $foto_donatur = $request->file('foto_donatur');
                 $foto_donatur->storeAs('public/kedonaturans', $foto_donatur->hashName());
@@ -154,7 +152,7 @@ class KedonaturanController extends Controller
                     return redirect()->route('kedonaturan')->with(['message' => 'Data donatur berhasil diedit']);
                 }
             }
-        }
+        } 
     }
 
     public function hapus_donatur($id): RedirectResponse

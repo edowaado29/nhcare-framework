@@ -86,10 +86,10 @@
               </div>
             </div>
             <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-              <div class="position-relative bg-gradient-success h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('assets/img/bobi.jpg');
+              <div class="position-relative bg-gradient-success h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('assets/img/bg-login.jpg');
                 background-size: cover;">
-                <span class="mask bg-gradient-success opacity-6"></span>
-                <h4 class="mt-5 text-white font-weight-bolder position-relative" style="font-size: 4rem;">NHCoreee🤘🔥</h4>
+                <span class="mask bg-gradient-success opacity-5"></span>
+                <!-- <h4 class="mt-5 text-white font-weight-bolder position-relative" style="font-size: 4rem;"></h4> -->
               </div>
             </div>
           </div>

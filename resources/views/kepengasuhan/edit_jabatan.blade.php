@@ -87,7 +87,7 @@
     })
     Toast.fire({
       icon: 'warning',
-      title: "Jabatan Tidak Boleh Kosong",
+      title: "Nama jabatan harus diisi!",
     });
   }
 </script>

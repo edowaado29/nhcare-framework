@@ -124,16 +124,31 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="foto_kartukeluarga" class="text-secondary fs-6">Foto Kartu Keluarga (KK) <span class="text-danger">*</span></label><br>
+                      <label for="foto_kartukeluarga" class="text-secondary fs-6">Foto Kartu Keluarga (Maksimal 2MB) <span class="text-danger">*</span></label><br>
                       <input type="file" class="form-control" id="foto_kartukeluarga" name="foto_kartukeluarga" onchange="kkPreview(event)">
+                      @error('foto_kartukeluarga')
+                      <script>
+                        const ErrorKK = '{{ $message }}';
+                      </script>
+                      @enderror
                     </div>
                     <div class="form-group">
-                      <label for="foto_ktp" class="text-secondary fs-6">Foto Kartu Tanda Penduduk (KTP) <span class="text-danger">*</span></label><br>
+                      <label for="foto_ktp" class="text-secondary fs-6">Foto Kartu Tanda Penduduk (Maksimal 2MB) <span class="text-danger">*</span></label><br>
                       <input type="file" class="form-control " id="foto_ktp" name="foto_ktp" onchange="ktpPreview(event)">
+                      @error('foto_ktp')
+                      <script>
+                        const ErrorKTP = '{{ $message }}';
+                      </script>
+                      @enderror
                     </div>
                     <div class="form-group">
-                      <label for="foto_pengasuh" class="text-secondary fs-6">Foto Pengasuh <span class="text-danger">*</span></label><br>
+                      <label for="foto_pengasuh" class="text-secondary fs-6">Foto Pengasuh (Maksimal 2MB) <span class="text-danger">*</span></label><br>
                       <input type="file" class="form-control" id="foto_pengasuh" name="foto_pengasuh" onchange="pengasuhPreview(event)">
+                      @error('foto_pengasuh')
+                      <script>
+                        const ErrorFoto = '{{ $message }}';
+                      </script>
+                      @enderror
                     </div>
                     <div class="row mt-4">
                       <div class="col-6">
@@ -268,7 +283,7 @@
 </script>
 
 <script>
-  if (typeof ErrorNama !== 'undefined' || typeof ErrorJabat !== 'undefined' || typeof ErrorEmail !== 'undefined') {
+  if (typeof ErrorNama !== 'undefined' || typeof ErrorJabat !== 'undefined' || typeof ErrorEmail !== 'undefined' || typeof ErrorKK !== 'undefined' || typeof ErrorKTP !== 'undefined' || typeof ErrorFoto !== 'undefined') {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',
@@ -298,6 +313,21 @@
       Toast.fire({
         icon: 'warning',
         title: ErrorEmail,
+      });
+    } else if (typeof ErrorKK !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorKK,
+      });
+    } else if (typeof ErrorKTP !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorKTP,
+      });
+    } else if (typeof ErrorFoto !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorFoto,
       });
     }
   }

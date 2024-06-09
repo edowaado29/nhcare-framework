@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('namaAcara');
             $table->text('deskripsiAcara');
             $table->dateTime('tanggalAcara');
-            $table->string('gambarAcara');
+            $table->string('gambarAcara')->nullable();
             $table->timestamps();
         });
     }

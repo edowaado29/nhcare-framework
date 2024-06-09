@@ -13,9 +13,8 @@ class PengasuhController extends Controller
 {
     public function pengasuh(): View
     {
-        $peng = Pengasuh::paginate(5);
+        $peng = Pengasuh::all();
 
-        //render view with posts
         return view('kepengasuhan.pengasuh', compact('peng'));
     }
 
@@ -30,7 +29,7 @@ class PengasuhController extends Controller
         $this->validate($request, [
             'nama_pengasuh' => 'required',
             'id_jabatan' => 'required',
-            'email' => 'email',
+            'email' => 'required|email',
             'foto_kartukeluarga' => 'image|mimes:jpeg,jpg,png|max:2048',
             'foto_ktp' => 'image|mimes:jpeg,jpg,png|max:2048',
             'foto_pengasuh' => 'image|mimes:jpeg,jpg,png|max:2048'
@@ -38,7 +37,14 @@ class PengasuhController extends Controller
     [
         'nama_pengasuh.required' => 'Nama pengasuh harus diisi!',
         'id_jabatan.required' => 'Jabatan pengasuh harus diisi!',
-        'email.email' => 'Email tidak valid'
+        'email.required' => 'Email harus diisi!',
+        'email.email' => 'Email tidak valid',
+        'foto_kartukeluarga.image' => 'Format foto KK salah',
+        'foto_kartukeluarga.max' => 'Ukuran foto KK terlalu besar',
+        'foto_ktp.image' => 'Format foto KTP salah',
+        'foto_ktp.max' => 'Ukuran foto KTP terlalu besar',
+        'foto_pengasuh.image' => 'Format foto Pengasuh salah',
+        'foto_pengasuh.max' => 'Ukuran foto Pengasuh terlalu besar',
     ]);
 
         $fotoKKPath = $request->hasFile('foto_kartukeluarga') ? $request->file('foto_kartukeluarga')->store('public/pengasuhs/KK') : null;
@@ -49,24 +55,30 @@ class PengasuhController extends Controller
         $fotoktp = $fotoKTPPath ? basename($fotoKTPPath) : null;
         $foto = $fotoPath ? basename($fotoPath) : null;
 
-        Pengasuh::create([
-            'nbm' => $request->input('nbm'),
-            'nama_pengasuh' => $request->input('nama_pengasuh'),
-            'jenis_kelamin' => $request->input('jenis_kelamin'),
-            'tempat_lahir' => $request->input('tempat_lahir'),
-            'tanggal_lahir' => $request->input('tanggal_lahir'),
-            'pendidikan_terakhir' => $request->input('pendidikan_terakhir'),
-            'id_jabatan' => $request->input('id_jabatan'),
-            'alamat' => $request->input('alamat'),
-            'nomor_handphone' => $request->input('nomor_handphone'),
-            'email' => $request->input('email'),
-            'tanggal_masuk' => $request->input('tanggal_masuk'),
-            'status_pengasuh' => 'aktif',
-            'foto_kartukeluarga' => $fotokk,
-            'foto_ktp' => $fotoktp,
-            'foto_pengasuh' => $foto,
-        ]);
-        return redirect()->route('pengasuh')->with('message', 'Pengasuh berhasil ditambahkan');
+        $getEmail = Pengasuh::where('email', '=', $request->email)->first();
+
+        if($getEmail){
+            return back()->with('fail', 'Email sudah terdaftar!');
+        } else{
+            Pengasuh::create([
+                'nbm' => $request->input('nbm'),
+                'nama_pengasuh' => $request->input('nama_pengasuh'),
+                'jenis_kelamin' => $request->input('jenis_kelamin'),
+                'tempat_lahir' => $request->input('tempat_lahir'),
+                'tanggal_lahir' => $request->input('tanggal_lahir'),
+                'pendidikan_terakhir' => $request->input('pendidikan_terakhir'),
+                'id_jabatan' => $request->input('id_jabatan'),
+                'alamat' => $request->input('alamat'),
+                'nomor_handphone' => $request->input('nomor_handphone'),
+                'email' => $request->input('email'),
+                'tanggal_masuk' => $request->input('tanggal_masuk'),
+                'status_pengasuh' => 'aktif',
+                'foto_kartukeluarga' => $fotokk,
+                'foto_ktp' => $fotoktp,
+                'foto_pengasuh' => $foto,
+            ]);
+            return redirect()->route('pengasuh')->with('message', 'Pengasuh berhasil ditambahkan');
+        }
     }
 
 
@@ -92,11 +104,17 @@ class PengasuhController extends Controller
             'foto_ktp' => 'image|mimes:jpeg,jpg,png|max:2048',
             'foto_pengasuh' => 'image|mimes:jpeg,jpg,png|max:2048'
         ],
-    [
-        'nama_pengasuh.required' => 'Nama pengasuh harus diisi!',
-        'id_jabatan.required' => 'Jabatan pengasuh harus diisi!',
-        'email.email' => 'Email tidak valid'
-    ]);
+        [
+            'nama_pengasuh.required' => 'Nama pengasuh harus diisi!',
+            'id_jabatan.required' => 'Jabatan pengasuh harus diisi!',
+            'email.email' => 'Email tidak valid',
+            'foto_kartukeluarga.image' => 'Format foto KK salah',
+            'foto_kartukeluarga.max' => 'Ukuran foto KK terlalu besar',
+            'foto_ktp.image' => 'Format foto KTP salah',
+            'foto_ktp.max' => 'Ukuran foto KTP terlalu besar',
+            'foto_pengasuh.image' => 'Format foto Pengasuh salah',
+            'foto_pengasuh.max' => 'Ukuran foto Pengasuh terlalu besar',
+        ]);
 
         $peng = Pengasuh::findOrFail($id);
 
@@ -124,23 +142,27 @@ class PengasuhController extends Controller
             $peng->foto_pengasuh = basename($fotoPath);
         }
 
-        $peng->update([
-            'nbm' => $request->input('nbm'),
-            'nama_pengasuh' => $request->input('nama_pengasuh'),
-            'jenis_kelamin' => $request->input('jenis_kelamin'),
-            'tempat_lahir' => $request->input('tempat_lahir'),
-            'tanggal_lahir' => $request->input('tanggal_lahir'),
-            'pendidikan_terakhir' => $request->input('pendidikan_terakhir'),
-            'id_jabatan' => $request->input('id_jabatan'),
-            'alamat' => $request->input('alamat'),
-            'nomor_handphone' => $request->input('nomor_handphone'),
-            'email' => $request->input('email'),
-            'tanggal_masuk' => $request->input('tanggal_masuk'),
-            'status_pengasuh' => $request->input('status_pengasuh'),
-            'foto_kartukeluarga' => $peng->foto_kartukeluarga,
-            'foto_ktp' => $peng->foto_ktp,
-            'foto_pengasuh' => $peng->foto_pengasuh
-        ]);
+        if(Pengasuh::where('email', '=', $request->email)->where('id', '!=', $request->id)->first()){
+            return back()->with('fail', 'Email sudah terdaftar!');
+        } else if(Pengasuh::where('email', '=', $request->email)->where('id', '=', $request->id)->first() || Pengasuh::where('email', '!=', $request->email)->where('id', '=', $request->id)->first()){
+            $peng->update([
+                'nbm' => $request->input('nbm'),
+                'nama_pengasuh' => $request->input('nama_pengasuh'),
+                'jenis_kelamin' => $request->input('jenis_kelamin'),
+                'tempat_lahir' => $request->input('tempat_lahir'),
+                'tanggal_lahir' => $request->input('tanggal_lahir'),
+                'pendidikan_terakhir' => $request->input('pendidikan_terakhir'),
+                'id_jabatan' => $request->input('id_jabatan'),
+                'alamat' => $request->input('alamat'),
+                'nomor_handphone' => $request->input('nomor_handphone'),
+                'email' => $request->input('email'),
+                'tanggal_masuk' => $request->input('tanggal_masuk'),
+                'status_pengasuh' => $request->input('status_pengasuh'),
+                'foto_kartukeluarga' => $peng->foto_kartukeluarga,
+                'foto_ktp' => $peng->foto_ktp,
+                'foto_pengasuh' => $peng->foto_pengasuh
+            ]);
+        }
 
         return redirect()->route('pengasuh')->with('message', 'Data pengasuh berhasil diedit');
     }

@@ -42,7 +42,7 @@
                                         @csrf
                                         <div class="mb-3">
                                             <label for="article_name" class="form-label text-secondary fs-6">Judul Artikel <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control @error('judulArtikel') is-invalid @enderror" id="article_name" name="judul_artikel" value="{{ old('judul_artikel') }}">
+                                            <input type="text" class="form-control @error('judulArtikel') is-invalid @enderror" id="article_name" name="judulArtikel" value="{{ old('judulArtikel') }}">
                                             @error('judulArtikel')
                                             <script>
                                                 const ErrorNama = '{{ $message }}';
@@ -52,7 +52,7 @@
                                         
                                         <div class="mb-3">
                                             <label for="article_desc" class="form-label text-secondary fs-6">Deskripsi Artikel <span class="text-danger">*</span></label>
-                                            <textarea type="text" class="form-control @error('deskripsiArtikel') is-invalid @enderror" id="article_desc" name="deskripsi_artikel" rows="5">{{ old('deskripsi_artikel') }}</textarea>
+                                            <textarea type="text" class="form-control @error('deskripsiArtikel') is-invalid @enderror" id="article_desc" name="deskripsiArtikel" rows="5">{{ old('deskripsiArtikel') }}</textarea>
                                             @error('deskripsiArtikel')
                                             <script>
                                                 const ErrorDeskripsi = '{{ $message }}';
@@ -61,8 +61,8 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="article_img" class="text-secondary fs-6">Gambar Artikel <span class="text-danger">*</span></label><br>
-                                            <input type="file" class="form-control-file @error('gambarArtikel') is-invalid @enderror" id="article_img" name="gambar_artikel" onchange="previewImage(event)">
+                                            <label for="article_img" class="text-secondary fs-6">Gambar Artikel (Maksimal 2MB) <span class="text-danger">*</span></label><br>
+                                            <input type="file" class="form-control @error('gambarArtikel') is-invalid @enderror" id="article_img" name="gambarArtikel" onchange="previewImage(event)">
 
                                             @error('gambarArtikel')
                                             <script>

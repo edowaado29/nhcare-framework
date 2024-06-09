@@ -66,10 +66,10 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
-                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" {{ old('jenis_kelamin', $donatur->jenis_kelamin) == 'laki-laki' ? 'checked' : '' }}>
+                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="Laki-laki" {{ old('jenis_kelamin', $donatur->jenis_kelamin) == 'laki-laki' ? 'checked' : '' }}>
                       <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
 
-                      <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" style="margin-left: 3vh;" {{ old('jenis_kelamin', $donatur->jenis_kelamin) == 'perempuan' ? 'checked' : '' }}>
+                      <input type="radio" id="perempuan" name="jenis_kelamin" value="Perempuan" style="margin-left: 3vh;" {{ old('jenis_kelamin', $donatur->jenis_kelamin) == 'perempuan' ? 'checked' : '' }}>
                       <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
                     </div>
                     <div class="mb-3">
@@ -89,8 +89,13 @@
                       <i class="fa fa-eye position-absolute" id="togglePassword" style="cursor: pointer; right: 11.9px; top: 46.195px;"></i>
                     </div>
                     <div class="form-group">
-                      <label for="foto_donatur" class="text-secondary fs-6">Foto Donatur <span class="text-danger">*</span></label><br>
+                      <label for="foto_donatur" class="text-secondary fs-6">Foto Donatur (Maksimal 2MB) <span class="text-danger">*</span></label><br>
                       <input type="file" class="form-control" id="foto_donatur " name="foto_donatur" onchange="previewImage(event)">
+                      @error('foto_donatur')
+                      <script>
+                        const ErrorFoto = '{{ $message }}';
+                      </script>
+                      @enderror
                     </div>
                     <div class="row mt-4">
                       <div class="col-6">
@@ -178,7 +183,7 @@
 
 <script>
   // Check if ErrorImage, ErrorJudul, or ErrorDeskripsi variable exists and display toast message if any of them does
-  if (typeof ErrorNama !== 'undefined' || typeof ErrorEmail !== 'undefined' || typeof ErrorPassword !== 'undefined' || typeof ErrorMessage !== 'undefined') {
+  if (typeof ErrorNama !== 'undefined' || typeof ErrorEmail !== 'undefined' || typeof ErrorPassword !== 'undefined' || typeof ErrorMessage !== 'undefined' || typeof ErrorFoto !== 'undefined') {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',
@@ -209,6 +214,11 @@
       Toast.fire({
         icon: 'warning',
         title: ErrorMessage,
+      });
+    } else if (typeof ErrorFoto !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorFoto,
       });
     }
   }

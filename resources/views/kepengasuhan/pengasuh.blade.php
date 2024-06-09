@@ -79,12 +79,12 @@
                       {{ $asuh->jabatan->nama_jabatan }}
                     </td>
                     <td class="align-middle text-sm">
-                      <form action="{{ route('hapus_pengasuh', $asuh->id) }}" method="POST" id="delete-form">
+                      <form action="" method="POST" id="delete-form">
                         <a href="" class="btn btn-sm bg-gradient-primary">Detail</a>
                         <a href="{{ route('edit_pengasuh', $asuh->id)}}" class="btn btn-sm bg-gradient-success">Edit</a>
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete()">HAPUS</button>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{$asuh->id}}')">HAPUS</button>
                       </form>
                     </td>
                   </tr>
@@ -105,7 +105,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('assets/js/search.js') }}"></script>
 <script>
-  function confirmDelete() {
+  const baseUrl = "{{ url('/hapus_pengasuh') }}";
+  function confirmDelete(id) {
     Swal.fire({
       title: "Apakah Anda Yakin?",
       text: "Ingin Menghapus Data Ini",
@@ -117,7 +118,9 @@
       cancelButtonText: "Tidak"
     }).then((result) => {
       if (result.isConfirmed) {
-        document.getElementById("delete-form").submit(); // Submit the form if confirmed
+        const deleteForm = document.getElementById("delete-form");
+        deleteForm.action = `${baseUrl}/${id}`;
+        deleteForm.submit();
       }
     });
   }

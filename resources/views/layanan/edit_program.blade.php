@@ -60,8 +60,13 @@
               </div>
 
               <div class="form-group">
-                <label for="program_img" class="text-secondary fs-6">Gambar Program <span class="text-danger">*</span></label><br>
-                <input type="file" class="form-control" id="program_img" name="gambarProgram" onchange="previewImage(event)">
+                <label for="program_img" class="text-secondary fs-6">Gambar Program (Maksimal 2MB) <span class="text-danger">*</span></label><br>
+                <input type="file" class="form-control @error('gambarProgram') is-invalid @enderror" id="program_img" name="gambarProgram" onchange="previewImage(event)">
+                @error('gambarProgram')
+                <script>
+                  const ErrorGambar = '{{ $message }}';
+                </script>
+                @enderror
               </div>
               <div class="row mt-4">
                 <div class="col-6">
@@ -91,7 +96,10 @@
   </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('program_desc');
+</script>
 <script>
   function previewImage(event) {
     const reader = new FileReader();
@@ -115,7 +123,7 @@
 
 <script>
   // Check if ErrorImage, ErrorJudul, or ErrorDeskripsi variable exists and display toast message if any of them does
-  if (typeof ErrorNama !== 'undefined' || typeof ErrorDeskripsi !== 'undefined') {
+  if (typeof ErrorNama !== 'undefined' || typeof ErrorDeskripsi !== 'undefined' || typeof ErrorGambar !== 'undefined') {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',
@@ -141,7 +149,12 @@
         icon: 'warning',
         title: ErrorDeskripsi,
       });
+    } else if (typeof ErrorGambar !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorGambar,
+      });
+    }
   }
-}
 </script>
 @endsection

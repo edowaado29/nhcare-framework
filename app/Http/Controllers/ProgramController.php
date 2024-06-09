@@ -12,7 +12,7 @@ class ProgramController extends Controller
 {
     public function program(): View
     {
-        $prog = Program::latest()->paginate(5);
+        $prog = Program::all();
         return view('layanan.program', compact('prog'));
     }
 
@@ -33,21 +33,22 @@ class ProgramController extends Controller
         $this->validate($request, [
             'namaProgram' => 'required',
             'deskripsiProgram' => 'required',
-            'gambarProgram' => 'required|image|mimes:jpeg,jpg,png|max:2048'
+            'gambarProgram' => 'image|mimes:jpeg,jpg,png|max:2048'
         ], 
         [
-            'namaProgram.required' => 'Nama program tidak boleh kosong!',
-            'deskripsiProgram.required' => 'Deskripsi program tidak boleh kosong!',
-            'gambarProgram.required' => 'Gambar program tidak boleh kosong!'
+            'namaProgram.required' => 'Nama program harus diisi!',
+            'deskripsiProgram.required' => 'Deskripsi program harus diisi!',
+            'gambarProgram.image' => 'Format gambar program salah!',
+            'gambarProgram.max' => 'Ukuran gambar program terlalu besar!'
         ]);
 
-        $gambarProgram = $request->file('gambarProgram');
-        $gambarProgram->storeAs('public/programs', $gambarProgram->hashName());
+        $gambarProgramPath = $request->hasFile('gambarProgram') ? $request->file('gambarProgram')->store('public/programs') : null;
+        $gambarProgram = $gambarProgramPath ? basename($gambarProgramPath) : null;
 
         Program::create([
             'namaProgram' => $request->namaProgram,
             'deskripsiProgram' => $request->deskripsiProgram,
-            'gambarProgram' => $gambarProgram->hashName()
+            'gambarProgram' => $gambarProgram
         ]);
         return redirect()->route('program')->with(['message' => 'Program berhasil ditambahkan']);
     }
@@ -67,9 +68,10 @@ class ProgramController extends Controller
             'gambarProgram' => 'image|mimes:jpeg,jpg,png|max:2048'
         ],
         [
-            'namaProgram.required' => 'Nama program tidak boleh kosong!',
-            'deskripsiProgram.required' => 'Deskripsi program tidak boleh kosong!',
-            'gambarProgram.required' => 'Gambar program tidak boleh kosong!'
+            'namaProgram.required' => 'Nama program harus diisi!',
+            'deskripsiProgram.required' => 'Deskripsi program harus diisi!',
+            'gambarProgram.image' => 'Format gambar program salah!',
+            'gambarProgram.max' => 'Ukuran gambar program terlalu besar!'
         ]);
 
         $prog = program::findOrFail($id);

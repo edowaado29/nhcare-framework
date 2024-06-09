@@ -54,8 +54,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="acara_desc" class="form-label text-secondary fs-6">Deskripsi Acara <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control @error('deskripsiAcara') is-invalid @enderror" id="acara_desc" name="deskripsiAcara" value="{{ old('deskripsiAcara', $acra->deskripsiAcara) }}">
-
+                      <textarea type="text" class="form-control @error('deskripsiAcara') is-invalid @enderror" id="acara_desc" name="deskripsiAcara" rows="5">{{ old('deskripsiAcara', $acra->deskripsiAcara) }}</textarea>
                       @error('deskripsiAcara')
                       <script>
                         const ErrorDeskripsi = '{{ $message }}'; 
@@ -74,7 +73,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="acara_img" class="text-secondary fs-6">Gambar Acara <span class="text-danger">*</span></label><br>
+                      <label for="acara_img" class="text-secondary fs-6">Gambar Acara (Maksimal 2MB) <span class="text-danger">*</span></label><br>
                       <input type="file" class="form-control @error('gambarAcara') is-invalid @enderror" id="acara_img" name="gambarAcara" onchange="previewImage(event)">
 
                       @error('gambarAcara')
@@ -116,7 +115,10 @@
   </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('acara_desc');
+</script>
 <script>
   function previewImage(event) {
     const reader = new FileReader();
@@ -156,6 +158,27 @@
       icon: 'warning',
       title: "Form Tidak Boleh Kosong",
     });
+    if (typeof ErrorNama !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorNama,
+      });
+    } else if (typeof ErrorDeskripsi !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorDeskripsi,
+      });
+    } else if (typeof ErrorDate !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorDate,
+      });
+    } else if (typeof ErrorGambar !== 'undefined') {
+      Toast.fire({
+        icon: 'warning',
+        title: ErrorGambar,
+      });
+    }
   }
 </script>
 @endsection

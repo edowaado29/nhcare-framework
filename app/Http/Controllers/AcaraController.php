@@ -12,7 +12,7 @@ class AcaraController extends Controller
 {
     public function acara(): View
     {
-        $acra = Acara::latest()->paginate(5);
+        $acra = Acara::all();
         return view('layanan.acara', compact('acra'));
     }
 
@@ -34,23 +34,24 @@ class AcaraController extends Controller
             'namaAcara' => 'required',
             'deskripsiAcara' => 'required',
             'tanggalAcara' => 'required',
-            'gambarAcara' => 'required|image|mimes:jpeg,jpg,png|max:2048'
+            'gambarAcara' => 'image|mimes:jpeg,jpg,png|max:2048'
         ], 
         [
-            'namaAcara.required' => 'Nama acara tidak boleh kosong!',
-            'deskripsiAcara.required' => 'Deskripsi acara tidak boleh kosong!',
-            'tanggalAcara.required' => 'Tanggal acara tidak boleh kosong!',
-            'gambarAcara.required' => 'Gambar acara tidak boleh kosong!'
+            'namaAcara.required' => 'Nama acara harus diisi!',
+            'deskripsiAcara.required' => 'Deskripsi acara harus diisi!',
+            'tanggalAcara.required' => 'Tanggal acara harus diisi!',
+            'gambarAcara.image' => 'Format gambar acara salah',
+            'gambarAcara.max' => 'Ukuran gambar acara terlalu besar'
         ]);
-
-        $gambarAcara = $request->file('gambarAcara');
-        $gambarAcara->storeAs('public/acaras', $gambarAcara->hashName());
+        
+        $gambarAcaraPath = $request->hasFile('gambarAcara') ? $request->file('gambarAcara')->store('public/acaras') : null;
+        $gambarAcara = $gambarAcaraPath ? basename($gambarAcaraPath) : null;
 
         Acara::create([
             'namaAcara' => $request->namaAcara,
             'deskripsiAcara' => $request->deskripsiAcara,
             'tanggalAcara' => $request->tanggalAcara,
-            'gambarAcara' => $gambarAcara->hashName()
+            'gambarAcara' => $gambarAcara
         ]);
         return redirect()->route('acara')->with(['message' => 'Acara berhasil ditambahkan']);
     }
@@ -71,10 +72,11 @@ class AcaraController extends Controller
             'gambarAcara' => 'image|mimes:jpeg,jpg,png|max:2048'
         ],
         [
-            'namaAcara.required' => 'Nama Acara tidak boleh kosong!',
-            'deskripsiAcara.required' => 'Deskripsi Acara tidak boleh kosong!',
-            'tanggalAcara.required' => 'Tanggal Acara tidak boleh kosong!',
-            'gambarAcara.required' => 'Gambar Acara tidak boleh kosong!'
+            'namaAcara.required' => 'Nama Acara harus diisi!',
+            'deskripsiAcara.required' => 'Deskripsi Acara harus diisi!',
+            'tanggalAcara.required' => 'Tanggal Acara harus diisi!',
+            'gambarAcara.image' => 'Format gambar acara salah',
+            'gambarAcara.max' => 'Ukuran gambar acara terlalu besar'
         ]);
 
         $acra = acara::findOrFail($id);

@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="program_img" class="text-secondary fs-6">Gambar Program <span class="text-danger">*</span></label><br>
+                      <label for="program_img" class="text-secondary fs-6">Gambar Program (Maksimal 2MB) <span class="text-danger">*</span></label><br>
                       <input type="file" class="form-control @error('gambarProgram') is-invalid @enderror" id="program_img" name="gambarProgram" onchange="previewImage(event)">
 
                       @error('gambarProgram')
@@ -104,7 +104,10 @@
   </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('program_desc');
+</script>
 <script>
   function previewImage(event) {
     const reader = new FileReader();

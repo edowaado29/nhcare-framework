@@ -35,7 +35,7 @@
             <div class="container mt-3">
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                  <a href="/tambah_anakasuh" class="btn btn-sm bg-gradient-primary">Tambah Data</a>
+                  <a href="{{ route('tambah_anakasuh') }}" class="btn btn-sm bg-gradient-primary">Tambah Data</a>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <input class="form-control" id="search" type="text" placeholder="Masukkan kata kunci ...">
@@ -57,56 +57,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">1</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-x font-weight-bold mb-0">Nama</p>
-                      </td>
-                      <td>
-                        <p class="text-x font-weight-bold mb-0">Kelas</p>
-                      </td>
-                      <td>
-                        <p class="text-x font-weight-bold mb-0">Cabang</p>
-                      </td>
-                      <td>
-                        <p class="text-x font-weight-bold mb-0">Keterangan</p>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <a href="/detail_anakasuh" class="btn btn-sm bg-gradient-primary">Detail</a>
-                        <a href="/edit_anakasuh" class="btn btn-sm bg-gradient-success">Edit</a>
-                        <a href="" class="btn btn-sm bg-gradient-danger">Hapus</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">2</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-x font-weight-bold mb-0">Nama</p>
-                      </td>
-                      <td>
-                        <p class="text-x font-weight-bold mb-0">Kelas</p>
-                      </td>
-                      <td>
-                        <p class="text-x font-weight-bold mb-0">Cabang</p>
-                      </td>
-                      <td>
-                        <p class="text-x font-weight-bold mb-0">Keterangan</p>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <a href="/detail_anakasuh" class="btn btn-sm bg-gradient-primary">Detail</a>
-                        <a href="/edit_anakasuh" class="btn btn-sm bg-gradient-success">Edit</a>
-                        <a href="" class="btn btn-sm bg-gradient-danger">Hapus</a>
-                      </td>
+                      <td colspan="3" class="text-center">Data Anak asuh belum Tersedia.</td>
                     </tr>
                   </tbody>
                 </table>
