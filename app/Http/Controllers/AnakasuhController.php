@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anakasuh;
+use App\Models\PrestasiAnakasuh;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 class AnakasuhController extends Controller
 {
+
     public function anakasuh(): View
     {
-        // $ank = Anakasuh::all();
-        // return view('asuhan.anakasuh', compact('ank'));
-
-        return view('asuhan.anakasuh');
+        $ank = Anakasuh::all();
+        return view('asuhan.anakasuh', compact('ank'));
     }
 
     public function tambah_anakasuh(): View
@@ -26,11 +27,14 @@ class AnakasuhController extends Controller
     public function tambahAnk(Request $request): RedirectResponse
     {
         $this->validate($request, [
-            'nik' => 'required'
+            'nama' => 'required'
         ],
         [
-            'nik.required' => 'NIK harus diisi!'
+            'nama.required' => 'Nama harus diisi!'
         ]);
+
+        $currentDateTime = Carbon::now()->format('YmdHisu');
+        $id_anak = "p-". $currentDateTime;
 
         $imgAktaPath = $request->hasFile('img_akta') ? $request->file('img_akta')->store('public/anakasuhs/Akta') : null;
         $imgKKPath = $request->hasFile('img_kk') ? $request->file('img_kk')->store('public/anakasuhs/KK') : null;
@@ -43,6 +47,7 @@ class AnakasuhController extends Controller
         $imgAnak = $imgAnakPath ? basename($imgAnakPath) : null;
 
         Anakasuh::create([
+            'id_anakasuh' => $id_anak,
             'nik' => $request->input('nik'),
             'nama' => $request->input('nama'),
             'jenis_kelamin' => $request->input('jenis_kelamin'),
@@ -69,6 +74,15 @@ class AnakasuhController extends Controller
             'nik_wali' => $request->input('nik_wali'),
             'img_anak' => $imgAnak
         ]);
+
+        foreach ($request->nama_prestasi as $p) {
+            if(!empty($p)){
+                Prestasianakasuh::create([
+                    'id_anakasuh' => $id_anak,
+                    'nama_prestasi' => $p
+                ]);
+            }
+        }
         
         return redirect()->route('anakasuh')->with('message', 'Anak Asuh berhasil ditambahkan');
     }
@@ -80,22 +94,24 @@ class AnakasuhController extends Controller
         return view('detail_anakasuh', compact('ank'));
     }
 
-    public function edit_anakasuh(string $id): view
+    public function edit_anakasuh(string $id_anakasuh): view
     {
-        $ank = Anakasuh::findOrFail($id);
-        return view('asuhan.edit_anakasuh', compact('ank'));
-    }
-
-    public function update_anakasuh(Request $request, $id): RedirectResponse
-    {
-        $this->validate($request, [
-            'nik' => 'required'
-        ],
+        $ank = Anakasuh::findOrFail($id_anakasuh);
+        $pres = Prestasianakasuh::where('id_anakasuh', $id_anakasuh)->get();
+        return view('asuhan.edit_anakasuh', compact('ank', 'pres'));
+        }
+        
+        public function update_anakasuh(Request $request, $id_anakasuh): RedirectResponse
+        {
+            $this->validate($request, [
+                'nama' => 'required'
+                ],
         [
-            'nik.required' => 'NIK harus diisi!'
-        ]);
-
-        $ank = Anakasuh::findOrFail($id);
+            'nama.required' => 'Nama harus diisi!'
+            ]);
+            
+        $ank = Anakasuh::findOrFail($id_anakasuh);
+        $pres = Prestasianakasuh::where('id_anakasuh', $id_anakasuh)->get();
 
         if ($request->hasFile('img_akta')) {
             $imgAktaPath = $request->file('img_akta')->store('public/anakasuhs/Akta');
@@ -157,18 +173,39 @@ class AnakasuhController extends Controller
             'img_anak' => $ank->img_anak
         ]);
 
+        if($pres->isNotEmpty()){
+            foreach ($pres as $p) {
+                $p->delete();
+            }
+        }
+
+        foreach ($request->nama_prestasi as $prestasi) {
+            if(!empty($prestasi)){
+                Prestasianakasuh::create([
+                    'id_anakasuh' => $ank->id_anakasuh,
+                    'nama_prestasi' => $prestasi
+                ]);
+            }
+        }
+
         return redirect()->route('anakasuh')->with('message', 'Anak asuh berhasil diedit');
     }
 
-    public function hapus_anakasuh($id): RedirectResponse
+    public function hapus_anakasuh($id_anakasuh): RedirectResponse
     {
-        $ank = Anakasuh::findOrFail($id);
+        $ank = Anakasuh::findOrFail($id_anakasuh);
+        $pres = Prestasianakasuh::where('id_anakasuh', $id_anakasuh)->get();
 
         Storage::delete('public/anakasuhs/Akta/' . $ank->img_akta);
         Storage::delete('public/anakasuhs/KK/' . $ank->img_kk);
         Storage::delete('public/anakasuhs/SKKO/' . $ank->img_skko);
         Storage::delete('public/anakasuhs/Foto/' . $ank->img_anak);
 
+        if($pres->isNotEmpty()){
+            foreach ($pres as $p) {
+                $p->delete();
+            }
+        }
         $ank->delete();
 
         return redirect()->route('anakasuh')->with(['message' => 'Anak asuh berhasil dihapus']);

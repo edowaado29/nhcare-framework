@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Anakasuh extends Model
 {
     use HasFactory;
+    
+    protected $primaryKey = 'id_anakasuh';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $fillable = [
         'id_anakasuh',
@@ -32,8 +36,8 @@ class Anakasuh extends Model
         'nama_ayah',
         'nik_ayah',
         'nama_ibu',
-        'nama_ibu',
-        'nik_wali',
+        'nik_ibu',
+        'nama_wali',
         'nik_wali',
         'img_anak'
     ];

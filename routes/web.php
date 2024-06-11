@@ -10,7 +10,6 @@ use App\Http\Controllers\PengasuhController;
 use App\Http\Controllers\AcaraController;
 use App\Http\Controllers\AnakasuhController;
 use App\Http\Controllers\ProgramController;
-use App\Models\Anakasuh;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +41,10 @@ Route::delete('/hapus_donatur/{id}', [KedonaturanController::class, 'hapus_donat
 // Route Anak Asuh
 Route::get('/anakasuh', [AnakasuhController::class, 'anakasuh'])->name('anakasuh');
 Route::get('/tambah_anakasuh', [AnakasuhController::class, 'tambah_anakasuh'])->name('tambah_anakasuh');
+Route::post('/tambahAnk', [AnakasuhController::class, 'tambahAnk'])->name('tambahAnk');
+Route::delete('/hapus_anakasuh/{id_anakasuh}', [AnakasuhController::class, 'hapus_anakasuh'])->name('hapus_anakasuh');
+Route::get('/edit_anakasuh/{id_anakasuh}', [AnakasuhController::class, 'edit_anakasuh'])->name('edit_anakasuh');
+Route::put('/update_anakasuh/{id_anakasuh}', [AnakasuhController::class, 'update_anakasuh'])->name('update_anakasuh');
 
 // Route Donasi
 Route::get('/donasi', [DonasiController::class, 'donasi'])->name('donasi');

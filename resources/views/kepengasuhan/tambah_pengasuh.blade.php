@@ -56,21 +56,19 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
-                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki">
+                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="Laki-laki">
                       <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
-                      <input type="radio" id="perempuan" name="jenis_kelamin" style="margin-left: 3vh;" value="perempuan">
+                      <input type="radio" id="perempuan" name="jenis_kelamin" style="margin-left: 3vh;" value="Perempuan">
                       <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
                     </div>
                     <div class="mb-3">
                       <label for="tempat_lahir" class="form-label text-secondary fs-6">Tempat Lahir <span class="text-danger">*</span></label>
                       <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}">
                     </div>
-
                     <div class="mb-3">
                       <label for="tanggal_lahir" class="form-label text-secondary fs-6">Tanggal Lahir <span class="text-danger">*</span></label>
                       <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
                     </div>
-
                     <div class="mb-3">
                       <label for="last_pend" class="form-label text-secondary fs-6">Pendidikan Terakhir</label>
                       <select class="form-control" id="last_pend" name="pendidikan_terakhir">
@@ -99,10 +97,9 @@
                       @enderror
                     </div>
                     <div class="mb-3">
-                      <label for="alamat" class="form-label text-secondary fs-6">Alamat <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat') }}">
+                      <label for="alamat" class="form-label text-secondary fs-6">Alamat</label>
+                      <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ old('alamat') }}</textarea>
                     </div>
-
                     <div class="mb-3">
                       <label for="nomor_handphone" class="form-label text-secondary fs-6">Nomor Handphone <span class="text-danger">*</span></label>
                       <input type="regex" class="form-control" id="nomor_handphone" name="nomor_handphone" value="{{ old('nomor_handphone')}}" onkeypress="return hanyaAngka(event)" oninput="cekPanjangInput(this)">
@@ -169,6 +166,18 @@
                 <div class="container">
                   <div class="mb-3">
                     <div class="preview">
+                      <label class="text-secondary fs-6">Pratinjau Foto Pengasuh</label><br>
+                      <img src="{{asset('assets/img/no_image.png')}}" class="mb-3" id="pengasuhPreview" style="width: 100%; height: 400px; border: 2px solid #d4d4d4; border-radius: 10px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mt-4">
+              <div class="card-body px-0 pt-0 pb-2 mt-3">
+                <div class="container">
+                  <div class="mb-3">
+                    <div class="preview">
                       <label class="text-secondary fs-6">Pratinjau Foto Kartu Keluarga (KK)</label><br>
                       <img src="{{asset('assets/img/no_image.png')}}" class="mb-3" id="kkPreview" style="width: 100%; height: 270px; border: 2px solid #d4d4d4; border-radius: 10px;">
                     </div>
@@ -183,18 +192,6 @@
                     <div class="preview">
                       <label class="text-secondary fs-6">Pratinjau Foto Kartu Tanda Penduduk (KTP)</label><br>
                       <img src="{{asset('assets/img/no_image.png')}}" class="mb-3" id="ktpPreview" style="width: 100%; height: 270px; border: 2px solid #d4d4d4; border-radius: 10px;">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card mt-4">
-              <div class="card-body px-0 pt-0 pb-2 mt-3">
-                <div class="container">
-                  <div class="mb-3">
-                    <div class="preview">
-                      <label class="text-secondary fs-6">Pratinjau Foto Pengasuh</label><br>
-                      <img src="{{asset('assets/img/no_image.png')}}" class="mb-3" id="pengasuhPreview" style="width: 100%; height: 400px; border: 2px solid #d4d4d4; border-radius: 10px;">
                     </div>
                   </div>
                 </div>

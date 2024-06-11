@@ -58,10 +58,10 @@
 
                     <div class="mb-3">
                       <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
-                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" {{ old('jenis_kelamin', $peng->jenis_kelamin) == 'laki-laki' ? 'checked' : '' }}>
+                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="Laki-laki" {{ old('jenis_kelamin', $peng->jenis_kelamin) == 'Laki-laki' ? 'checked' : '' }}>
                       <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
 
-                      <input type="radio" id="perempuan" name="jenis_kelamin" value="perempuan" style="margin-left: 3vh;" {{ old('jenis_kelamin', $peng->jenis_kelamin) == 'perempuan' ? 'checked' : '' }}>
+                      <input type="radio" id="perempuan" name="jenis_kelamin" value="Perempuan" style="margin-left: 3vh;" {{ old('jenis_kelamin', $peng->jenis_kelamin) == 'Perempuan' ? 'checked' : '' }}>
                       <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
                     </div>
 
@@ -184,6 +184,18 @@
               <div class="container">
                 <div class="mb-3">
                   <div class="preview">
+                    <label class="text-secondary fs-6">Pratinjau Foto Pengasuh</label><br>
+                    <img src="{{ asset('/storage/pengasuhs/foto/' .$peng->foto_pengasuh)}}" class="mb-3" id="pengasuhPreview" style="width: 100%; height: 400px; border: 2px solid #d4d4d4; border-radius: 10px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mt-4">
+            <div class="card-body px-0 pt-0 pb-2 mt-3">
+              <div class="container">
+                <div class="mb-3">
+                  <div class="preview">
                     <label class="text-secondary fs-6">Pratinjau Foto Kartu Keluarga (KK)</label><br>
                     <img src="{{ asset('/storage/pengasuhs/KK/' .$peng->foto_kartukeluarga)}}" class="mb-3" id="kkPreview" style="width: 100%; height: 270px; border: 2px solid #d4d4d4; border-radius: 10px;">
                   </div>
@@ -198,18 +210,6 @@
                   <div class="preview">
                     <label class="text-secondary fs-6">Pratinjau Foto Kartu Tanda Penduduk (KTP)</label><br>
                     <img src="{{ asset('/storage/pengasuhs/KTP/' .$peng->foto_ktp)}}" class="mb-3" id="ktpPreview" style="width: 100%; height: 270px; border: 2px solid #d4d4d4; border-radius: 10px;">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card mt-4">
-            <div class="card-body px-0 pt-0 pb-2 mt-3">
-              <div class="container">
-                <div class="mb-3">
-                  <div class="preview">
-                    <label class="text-secondary fs-6">Pratinjau Foto Pengasuh</label><br>
-                    <img src="{{ asset('/storage/pengasuhs/foto/' .$peng->foto_pengasuh)}}" class="mb-3" id="pengasuhPreview" style="width: 100%; height: 400px; border: 2px solid #d4d4d4; border-radius: 10px;">
                   </div>
                 </div>
               </div>

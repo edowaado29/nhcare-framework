@@ -64,10 +64,10 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label text-secondary fs-6">Jenis Kelamin <span class="text-danger">*</span></label><br>
-                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="Laki-laki" {{ old('jenis_kelamin') == 'laki-laki' ? 'checked' : '' }}>
+                      <input type="radio" id="laki-laki" name="jenis_kelamin" value="Laki-laki">
                       <label for="laki-laki" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Laki-laki</label>
 
-                      <input type="radio" id="perempuan" name="jenis_kelamin" value="Perempuan" style="margin-left: 3vh;" {{ old('jenis_kelamin') == 'perempuan' ? 'checked' : '' }}>
+                      <input type="radio" id="perempuan" name="jenis_kelamin" value="Perempuan" style="margin-left: 3vh;">
                       <label for="perempuan" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Perempuan</label>
                     </div>
                     <div class="mb-3">

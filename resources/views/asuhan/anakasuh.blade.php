@@ -2,6 +2,11 @@
 
 @section('content')
   <main class="main-content position-relative border-radius-lg ">
+  <style>
+    .colored-toast.swal2-icon-success {
+      background-color: #a5dc86 !important;
+    }
+  </style>
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
@@ -56,9 +61,42 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @forelse ($ank as $anaks)
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{ $loop->iteration }}</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        {{ $anaks->nama }}
+                      </td>
+                      <td>
+                        {{ $anaks->kelas }}
+                      </td>
+                      <td>
+                        {{ $anaks->cabang }}
+                      </td>
+                      <td>
+                        {{ $anaks->keterangan }}
+                      </td>
+                      <td class="align-middle text-sm">
+                        <form action="" method="POST" id="delete-form">
+                          <a href="" class="btn btn-sm bg-gradient-primary">Detail</a>
+                          <a href="{{route('edit_anakasuh', $anaks->id_anakasuh)}}" class="btn btn-sm bg-gradient-success">Edit</a>
+                          @csrf
+                          @method('DELETE')
+                          <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{$anaks->id_anakasuh}}')">HAPUS</button>
+                        </form>
+                      </td>
+                    </tr>
+                    @empty
                     <tr>
                       <td colspan="3" class="text-center">Data Anak asuh belum Tersedia.</td>
                     </tr>
+                    @endforelse
                   </tbody>
                 </table>
               </div>
@@ -68,4 +106,46 @@
       </div>
     </div>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{{ asset('assets/js/search.js') }}"></script>
+  <script>
+    const baseUrl = "{{ url('/hapus_anakasuh') }}";
+    function confirmDelete(id) {
+      Swal.fire({
+        title: "Apakah Anda Yakin?",
+        text: "Ingin Menghapus Data Ini",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const deleteForm = document.getElementById("delete-form");
+          deleteForm.action = `${baseUrl}/${id}`;
+          deleteForm.submit();
+        }
+      });
+    }
+  </script>
+  @if (session('message'))
+  <script>
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast',
+      },
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    })
+    Toast.fire({
+      icon: 'success',
+      title: "{{ session('message') }}"
+    });
+  </script>
+  @endif
 @endsection
