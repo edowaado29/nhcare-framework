@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jabatan;
+use App\Models\Pengasuh;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -53,6 +54,12 @@ class JabatanController extends Controller
     public function hapus_jabatan($id): RedirectResponse
     {
         $jabatan = Jabatan::findOrFail($id);
+        $pengasuh = Pengasuh::where('id_jabatan', $id)->get();
+        if($pengasuh->isNotEmpty()){
+            foreach ($pengasuh as $p) {
+                $p->delete();
+            }
+        }
         $jabatan->delete();
         return redirect()->route('jabatan')->with(['message' => 'Jabatan berhasil dihapus']);
     }

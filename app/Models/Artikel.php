@@ -14,4 +14,7 @@ class Artikel extends Model
         'deskripsiArtikel',
         'gambarArtikel',
     ];
+    public function getGambarArtikelUrlAttribute($value)
+    {
+        return url('storage/artikels/' . $value);}
 }

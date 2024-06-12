@@ -17,4 +17,9 @@ class Prestasianakasuh extends Model
         'id_anakasuh',
         'nama_prestasi'
     ];
+
+    public function anakasuh()
+    {
+        return $this->belongsTo(Anakasuh::class, 'id_anakasuh');
+    }
 }

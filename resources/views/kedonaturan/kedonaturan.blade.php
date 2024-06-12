@@ -80,11 +80,11 @@
                     </td>
                     <td class="align-middle text-sm">
                       <form action="" method="POST" id="delete-form">
-                        <a href="{{ route('detail_donatur', $dntr->id)}}" class="btn btn-sm bg-gradient-primary">Detail</a>
-                        <a href="{{ route('edit_donatur', $dntr->id)}}" class="btn btn-sm bg-gradient-success">Edit</a>
+                        <a href="{{ route('detail_donatur', $dntr->id_donatur)}}" class="btn btn-sm bg-gradient-primary">Detail</a>
+                        <a href="{{ route('edit_donatur', $dntr->id_donatur)}}" class="btn btn-sm bg-gradient-success">Edit</a>
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{$dntr->id}}')">HAPUS</button>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{$dntr->id_donatur}}')">HAPUS</button>
                       </form>
                     </td>
                   </tr>

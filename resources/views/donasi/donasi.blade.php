@@ -68,7 +68,7 @@
                       {{ $dns->id_transaksi }}
                     </td>
                     <td>
-                      {{ $dns->kedonaturan->email }}
+                      {{ $dns->donatur->email }}
                     </td>
                     <td>
                       {{ $dns->nominal }}
@@ -77,7 +77,7 @@
                       {{ $dns->tanggal_donasi }}
                     </td>
                     <td class="align-middle text-sm">
-                      <a href="{{ route('detail_donasi', $dns->id)}}" class="btn btn-sm bg-gradient-primary">Detail</a>
+                      <a href="{{ route('detail_donasi', $dns->id_transaksi)}}" class="btn btn-sm bg-gradient-primary">Detail</a>
                     </td>
                   </tr>
                   @empty
@@ -94,5 +94,5 @@
     </div>
   </div>
 </main>
-@endsection
 <script src="{{ asset('assets/js/search.js') }}"></script>
+@endsection

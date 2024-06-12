@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kedonaturans', function (Blueprint $table) {
-            $table->id();
+            $table->string('id_donatur')->primary();
             $table->string('nama_donatur');
             $table->string('nomor_handphone')->nullable();
             $table->string('alamat')->nullable();
             $table->string('jenis_kelamin')->nullable();
-            $table->string('email');
-            $table->string('password');
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
+            $table->string('pertanyaan')->nullable();
+            $table->string('jawaban')->nullable();
             $table->string('foto_donatur')->nullable();
             $table->timestamps();
         });

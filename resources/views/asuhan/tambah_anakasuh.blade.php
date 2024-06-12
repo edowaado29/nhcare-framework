@@ -132,7 +132,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="tingkat" class="form-label text-secondary fs-6">Tingkat <span class="text-danger">*</span></label>
-                      <select class="form-control" id="tingkat" name="tingkat">
+                      <select class="form-control" id="tingkat" name="tingkat" onchange="updateKelas()">
                         <option value="">Pilih Tingkat</option>
                         <option value="TK">TK</option>
                         <option value="SD">SD</option>
@@ -144,20 +144,6 @@
                       <label for="kelas" class="form-label text-secondary fs-6">Kelas <span class="text-danger">*</span></label>
                       <select class="form-control" id="kelas" name="kelas">
                         <option value="">Pilih Kelas</option>
-                        <option value="TK Kecil">TK Kecil</option>
-                        <option value="TK Besar">TK Besar</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
                       </select>
                     </div>
                     <div class="mb-3">
@@ -178,7 +164,7 @@
                       </div>
                       <div id="input_fields_wrap">
                           <div class="form-group">
-                              <input type="text" name="nama_prestasi[]" class="form-control mb-2"/>
+                              <input type="hidden" name="nama_prestasi[]" class="form-control mb-2"/>
                           </div>
                       </div>
                     </div>
@@ -365,7 +351,45 @@
     }
   }
 </script>
+<script>
+    function updateKelas() {
+        var tingkat = document.getElementById("tingkat").value;
+        var kelas = document.getElementById("kelas");
 
+        kelas.innerHTML = '<option value="">Pilih Kelas</option>';
+
+        if (tingkat === "TK") {
+            var options = ['<option value="TK Kecil">TK Kecil</option>', '<option value="TK Besar">TK Besar</option>'];
+        } else if (tingkat === "SD") {
+            var options = [
+                '<option value="1">1</option>',
+                '<option value="2">2</option>',
+                '<option value="3">3</option>',
+                '<option value="4">4</option>',
+                '<option value="5">5</option>',
+                '<option value="6">6</option>'
+            ];
+        } else if (tingkat === "SMP") {
+            var options = [
+                '<option value="7">7</option>',
+                '<option value="8">8</option>',
+                '<option value="9">9</option>'
+            ];
+        } else if (tingkat === "SMA") {
+            var options = [
+                '<option value="10">10</option>',
+                '<option value="11">11</option>',
+                '<option value="12">12</option>'
+            ];
+        }
+
+        if (options) {
+            options.forEach(function(option) {
+                kelas.innerHTML += option;
+            });
+        }
+    }
+</script>
 <script>
   if (typeof ErrorNama !== 'undefined') {
     const Toast = Swal.mixin({

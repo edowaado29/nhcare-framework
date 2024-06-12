@@ -20,7 +20,7 @@ class AcaraController extends Controller
     {
         $acra = Acara::findOrFail($id);
 
-        return view('detail_acara', compact('acra'));
+        return view('layanan.detail_acara', compact('acra'));
     }
 
     public function tambah_acara(): View
@@ -112,4 +112,13 @@ class AcaraController extends Controller
         $acra->delete();
         return redirect()->route('acara')->with(['message' => 'Acara berhasil dihapus']);
     }
+
+
+    //untuk api di mobile
+    public function acaras()
+    {
+        $acara = Acara::all();
+        return response()->json($acara);
+    }
+
 }

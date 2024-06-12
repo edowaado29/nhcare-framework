@@ -133,7 +133,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="tingkat" class="form-label text-secondary fs-6">Tingkat <span class="text-danger">*</span></label>
-                      <select class="form-control" id="tingkat" name="tingkat">
+                      <select class="form-control" id="tingkat" name="tingkat"  onchange="updateKelas()">
                         <option value="">Pilih Tingkat</option>
                         <option value="TK" {{ old('tingkat', $ank->tingkat) == 'TK' ? 'selected' : ''}}>TK</option>
                         <option value="SD" {{ old('tingkat', $ank->tingkat) == 'SD' ? 'selected' : ''}}>SD</option>
@@ -145,20 +145,6 @@
                       <label for="kelas" class="form-label text-secondary fs-6">Kelas <span class="text-danger">*</span></label>
                       <select class="form-control" id="kelas" name="kelas">
                         <option value="">Pilih Kelas</option>
-                        <option value="TK Kecil" {{ old('kelas', $ank->kelas) == 'TK Kecil' ? 'selected' : ''}}>TK Kecil</option>
-                        <option value="TK Besar" {{ old('kelas', $ank->kelas) == 'TK Besar' ? 'selected' : ''}}>TK Besar</option>
-                        <option value="1" {{ old('kelas', $ank->kelas) == '1' ? 'selected' : ''}}>1</option>
-                        <option value="2" {{ old('kelas', $ank->kelas) == '2' ? 'selected' : ''}}>2</option>
-                        <option value="3" {{ old('kelas', $ank->kelas) == '3' ? 'selected' : ''}}>3</option>
-                        <option value="4" {{ old('kelas', $ank->kelas) == '4' ? 'selected' : ''}}>4</option>
-                        <option value="5" {{ old('kelas', $ank->kelas) == '5' ? 'selected' : ''}}>5</option>
-                        <option value="6" {{ old('kelas', $ank->kelas) == '6' ? 'selected' : ''}}>6</option>
-                        <option value="7" {{ old('kelas', $ank->kelas) == '7' ? 'selected' : ''}}>7</option>
-                        <option value="8" {{ old('kelas', $ank->kelas) == '8' ? 'selected' : ''}}>8</option>
-                        <option value="9" {{ old('kelas', $ank->kelas) == '9' ? 'selected' : ''}}>9</option>
-                        <option value="10" {{ old('kelas', $ank->kelas) == '10' ? 'selected' : ''}}>10</option>
-                        <option value="11" {{ old('kelas', $ank->kelas) == '11' ? 'selected' : ''}}>11</option>
-                        <option value="12" {{ old('kelas', $ank->kelas) == '12' ? 'selected' : ''}}>12</option>
                       </select>
                     </div>
                     <div class="mb-3">
@@ -179,8 +165,9 @@
                       </div>
                       <div id="input_fields_wrap">
                           <div class="form-group">
+                            <input type="hidden" name="nama_prestasi[]" class="form-control mb-2"/>
                             @foreach($pres as $p)
-                            <input type="text" name="nama_prestasi[]" class="form-control mb-2" value="{{old('nama_prestasi', $p)}}"/>
+                            <div class="d-flex align-items-center justify-content-between mb-2"><input type="text" name="nama_prestasi[]" value="{{old('nama_prestasi', $p)}}" class="form-control mb-2" /><i class="fas fa-solid fa-minus" onclick="removeField(this)" style="border: 3px solid red; color: red; padding : 3px; margin-left: 10px; border-radius: 5px; cursor: pointer;"></i></div>
                             @endforeach
                           </div>
                       </div>
@@ -368,7 +355,86 @@
     }
   }
 </script>
+<script>
+    var tingkat = document.getElementById("tingkat").value;
+    var kelas = document.getElementById("kelas");
 
+    kelas.innerHTML = '<option value="">Pilih Kelas</option>';
+
+    if (tingkat === "TK") {
+        var options = [
+            '<option value="TK Kecil" {{ old("kelas", $ank->kelas) == "TK Kecil" ? "selected" : ""}}>TK Kecil</option>',
+            '<option value="TK Besar" {{ old("kelas", $ank->kelas) == "TK Besar" ? "selected" : ""}}>TK Besar</option>'
+        ];
+    } else if (tingkat === "SD") {
+        var options = [
+            '<option value="1" {{ old("kelas", $ank->kelas) == "1" ? "selected" : ""}}>1</option>',
+            '<option value="2" {{ old("kelas", $ank->kelas) == "2" ? "selected" : ""}}>2</option>',
+            '<option value="3" {{ old("kelas", $ank->kelas) == "3" ? "selected" : ""}}>3</option>',
+            '<option value="4" {{ old("kelas", $ank->kelas) == "4" ? "selected" : ""}}>4</option>',
+            '<option value="5" {{ old("kelas", $ank->kelas) == "5" ? "selected" : ""}}>5</option>',
+            '<option value="6" {{ old("kelas", $ank->kelas) == "6" ? "selected" : ""}}>6</option>'
+        ];
+    } else if (tingkat === "SMP") {
+        var options = [
+            '<option value="7" {{ old("kelas", $ank->kelas) == "7" ? "selected" : ""}}>7</option>',
+            '<option value="8" {{ old("kelas", $ank->kelas) == "8" ? "selected" : ""}}>8</option>',
+            '<option value="9" {{ old("kelas", $ank->kelas) == "9" ? "selected" : ""}}>9</option>'
+        ];
+    } else if (tingkat === "SMA") {
+        var options = [
+            '<option value="10" {{ old("kelas", $ank->kelas) == "10" ? "selected" : ""}}>10</option>',
+            '<option value="11" {{ old("kelas", $ank->kelas) == "11" ? "selected" : ""}}>11</option>',
+            '<option value="12" {{ old("kelas", $ank->kelas) == "12" ? "selected" : ""}}>12</option>'
+        ];
+    }
+
+    if (options) {
+        options.forEach(function(option) {
+            kelas.innerHTML += option;
+        });
+    }
+    function updateKelas() {
+        var tingkat = document.getElementById("tingkat").value;
+        var kelas = document.getElementById("kelas");
+
+        kelas.innerHTML = '<option value="">Pilih Kelas</option>';
+
+        if (tingkat === "TK") {
+            var options = [
+                '<option value="TK Kecil" {{ old("kelas", $ank->kelas) == "TK Kecil" ? "selected" : ""}}>TK Kecil</option>',
+                '<option value="TK Besar" {{ old("kelas", $ank->kelas) == "TK Besar" ? "selected" : ""}}>TK Besar</option>'
+            ];
+        } else if (tingkat === "SD") {
+            var options = [
+                '<option value="1" {{ old("kelas", $ank->kelas) == "1" ? "selected" : ""}}>1</option>',
+                '<option value="2" {{ old("kelas", $ank->kelas) == "2" ? "selected" : ""}}>2</option>',
+                '<option value="3" {{ old("kelas", $ank->kelas) == "3" ? "selected" : ""}}>3</option>',
+                '<option value="4" {{ old("kelas", $ank->kelas) == "4" ? "selected" : ""}}>4</option>',
+                '<option value="5" {{ old("kelas", $ank->kelas) == "5" ? "selected" : ""}}>5</option>',
+                '<option value="6" {{ old("kelas", $ank->kelas) == "6" ? "selected" : ""}}>6</option>'
+            ];
+        } else if (tingkat === "SMP") {
+            var options = [
+                '<option value="7" {{ old("kelas", $ank->kelas) == "7" ? "selected" : ""}}>7</option>',
+                '<option value="8" {{ old("kelas", $ank->kelas) == "8" ? "selected" : ""}}>8</option>',
+                '<option value="9" {{ old("kelas", $ank->kelas) == "9" ? "selected" : ""}}>9</option>'
+            ];
+        } else if (tingkat === "SMA") {
+            var options = [
+                '<option value="10" {{ old("kelas", $ank->kelas) == "10" ? "selected" : ""}}>10</option>',
+                '<option value="11" {{ old("kelas", $ank->kelas) == "11" ? "selected" : ""}}>11</option>',
+                '<option value="12" {{ old("kelas", $ank->kelas) == "12" ? "selected" : ""}}>12</option>'
+            ];
+        }
+
+        if (options) {
+            options.forEach(function(option) {
+                kelas.innerHTML += option;
+            });
+        }
+    }
+</script>
 <script>
   if (typeof ErrorNama !== 'undefined') {
     const Toast = Swal.mixin({

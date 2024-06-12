@@ -38,7 +38,7 @@
             <div class="card" style="height: 100%">
               <div class="card-body px-0 pt-0 pb-2 mt-3">
                 <div class="container">
-                  <form action="{{route ('update_donatur', $donatur->id )}}" method="post" enctype="multipart/form-data">
+                  <form action="{{route ('update_donatur', $donatur->id_donatur )}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @if (Session::has('fail'))
                     <script>
@@ -46,7 +46,7 @@
                     </script>
                     @endif
                     @method('PUT')
-                    <input type="hidden" name="id" value="{{old('id', $donatur->id)}}">
+                    <input type="hidden" name="id" value="{{old('id', $donatur->id_donatur)}}">
                     <div class="mb-3">
                       <label for="nama_donatur" class="form-label text-secondary fs-6">Nama <span class="text-danger">*</span></label>
                       <input type="text" class="form-control @error('nama_donatur') is-invalid @enderror" id="nama_donatur" name="nama_donatur" value="{{old('nama_donatur', $donatur->nama_donatur)}}">

@@ -9,11 +9,15 @@ class Donasi extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_transaksi';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id_transaksi',
         'nominal',
         'tanggal_donasi',
-        'keterangan',
+        'tujuan',
         'doa',
         'id_donatur'
     ];

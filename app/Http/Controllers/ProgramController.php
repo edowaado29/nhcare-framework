@@ -20,7 +20,7 @@ class ProgramController extends Controller
     {
         $prog = Program::findOrFail($id);
 
-        return view('detail_program', compact('prog'));
+        return view('layanan.detail_program', compact('prog'));
     }
 
     public function tambah_program(): View
@@ -104,5 +104,13 @@ class ProgramController extends Controller
 
         $prog->delete();
         return redirect()->route('program')->with(['message' => 'Program berhasil dihapus']);
+    }
+
+
+    //controller untuk api di mobile
+    public function programs()
+    {
+        $program = Program::all();
+        return response()->json($program);
     }
 }

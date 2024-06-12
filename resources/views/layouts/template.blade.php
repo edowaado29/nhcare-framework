@@ -148,7 +148,7 @@
       timerProgressBar: true,
     })
     Toast1.fire({
-      icon: 'success',
+      icon: 'warning',
       title: "{{ Session::get('fail') }}"
     });
   </script>

@@ -41,4 +41,14 @@ class Anakasuh extends Model
         'nik_wali',
         'img_anak'
     ];
+
+    public function getGambarArtikelUrlAttribute($value)
+    {
+        return url('storage/anakasuhs/' . $value);}
+    
+    
+        public function prestasi()
+    {
+    return $this->hasMany(Prestasianakasuh::class, 'id_anakasuh');
+    }
 }

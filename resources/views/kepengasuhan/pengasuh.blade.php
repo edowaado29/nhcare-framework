@@ -80,7 +80,7 @@
                     </td>
                     <td class="align-middle text-sm">
                       <form action="" method="POST" id="delete-form">
-                        <a href="" class="btn btn-sm bg-gradient-primary">Detail</a>
+                        <a href="{{ route('detail_pengasuh', $asuh->id)}}" class="btn btn-sm bg-gradient-primary">Detail</a>
                         <a href="{{ route('edit_pengasuh', $asuh->id)}}" class="btn btn-sm bg-gradient-success">Edit</a>
                         @csrf
                         @method('DELETE')

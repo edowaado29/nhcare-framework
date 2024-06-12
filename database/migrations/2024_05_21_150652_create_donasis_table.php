@@ -12,16 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donasis', function (Blueprint $table) {
-            $table->id();
-            $table->string('id_transaksi');
+            $table->string('id_transaksi')->primary();
             $table->double('nominal');
             $table->date('tanggal_donasi');
-            $table->string('keterangan');
+            $table->string('tujuan');
             $table->string('doa');
-            $table->unsignedBigInteger('id_donatur');
+            $table->string('id_donatur');
             $table->timestamps();
 
-            $table->foreign('id_donatur')->references('id')->on('kedonaturans');
+            $table->foreign('id_donatur')->references('id_donatur')->on('kedonaturans');
         });
     }
 
@@ -33,4 +32,3 @@ return new class extends Migration
         Schema::dropIfExists('donasis');
     }
 };
-

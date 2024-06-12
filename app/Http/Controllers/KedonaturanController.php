@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class KedonaturanController extends Controller
@@ -91,9 +93,9 @@ class KedonaturanController extends Controller
 
         $donatur = Kedonaturan::findOrFail($id);
 
-        if(Kedonaturan::where('email', '=', $request->email)->where('id', '!=', $request->id)->first()){
+        if(Kedonaturan::where('email', '=', $request->email)->where('id_donatur', '!=', $request->id)->first()){
             return back()->with('fail', 'Email sudah terdaftar!');
-        } else if(Kedonaturan::where('email', '=', $request->email)->where('id', '=', $request->id)->first() || Kedonaturan::where('email', '!=', $request->email)->where('id', '=', $request->id)->first()){
+        } else if(Kedonaturan::where('email', '=', $request->email)->where('id_donatur', '=', $request->id)->first() || Kedonaturan::where('email', '!=', $request->email)->where('id_donatur', '=', $request->id)->first()){
             if ($request->hasFile('foto_donatur')) {
                 $foto_donatur = $request->file('foto_donatur');
                 $foto_donatur->storeAs('public/kedonaturans', $foto_donatur->hashName());
@@ -163,5 +165,246 @@ class KedonaturanController extends Controller
 
         $donatur->delete();
         return redirect()->route('kedonaturan')->with(['message' => 'Donatur berhasil dihapus']);
+    }
+
+    //api mobile
+    public function createDonatur(Request $request)
+    {
+        try {
+            // Validasi data yang diterima dari request
+            $validateDonatur = Validator::make($request->all(), [
+                'nama_donatur' => 'nullable',
+                'nomor_handphone' => 'required',
+                'alamat' => 'nullable',
+                'jenis_kelamin' => 'nullable',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:8',
+                'pertanyaan' => 'required',
+                'jawaban' => 'required'
+            ]);
+
+            // Jika validasi gagal, kembalikan pesan error
+            if ($validateDonatur->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validation error',
+                    'errors' => $validateDonatur->errors()
+                ], 422);
+            }
+
+            // Buat pengguna baru
+            $donatur = Kedonaturan::create([
+                'nama_donatur' => $request->nama_donatur,
+                'nomor_handphone' => $request->nomor_handphone,
+                'alamat' => $request->alamat,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'email' => $request->email,
+                'password' => bcrypt($request->password), // Enkripsi password
+                'pertanyaan' => $request->pertanyaan,
+                'jawaban' => $request->jawaban
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Created Successfully',
+                'donatur' => $donatur
+            ], 201);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to create user',
+                'error' => $th->getMessage()
+            ], 500);
+        }
+    }
+
+    // Method untuk login pengguna
+    public function loginDonatur(Request $request)
+    {
+        try {
+            // Validasi data yang diterima dari request
+            $validateDonatur = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+
+            // Jika validasi gagal, kembalikan pesan error
+            if ($validateDonatur->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validation error',
+                    'errors' => $validateDonatur->errors()
+                ], 422);
+            }
+
+            // Lakukan proses autentikasi pengguna
+            if (!Auth::guard('donatur')->attempt($request->only(['email', 'password']))) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Email & Password does not match with our record.',
+                ], 401);
+            }
+
+            // Jika autentikasi berhasil, kembalikan respons dengan token autentikasi
+            $donatur = Kedonaturan::where('email', $request->email)->first();
+
+            // Pastikan pengguna ditemukan
+            if (!$donatur) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'User not found.',
+                ], 404);
+            }
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Logged In Successfully',
+                'token' => $donatur->createToken("API TOKEN")->plainTextToken
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to login user',
+                'error' => $th->getMessage()
+            ], 500);
+        }
+    }
+    
+    // Method untuk mendapatkan data pengguna dari token
+    public function getDntrFromToken()
+    {
+        $donatur = Auth::user();
+    
+        if ($donatur) {
+            return response()->json([
+                'id_donatur' => $donatur->id_donatur,
+                'nama_donatur' => $donatur->nama_donatur,
+                'nomor_handphone' => $donatur->nomor_handphone,
+                'alamat' => $donatur->alamat,
+                'jenis_kelamin' => $donatur->jenis_kelamin,
+                'email' => $donatur->email,
+                'password' => $donatur->password,
+                'pertanyaan' => $donatur->pertanyaan,
+                'jawaban' => $donatur->jawaban,
+            ]);
+        } else {
+            return response()->json(['error' => 'Donatur tidak ditemukan'], 404);
+        }
+    } 
+
+    //UpdateProfilController
+    public function updateDntr(Request $request)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'nama_donatur' => 'sometimes|required|string|max:255',
+            'nomor_handphone' => 'sometimes|required|string|max:20',
+            'jawaban' => 'sometimes|required|string|max:255',
+            'alamat' => 'sometimes|required|string|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // // Temukan pengguna yang sedang login
+        $donatur = Auth::user();
+        // $donatur = Auth::guard('donatur')->user();
+
+        if (!$donatur instanceof Kedonaturan) {                             
+            return response()->json(['message' => 'Donatur tidak ditemukan'], 404);
+        }
+
+        // Perbarui data pengguna
+        if ($request->has('nama_donatur')) {
+            $donatur->nama_donatur = $request->input('nama_donatur');
+        }
+
+        if ($request->has('nomor_handphone')) {
+            $donatur->nomor_handphone = $request->input('nomor_handphone');
+        }
+
+        if ($request->has('alamat')) {
+            $donatur->alamat = $request->input('alamat');
+        }
+
+        if ($request->has('jawaban')) {
+            $donatur->jawaban = $request->input('jawaban');
+        }
+
+        $donatur->save();
+
+        return response()->json(['message' => 'Profile updated successfully', 'user' => $donatur], 200);
+    }
+
+    //ForgotPasswordController
+    public function resetPsswrd(Request $request)
+    {
+        // Validasi permintaan
+        $request->validate([
+            'email' => 'required|email',
+            'jawaban' => 'required',
+            'password' => 'required|min:8', // Validasi password baru
+        ]);
+
+        // Cari pengguna berdasarkan email
+        $donatur = Kedonaturan::where('email', $request->email)->first();
+
+        // Periksa apakah pengguna ditemukan
+        if (!$donatur) {
+            return response()->json(['message' => 'Email tidak ditemukan'], 404);
+        }
+
+        // Periksa apakah jawaban keamanan sesuai
+        if ($request->jawaban === $donatur->jawaban) {
+            // Jika jawaban keamanan benar, ubah password pengguna
+            $donatur->password = Hash::make($request->password);
+            $donatur->save();
+            return response()->json(['message' => 'Password berhasil diubah'], 200);
+        } else {
+            // Jika jawaban keamanan salah
+            return response()->json(['message' => 'Jawaban Keamanan Salah, Silahkan cek lagi!'], 400);
+        }
+    }
+
+    //UbahPasswordController
+    public function verifyEmail(Request $request){
+        $request->validate(['email' => 'required|email']);
+        $donatur= Kedonaturan::where('email', $request->email)->first();
+
+        if ($donatur) {
+            return response()->json(['pertanyaan' => $donatur->pertanyaan], 200);
+        }
+
+        return response()->json(['message' => 'Email not found'], 404);
+    }
+
+    public function verifyAnswer(Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'jawaban' => 'required'
+        ]);
+        $donatur = Kedonaturan::where('email', $request->email)->first();
+        if ($donatur && $request->jawaban === $donatur->jawaban) {
+            return response()->json(['message' => 'Jawaban sesuai'], 200);
+        }
+        return response()->json(['message' => 'Jawaban tidak sesuai'], 401);
+
+    }
+
+    public function resetPassword(Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed'
+        ]);
+        $donatur = Kedonaturan::where('email', $request->email)->first();
+
+        if ($donatur) {
+            $donatur->password = Hash::make($request->password);
+            $donatur->save();
+            return response()->json(['message' => 'Password has been reset'], 200);
+        }
     }
 }

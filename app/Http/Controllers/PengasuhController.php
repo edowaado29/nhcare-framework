@@ -85,7 +85,7 @@ class PengasuhController extends Controller
     public function detail_pengasuh(string $id): View
     {
         $peng = Pengasuh::findOrFail($id);
-        return view('detail_pengasuh', compact('peng'));
+        return view('kepengasuhan.detail_pengasuh', compact('peng'));
     }
 
     public function edit_pengasuh(string $id): view

@@ -14,4 +14,8 @@ class Program extends Model
         'deskripsiProgram',
         'gambarProgram'
     ];
+    public function getGambarProgramUrlAttribute($value)
+    {
+        return url('storage/programs/' . $value);}
 }
+

@@ -19,7 +19,7 @@ class ArtikelController extends Controller
     public function detail_artikel(string $id): View
     {
         $artikels = Artikel::findOrFail($id);
-        return View('detail_artikel', compact('artikels'));
+        return View('layanan.detail_artikel', compact('artikels'));
     }
 
     public function tambah_artikel(): View
@@ -105,4 +105,17 @@ class ArtikelController extends Controller
         $artikels->delete();
         return redirect()->route('artikel')->with(['message' => 'Artikel berhasil dihapus']);
     }
+
+
+    //controller untuk api di mobile
+    public function artikels()
+    {
+        $artikel = Artikel::all();
+        return response()->json($artikel);
+    }
+    public function latestArtikels()
+{
+    $latestArtikels = Artikel::orderBy('created_at', 'desc')->take(4)->get();
+    return response()->json($latestArtikels);
+}
 }

@@ -27,10 +27,21 @@ class AnakasuhController extends Controller
     public function tambahAnk(Request $request): RedirectResponse
     {
         $this->validate($request, [
-            'nama' => 'required'
+            'nama' => 'required',
+            'img_akta' => 'image|mimes:jpeg,jpg,png|max:2048',
+            'img_kk' => 'image|mimes:jpeg,jpg,png|max:2048',
+            'img_anak' => 'image|mimes:jpeg,jpg,png|max:2048'
         ],
         [
-            'nama.required' => 'Nama harus diisi!'
+            'nama.required' => 'Nama harus diisi!',
+            'img_akta.image' => 'Format foto Akta salah',
+            'img_akta.max' => 'Ukuran foto Akta terlalu besar',
+            'img_kk.image' => 'Format foto KK salah',
+            'img_kk.max' => 'Ukuran foto KK terlalu besar',
+            'img_skko.image' => 'Format foto SKKO salah',
+            'img_skko.max' => 'Ukuran foto SKKO terlalu besar',
+            'img_anak.image' => 'Format foto anak asuh salah',
+            'img_anak.max' => 'Ukuran foto anak asuh terlalu besar',
         ]);
 
         $currentDateTime = Carbon::now()->format('YmdHisu');
@@ -88,10 +99,10 @@ class AnakasuhController extends Controller
     }
 
 
-    public function detail_anakasuh(string $id): View
+    public function detail_anakasuh(string $id_anakasuh): View
     {
-        $ank = Anakasuh::findOrFail($id);
-        return view('detail_anakasuh', compact('ank'));
+        $ank = Anakasuh::findOrFail($id_anakasuh);
+        return view('asuhan.detail_anakasuh', compact('ank'));
     }
 
     public function edit_anakasuh(string $id_anakasuh): view
@@ -104,12 +115,23 @@ class AnakasuhController extends Controller
         public function update_anakasuh(Request $request, $id_anakasuh): RedirectResponse
         {
             $this->validate($request, [
-                'nama' => 'required'
-                ],
-        [
-            'nama.required' => 'Nama harus diisi!'
+                'nama' => 'required',
+                'img_akta' => 'image|mimes:jpeg,jpg,png|max:2048',
+                'img_kk' => 'image|mimes:jpeg,jpg,png|max:2048',
+                'img_anak' => 'image|mimes:jpeg,jpg,png|max:2048'
+            ],
+            [
+                'nama.required' => 'Nama harus diisi!',
+                'img_akta.image' => 'Format foto Akta salah',
+                'img_akta.max' => 'Ukuran foto Akta terlalu besar',
+                'img_kk.image' => 'Format foto KK salah',
+                'img_kk.max' => 'Ukuran foto KK terlalu besar',
+                'img_skko.image' => 'Format foto SKKO salah',
+                'img_skko.max' => 'Ukuran foto SKKO terlalu besar',
+                'img_anak.image' => 'Format foto anak asuh salah',
+                'img_anak.max' => 'Ukuran foto anak asuh terlalu besar',
             ]);
-            
+
         $ank = Anakasuh::findOrFail($id_anakasuh);
         $pres = Prestasianakasuh::where('id_anakasuh', $id_anakasuh)->get();
 
@@ -209,5 +231,12 @@ class AnakasuhController extends Controller
         $ank->delete();
 
         return redirect()->route('anakasuh')->with(['message' => 'Anak asuh berhasil dihapus']);
+    }
+
+    //controller untuk api anak asuh
+    public function anakasuhs()
+    {
+        $anakasuhs = Anakasuh::with('prestasi')->get();
+        return response()->json($anakasuhs);
     }
 }
