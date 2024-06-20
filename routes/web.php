@@ -9,7 +9,9 @@ use App\Http\Controllers\KedonaturanController;
 use App\Http\Controllers\PengasuhController;
 use App\Http\Controllers\AcaraController;
 use App\Http\Controllers\AnakasuhController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\SeleksiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +29,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('isLoggedIn');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('isLoggedIn');
 
 //Route Kedonaturan
 Route::get('/kedonaturan', [KedonaturanController::class, 'kedonaturan'])->name('kedonaturan')->middleware('isLoggedIn');
@@ -51,9 +53,9 @@ Route::put('/update_anakasuh/{id_anakasuh}', [AnakasuhController::class, 'update
 Route::get('/donasi', [DonasiController::class, 'donasi'])->name('donasi')->middleware('isLoggedIn');
 Route::get('/detail_donasi/{id}', [DonasiController::class, 'detail_donasi'])->name('detail_donasi')->middleware('isLoggedIn');
 
-Route::get('/ranking', function () {
-    return view('asuhan/ranking');
-});
+Route::get('/seleksi', [SeleksiController::class, 'seleksi'])->name('seleksi')->middleware('isLoggedIn');
+Route::post('/seleksiAnakasuh', [SeleksiController::class, 'seleksiAnakasuh'])->name('seleksiAnakasuh')->middleware('isLoggedIn');
+Route::get('/hasilSeleksi', [SeleksiController::class, 'hasilSeleksi'])->name('hasilSeleksi')->middleware('isLoggedIn');
 
 //Route Jabatan
 Route::get('/jabatan', [JabatanController::class, 'jabatan'])->name('jabatan')->middleware('isLoggedIn');
@@ -99,10 +101,11 @@ Route::get('/edit_program/{id}', [ProgramController::class, 'edit_program'])->na
 Route::put('/update/{id}', [ProgramController::class, 'update'])->name('update')->middleware('isLoggedIn');
 Route::delete('/hapus_program/{id}', [ProgramController::class, 'hapus_program'])->name('hapus_program')->middleware('isLoggedIn');
 
-
-Route::get('/profile', function () {
-    return view('profile/profile');
-});
+// route profile
+Route::get('/profile', [ProfileController::class, 'profile'])->name('profile')->middleware('isLoggedIn');
+Route::put('/updateProfile', [ProfileController::class, 'updateProfile'])->name('updateProfile')->middleware('isLoggedIn');
+Route::put('/uploadImg', [ProfileController::class, 'uploadImg'])->name('uploadImg')->middleware('isLoggedIn');
+Route::put('/updatePassword', [ProfileController::class, 'updatePassword'])->name('updatePassword')->middleware('isLoggedIn');
 
 // route auth
 Route::controller(AuthController::class)->group(function(){

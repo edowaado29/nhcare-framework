@@ -45,7 +45,7 @@ class AnakasuhController extends Controller
         ]);
 
         $currentDateTime = Carbon::now()->format('YmdHisu');
-        $id_anak = "p-". $currentDateTime;
+        $id_anak = "A-". $currentDateTime;
 
         $imgAktaPath = $request->hasFile('img_akta') ? $request->file('img_akta')->store('public/anakasuhs/Akta') : null;
         $imgKKPath = $request->hasFile('img_kk') ? $request->file('img_kk')->store('public/anakasuhs/KK') : null;
@@ -83,7 +83,8 @@ class AnakasuhController extends Controller
             'nik_ibu' => $request->input('nik_ibu'),
             'nama_wali' => $request->input('nama_wali'),
             'nik_wali' => $request->input('nik_wali'),
-            'img_anak' => $imgAnak
+            'img_anak' => $imgAnak,
+            'status_anak' => 'Aktif'
         ]);
 
         foreach ($request->nama_prestasi as $p) {
@@ -102,7 +103,8 @@ class AnakasuhController extends Controller
     public function detail_anakasuh(string $id_anakasuh): View
     {
         $ank = Anakasuh::findOrFail($id_anakasuh);
-        return view('asuhan.detail_anakasuh', compact('ank'));
+        $pres = Prestasianakasuh::where('id_anakasuh', $id_anakasuh)->get();
+        return view('asuhan.detail_anakasuh', compact('ank', 'pres'));
     }
 
     public function edit_anakasuh(string $id_anakasuh): view
@@ -192,7 +194,8 @@ class AnakasuhController extends Controller
             'nik_ibu' => $request->input('nik_ibu'),
             'nama_wali' => $request->input('nama_wali'),
             'nik_wali' => $request->input('nik_wali'),
-            'img_anak' => $ank->img_anak
+            'img_anak' => $ank->img_anak,
+            'status_anak' => $request->input('status_anak')
         ]);
 
         if($pres->isNotEmpty()){

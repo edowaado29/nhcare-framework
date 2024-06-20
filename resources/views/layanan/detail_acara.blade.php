@@ -31,6 +31,20 @@
   </nav>
   <!-- End Navbar -->
   <div class="container-fluid py-4">
+    <div class="card">
+      <div style="margin-left: 5vh;" class="py-3">
+        <a href="{{ route('acara')}}">
+          <img src="{{asset ('assets/img/back-button.png') }}" style="width: 5vh; opacity: 50%;">
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="px-5">
+        <img src="{{ $acra->gambarAcara !== null ? asset('/storage/acaras/' . $acra->gambarAcara) : asset('/assets/img/no_image.png') }}" style="width: 100%; border: 2px solid #d4d4d4; border-radius: 10px;">
+        <h2 class="pt-4">{{$acra->namaAcara}}</h2>
+        <h3 class="pb-3" style="font-size: 1.25rem; font-weight: 500; color: grey;">{{$acra->tanggalAcara}}</h3>
+        <p class="pb-5">{{$acra->deskripsiAcara}}</p>
+      </div>
+    </div>
   </div>
 </main>
 @endsection

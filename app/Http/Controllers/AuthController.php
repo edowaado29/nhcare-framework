@@ -29,7 +29,7 @@ class AuthController extends Controller
         $user = User::where('email','=',$request->email)->first();
         if($user){
             if(Hash::check($request->passwordd, $user->password)){
-                $request->session()->put('loginId', $user->id);
+                $request->session()->put('loginId', $user->id_user);
                 $request->session()->put('loginSuccess', 'Login Berhasil!');
                 return redirect('dashboard');
             } else {
@@ -45,6 +45,7 @@ class AuthController extends Controller
         $data = array();
         if(Session::has('loginId')){
             Session::pull('loginId');
+            Session::put('logoutSuccess', 'Logout Berhasil!');
             return redirect('login');
         }
     }

@@ -31,6 +31,50 @@
   </nav>
   <!-- End Navbar -->
   <div class="container-fluid py-4">
+    <div class="card">
+      <div style="margin-left: 5vh;" class="py-3">
+        <a href="{{ route('kedonaturan')}}">
+          <img src="{{asset ('assets/img/back-button.png') }}" style="width: 5vh; opacity: 50%;">
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12 px-5 pb-3">
+          <img src="{{ $donatur->foto_donatur !== null ? asset('/storage/kedonaturans/' . $donatur->foto_donatur) : asset('/assets/img/no_image.png') }}" style="width: 100%; border: 2px solid #d4d4d4; border-radius: 10px;">
+        </div>
+        <div class="col-lg-9 col-sm-12">
+          <div style="margin-top: 5vh;">
+            <h2 style="font-size: 1.25rem; font-weight: 400; color: grey;">{{$donatur->id_donatur}}</h2>
+            <h3 style="font-size: 2.25rem;">{{$donatur->nama_donatur}}</h3>
+            <h4 style="color: #73A578; font-weight: 400;">{{$donatur->email}}</h4>
+          </div>
+        </div>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="row mt-3 pb-5">
+        <div class="col-4" style="padding-left: 60px;">
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Jenis Kelamin</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Nomor Handphone</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Alamat</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Pertanyaan Keamanan</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Jawaban Keamanan</h5>
+        </div>
+        <div class="col-1">
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+        </div>
+        <div class="col-7">
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$donatur->jenis_kelamin}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$donatur->nomor_handphone}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$donatur->alamat}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$donatur->pertanyaan}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$donatur->jawaban}}</h5>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 @endsection

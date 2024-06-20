@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('nik_wali')->nullable();
             $table->string('img_anak')->nullable();
             $table->timestamps();
+            $table->string('status_anak')->nullable();
         });
     }
 

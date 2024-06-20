@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jabatan;
 use App\Models\Pengasuh;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -57,10 +58,14 @@ class PengasuhController extends Controller
 
         $getEmail = Pengasuh::where('email', '=', $request->email)->first();
 
+        $currentDateTime = Carbon::now()->format('YmdHisu');
+        $id_pengasuh = "P-". $currentDateTime;
+
         if($getEmail){
             return back()->with('fail', 'Email sudah terdaftar!');
         } else{
             Pengasuh::create([
+                'id' => $id_pengasuh,
                 'nbm' => $request->input('nbm'),
                 'nama_pengasuh' => $request->input('nama_pengasuh'),
                 'jenis_kelamin' => $request->input('jenis_kelamin'),
@@ -72,7 +77,7 @@ class PengasuhController extends Controller
                 'nomor_handphone' => $request->input('nomor_handphone'),
                 'email' => $request->input('email'),
                 'tanggal_masuk' => $request->input('tanggal_masuk'),
-                'status_pengasuh' => 'aktif',
+                'status_pengasuh' => 'Aktif',
                 'foto_kartukeluarga' => $fotokk,
                 'foto_ktp' => $fotoktp,
                 'foto_pengasuh' => $foto,

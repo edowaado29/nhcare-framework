@@ -20,13 +20,16 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
   <style>
-        .colored-toast.swal2-icon-error {
-            background-color: #f27474 !important;
-        }
+    .colored-toast.swal2-icon-success {
+      background-color: #a5dc86 !important;
+    }
+    .colored-toast.swal2-icon-error {
+        background-color: #f27474 !important;
+    }
     </style>
 </head>
 
-<body class="">
+<body>
   <main class="main-content  mt-0">
     <section>
       <div class="page-header min-vh-100">
@@ -66,7 +69,7 @@
                     <div class="row">
                       <div class="col-6">
                         <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" id="rememberMe">
+                          <input class="form-check-input" type="checkbox" id="rememberMe" name="remember_me">
                           <label class="form-check-label" for="rememberMe">Ingatkan saya</label>
                         </div>
                       </div>
@@ -158,6 +161,26 @@
     }
   }
 </script>
+@if (Session::has('logoutSuccess'))
+  <script>
+    const Toast2 = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast',
+      },
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    })
+    Toast2.fire({
+      icon: 'success',
+      title: "{{ Session::get('logoutSuccess') }}"
+    });
+  </script>
+  {{Session::pull('logoutSuccess', 'Logout Berhasil!')}}
+  @endif
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

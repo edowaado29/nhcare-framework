@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Donasi;
+use App\Models\Kedonaturan;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;

@@ -48,7 +48,7 @@
                   <tr>
                     <th class="text-uppercase text-success text-xxs font-weight-bolder opacity-7">No</th>
                     <th class="text-uppercase text-success text-xxs font-weight-bolder opacity-7 ps-2">ID Transaksi</th>
-                    <th class="text-uppercase text-success text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
+                    <th class="text-uppercase text-success text-xxs font-weight-bolder opacity-7 ps-2">Nama Donatur</th>
                     <th class="text-uppercase text-success text-xxs font-weight-bolder opacity-7 ps-2">Nominal</th>
                     <th class="text-uppercase text-success text-xxs font-weight-bolder opacity-7 ps-2">Tanggal</th>
                     <th class="text-uppercase text-success text-xxs font-weight-bolder opacity-7">Aksi</th>
@@ -68,7 +68,7 @@
                       {{ $dns->id_transaksi }}
                     </td>
                     <td>
-                      {{ $dns->donatur->email }}
+                      {{ $dns->donatur->nama_donatur }}
                     </td>
                     <td>
                       {{ $dns->nominal }}
@@ -77,7 +77,7 @@
                       {{ $dns->tanggal_donasi }}
                     </td>
                     <td class="align-middle text-sm">
-                      <a href="{{ route('detail_donasi', $dns->id_transaksi)}}" class="btn btn-sm bg-gradient-primary">Detail</a>
+                      <a href="{{ route('detail_donasi', $dns->id_transaksi )}}" class="btn btn-sm bg-gradient-primary">Detail</a>
                     </td>
                   </tr>
                   @empty

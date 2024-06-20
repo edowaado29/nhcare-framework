@@ -31,6 +31,49 @@
   </nav>
   <!-- End Navbar -->
   <div class="container-fluid py-4">
+    <div class="card">
+      <div style="margin-left: 5vh;" class="py-3">
+        <a href="{{ route('donasi')}}">
+          <img src="{{asset ('assets/img/back-button.png') }}" style="width: 5vh; opacity: 50%;">
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="row pb-5">
+        <div class="col-lg-4 col-sm-12 px-5 pb-3" style="text-align: center;">
+          <img src="{{asset ('assets/img/successful_payment.png') }}" style="width: 75%;">
+        </div>
+        <div class="col-lg-8 col-sm-12">
+          <div style="margin-top: 4vh;">
+            <div class="row">
+              <div class="col-3">
+                <h5 style="font-weight: 500; font-size: 1.15rem;">ID Transaksi</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">Nama Donatur</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">Nominal</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">Tujuan</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">Tanggal Donasi</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">Doa</h5>
+              </div>
+              <div class="col-1">
+                <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+              </div>
+              <div class="col-7">
+                <h5 style="font-weight: 500; font-size: 1.15rem;">{{$dnsi->id_transaksi}}</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">{{$dnsi->donatur->nama_donatur}}</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">Rp. {{$dnsi->nominal}}</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">{{$dnsi->tujuan}}</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">{{$dnsi->tanggal_donasi}}</h5>
+                <h5 style="font-weight: 500; font-size: 1.15rem;">{{$dnsi->doa}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 @endsection

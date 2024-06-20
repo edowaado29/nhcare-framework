@@ -131,10 +131,10 @@
 
                     <div class="mb-3">
                       <label class="form-label text-secondary fs-6">Status Kepengasuhan <span class="text-danger">*</span></label><br>
-                      <input type="radio" name="status_pengasuh" id="aktif" value="aktif" {{ old('status_pengasuh', $peng->status_pengasuh) == 'aktif' ? 'checked' : '' }}>
+                      <input type="radio" name="status_pengasuh" id="aktif" value="Aktif" {{ old('status_pengasuh', $peng->status_pengasuh) == 'Aktif' ? 'checked' : '' }}>
                       <label for="aktif" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Aktif</label>
 
-                      <input type="radio" name="status_pengasuh" id="tidak_aktif" value="tidak_aktif" style="margin-left: 3vh;" {{ old('status_pengasuh', $peng->status_pengasuh) == 'tidak_aktif' ? 'checked' : '' }}>
+                      <input type="radio" name="status_pengasuh" id="tidak_aktif" value="Tidak Aktif" style="margin-left: 3vh;" {{ old('status_pengasuh', $peng->status_pengasuh) == 'Tidak Aktif' ? 'checked' : '' }}>
                       <label for="tidak_aktif" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Tidak Aktif</label>
                     </div>
 

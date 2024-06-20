@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donasi;
 use App\Models\Kedonaturan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -64,6 +65,8 @@ class KedonaturanController extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'email' => $request->email,
                 'password' => Hash::make($request->passwordd),
+                'pertanyaan' => $request->pertanyaan,
+                'jawaban' => $request->jawaban,
                 'foto_donatur' => $foto_donatur
             ]);
             return redirect()->route('kedonaturan')->with(['message' => 'Donatur berhasil ditambahkan']);
@@ -110,6 +113,8 @@ class KedonaturanController extends Controller
                             'alamat' => $request->alamat,
                             'jenis_kelamin' => $request->jenis_kelamin,
                             'email' => $request->email,
+                            'pertanyaan' => $request->pertanyaan,
+                            'jawaban' => $request->jawaban,
                             'foto_donatur' => $foto_donatur->hashName()
                         ]);
                         return redirect()->route('kedonaturan')->with(['message' => 'Data donatur berhasil diedit']);
@@ -124,6 +129,8 @@ class KedonaturanController extends Controller
                         'jenis_kelamin' => $request->jenis_kelamin,
                         'email' => $request->email,
                         'password' => Hash::make($request->passwordd),
+                        'pertanyaan' => $request->pertanyaan,
+                        'jawaban' => $request->jawaban,
                         'foto_donatur' => $foto_donatur->hashName()
                     ]);
                     return redirect()->route('kedonaturan')->with(['message' => 'Data donatur berhasil diedit']);
@@ -136,7 +143,9 @@ class KedonaturanController extends Controller
                             'nomor_handphone' => $request->nomor_handphone,
                             'alamat' => $request->alamat,
                             'jenis_kelamin' => $request->jenis_kelamin,
-                            'email' => $request->email
+                            'email' => $request->email,
+                            'pertanyaan' => $request->pertanyaan,
+                            'jawaban' => $request->jawaban
                         ]);
                         return redirect()->route('kedonaturan')->with(['message' => 'Data donatur berhasil diedit']);
                     } else {
@@ -149,7 +158,9 @@ class KedonaturanController extends Controller
                         'alamat' => $request->alamat,
                         'jenis_kelamin' => $request->jenis_kelamin,
                         'email' => $request->email,
-                        'password' => Hash::make($request->passwordd)
+                        'password' => Hash::make($request->passwordd),
+                        'pertanyaan' => $request->pertanyaan,
+                        'jawaban' => $request->jawaban,
                     ]);
                     return redirect()->route('kedonaturan')->with(['message' => 'Data donatur berhasil diedit']);
                 }
@@ -160,9 +171,15 @@ class KedonaturanController extends Controller
     public function hapus_donatur($id): RedirectResponse
     {
         $donatur = kedonaturan::findOrFail($id);
-
+        $donasi = Donasi::where('id_donatur', $id)->get();
+        
         Storage::delete('public/kedonaturans/' . $donatur->foto_donatur);
-
+        
+        if($donasi->isNotEmpty()){
+            foreach ($donasi as $d) {
+                $d->delete();
+            }
+        }
         $donatur->delete();
         return redirect()->route('kedonaturan')->with(['message' => 'Donatur berhasil dihapus']);
     }

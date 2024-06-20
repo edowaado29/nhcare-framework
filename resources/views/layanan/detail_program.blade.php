@@ -31,6 +31,19 @@
   </nav>
   <!-- End Navbar -->
   <div class="container-fluid py-4">
+    <div class="card">
+      <div style="margin-left: 5vh;" class="py-3">
+        <a href="{{ route('program')}}">
+          <img src="{{asset ('assets/img/back-button.png') }}" style="width: 5vh; opacity: 50%;">
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="px-5">
+        <img src="{{ $prog->gambarProgram !== null ? asset('/storage/programs/' . $prog->gambarProgram) : asset('/assets/img/no_image.png') }}" style="width: 100%; border: 2px solid #d4d4d4; border-radius: 10px;">
+        <h2 class="pt-4 pb-3">{{$prog->namaProgram}}</h2>
+        <p class="pb-5">{{$prog->deskripsiProgram}}</p>
+      </div>
+    </div>
   </div>
 </main>
 @endsection

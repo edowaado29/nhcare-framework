@@ -203,6 +203,14 @@
                       </div>
                     </div>
                     <div class="mb-3">
+                      <label class="form-label text-secondary fs-6">Status Anak Asuh <span class="text-danger">*</span></label><br>
+                      <input type="radio" name="status_anak" id="aktif" value="Aktif" {{ old('status_anak', $ank->status_anak) == 'Aktif' ? 'checked' : '' }}>
+                      <label for="aktif" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Aktif</label>
+
+                      <input type="radio" name="status_anak" id="tidak_aktif" value="Tidak Aktif" style="margin-left: 3vh;" {{ old('status_anak', $ank->status_anak) == 'Tidak Aktif' ? 'checked' : '' }}>
+                      <label for="tidak_aktif" class="text-secondary" style="font-weight: 500; font-size: 1rem;">Tidak Aktif</label>
+                    </div>
+                    <div class="mb-3">
                       <div class="form-group">
                         <label for="img_anak" class="text-secondary fs-6">Foto Anak Asuh (Maksimal 2MB) <span class="text-danger">*</span></label><br>
                         <input type="file" class="form-control" id="img_anak" name="img_anak" onchange="fotoPreview(event)">

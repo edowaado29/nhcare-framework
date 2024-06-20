@@ -31,6 +31,73 @@
   </nav>
   <!-- End Navbar -->
   <div class="container-fluid py-4">
+    <div class="card">
+      <div style="margin-left: 5vh;" class="py-3">
+        <a href="{{ route('pengasuh')}}">
+          <img src="{{asset ('assets/img/back-button.png') }}" style="width: 5vh; opacity: 50%;">
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12 px-5 pb-3">
+          <img src="{{ $peng->foto_pengasuh !== null ? asset('/storage/pengasuhs/foto/' . $peng->foto_pengasuh) : asset('/assets/img/no_image.png') }}" style="width: 100%; border: 2px solid #d4d4d4; border-radius: 10px;">
+        </div>
+        <div class="col-lg-9 col-sm-12">
+          <div style="margin-top: 5vh;">
+            <h2 style="font-size: 1.25rem; font-weight: 400; color: grey;">{{$peng->id}}</h2>
+            <h3 style="font-size: 2.25rem;">{{$peng->nama_pengasuh}}</h3>
+            <h4 style="color: #73A578; font-weight: 400;">{{$peng->email}}</h4>
+          </div>
+        </div>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="row mt-3 pb-3">
+        <div class="col-4" style="padding-left: 60px;">
+          <h5 style="font-weight: 500; font-size: 1.15rem;">NBM</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Jenis Kelamin</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Tempat / Tanggal Lahir</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Alamat</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Nomor Handphone</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Pendidikan Terakhir</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Jabatan</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Tanggal Masuk</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Status</h5>
+        </div>
+        <div class="col-1">
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">:</h5>
+        </div>
+        <div class="col-7">
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$peng->nbm}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$peng->jenis_kelamin}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$peng->tempat_lahir}} / {{$peng->tanggal_lahir}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$peng->alamat}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$peng->nomor_handphone}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$peng->pendidikan_terakhir}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$peng->jabatan->nama_jabatan}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$peng->tanggal_masuk}}</h5>
+          <h5 style="font-weight: 500; font-size: 1.15rem;">{{$peng->status_pengasuh}}</h5>
+        </div>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="row pb-5">
+        <div class="col-lg-6 col-sm-12" style="padding-left: 60px;">
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Pratinjau Foto KK</h5>
+          <img src="{{ $peng->foto_kartukeluarga !== null ? asset('/storage/pengasuhs/KK/' . $peng->foto_kartukeluarga) : asset('/assets/img/no_image.png') }}" style="width: 100%; height: 330px; border: 2px solid #d4d4d4; border-radius: 10px;">
+        </div>
+        <div class="col-lg-6 col-sm-12" style="padding-right: 60px;">
+          <h5 style="font-weight: 500; font-size: 1.15rem;">Pratinjau Foto KTP</h5>
+          <img src="{{ $peng->foto_ktp !== null ? asset('/storage/pengasuhs/KTP/' . $peng->foto_ktp) : asset('/assets/img/no_image.png') }}" style="width: 100%; height: 330px; border: 2px solid #d4d4d4; border-radius: 10px;">
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 @endsection

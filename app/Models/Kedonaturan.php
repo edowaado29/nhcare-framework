@@ -20,6 +20,7 @@ class Kedonaturan extends Authenticatable
     protected $keyType = 'string';
 
     protected $fillable = [
+        'id_donatur',
         'nama_donatur',
         'nomor_handphone',
         'alamat',
@@ -47,7 +48,7 @@ class Kedonaturan extends Authenticatable
 
         static::creating(function ($model) {
             $currentDateTime = Carbon::now()->format('YmdHisu');
-        $model->id_donatur = "D-". $currentDateTime;
+            $model->id_donatur = "D-". $currentDateTime;
         });
     }
 }

@@ -91,6 +91,14 @@
                       </script>
                       @enderror
                     </div>
+                    <div class="mb-3">
+                      <label for="pertanyaan" class="form-label text-secondary fs-6">Pertanyaan Keamanan <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control @error('pertanyaan') is-invalid @enderror" id="pertanyaan" name="pertanyaan" value="{{ old('pertanyaan')}}">
+                    </div>
+                    <div class="mb-3">
+                      <label for="jawaban" class="form-label text-secondary fs-6">Jawaban Keamanan <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control @error('jawaban') is-invalid @enderror" id="jawaban" name="jawaban" value="{{ old('jawaban')}}">
+                    </div>
                     <div class="form-group">
                       <label for="foto_donatur" class="text-secondary fs-6">Foto Donatur (Maksimal 2MB) <span class="text-danger">*</span></label><br>
                       <input type="file" class="form-control" id="foto_donatur" name="foto_donatur" onchange="previewImage(event)">

@@ -39,7 +39,8 @@ class Anakasuh extends Model
         'nik_ibu',
         'nama_wali',
         'nik_wali',
-        'img_anak'
+        'img_anak',
+        'status_anak',
     ];
 
     public function getGambarArtikelUrlAttribute($value)
