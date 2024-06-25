@@ -50,7 +50,7 @@
                       </script>
                     @endif
                     <div class="mb-3">
-                      <input type="text" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" placeholder="Email" aria-label="Email" value="{{ old('email') }}">
+                      <input type="text" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" placeholder="Email" aria-label="Email" value="{{ old('email', Cookie::get('email')) }}">
                       @error('email')
                       <script>
                         const ErrorEmail = '{{ $message }}';
@@ -58,9 +58,9 @@
                       @enderror
                     </div>
                     <div class="mb-3">
-                      <input type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" id="passwordd" name="passwordd" placeholder="Password" aria-label="Password" value="{{ old('passwordd') }}">
+                      <input type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" id="passwordd" name="passwordd" placeholder="Password" aria-label="Password" value="{{ old('passwordd', Cookie::get('password')) }}">
                       <i class="fa fa-eye position-absolute" id="togglePassword" style="cursor: pointer; right: 40px; top: 195px;"></i>
-                      @error('password')
+                      @error('passwordd')
                       <script>
                         const ErrorPassword = '{{ $message }}';
                       </script>
@@ -69,7 +69,7 @@
                     <div class="row">
                       <div class="col-6">
                         <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" id="rememberMe" name="remember_me">
+                          <input class="form-check-input" type="checkbox" id="rememberMe" name="remember_me" {{ Cookie::has('email') ? 'checked' : '' }}>
                           <label class="form-check-label" for="rememberMe">Ingatkan saya</label>
                         </div>
                       </div>

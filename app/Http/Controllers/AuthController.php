@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -31,6 +32,15 @@ class AuthController extends Controller
             if(Hash::check($request->passwordd, $user->password)){
                 $request->session()->put('loginId', $user->id_user);
                 $request->session()->put('loginSuccess', 'Login Berhasil!');
+
+                if ($request->has('remember_me')) {
+                    Cookie::queue('email', $request->email, 43200);
+                    Cookie::queue('password', $request->passwordd, 43200);
+                } else {
+                    Cookie::queue(Cookie::forget('email'));
+                    Cookie::queue(Cookie::forget('password'));
+                }
+                
                 return redirect('dashboard');
             } else {
                 return back()->with('fail','Email atau password salah!');

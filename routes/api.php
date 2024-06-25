@@ -53,3 +53,4 @@ Route::post('/create-transaction', [DonasiController::class, 'createTransaction'
 Route::post('/handle-notification', [DonasiController::class, 'handleNotification']);
 Route::get('/alokasi', [DonasiController::class, 'alokasi']);
 Route::get('/total-donations', [DonasiController::class, 'getTotalDonations']);
+Route::get('/donations/{id_donatur}', [DonasiController::class, 'getDonationHistory']);

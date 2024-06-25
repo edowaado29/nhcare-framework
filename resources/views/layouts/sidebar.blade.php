@@ -1,4 +1,7 @@
 <div class="min-height-300 position-fixed w-100" style="background: #73A578;"></div>
+  <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url(assets/img/bg-nav.png); background-position-y: 50%; background-repeat: no-repeat; background-size: cover;">
+    <span class="mask bg-success opacity-7"></span>
+  </div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -68,7 +71,7 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="{{asset ('assets/img/absensi.png')}}" style="height: 2.75vh;">
             </div>
-            <span class="nav-link-text ms-1">Pilih Hero</span>
+            <span class="nav-link-text ms-1">Seleksi Anak Asuh</span>
           </a>
         </li>
         <li class="nav-item mt-3">

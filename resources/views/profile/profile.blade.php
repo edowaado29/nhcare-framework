@@ -3,6 +3,9 @@
 @section('content')
   <main class="main-content position-relative border-radius-lg ">
   <style>
+    .colored-toast.swal2-icon-success {
+      background-color: #a5dc86 !important;
+    }
     .colored-toast.swal2-icon-error {
       background-color: #f27474 !important;
     }
@@ -243,4 +246,23 @@
     } 
   }
 </script>
+@if (session('message'))
+  <script>
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast',
+      },
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    })
+    Toast.fire({
+      icon: 'success',
+      title: "{{ session('message') }}"
+    });
+  </script>
+  @endif
 @endsection

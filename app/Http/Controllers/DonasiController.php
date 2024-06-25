@@ -118,4 +118,15 @@ class DonasiController extends Controller
         ]);
     }
 
+    public function getDonationHistory(string $id_donatur)
+    {
+        $donations = Donasi::where('id_donatur', $id_donatur)
+            ->select('nominal','tujuan', 'tanggal_donasi')
+            ->get();
+
+        return response()->json([
+            'Donasi' => $donations,
+        ]);
+    }
+
 }
