@@ -5,9 +5,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
-  <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('assets/img/nhcare-logo-color.png') }}">
   <title>
-    Raw
+    Nurul Husna Care
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -76,7 +76,7 @@
                       <div class="col-6">
                         <div class="card-footer text-end pt-0 px-lg-2 px-1">
                           <p class="text-sm mx-auto">
-                            <a href="javascript:;" class="text-success text-gradient font-weight-bold">Lupa password</a>
+                            <a href="{{route('forgot_password')}}" class="text-success text-gradient font-weight-bold">Lupa password</a>
                           </p>
                         </div>
                       </div>
@@ -92,7 +92,6 @@
               <div class="position-relative bg-gradient-success h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('assets/img/bg-login.jpg');
                 background-size: cover;">
                 <span class="mask bg-gradient-success opacity-5"></span>
-                <!-- <h4 class="mt-5 text-white font-weight-bolder position-relative" style="font-size: 4rem;"></h4> -->
               </div>
             </div>
           </div>
@@ -180,6 +179,27 @@
     });
   </script>
   {{Session::pull('logoutSuccess', 'Logout Berhasil!')}}
+  @endif
+  
+@if (Session::has('ResetPasswordSuccess'))  
+  <script>
+    const Toast3 = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast',
+      },
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    })
+    Toast3.fire({
+      icon: 'success',
+      title: "{{ Session::get('ResetPasswordSuccess') }}"
+    });
+  </script>
+  {{Session::pull('ResetPasswordSuccess', 'Reset Password Berhasil!')}}
   @endif
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

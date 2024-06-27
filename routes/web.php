@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/ex', function () {
+//     return view('auth.mail-reset-password');
+// });
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('isLoggedIn');
 
@@ -109,7 +109,12 @@ Route::put('/updatePassword', [ProfileController::class, 'updatePassword'])->nam
 
 // route auth
 Route::controller(AuthController::class)->group(function(){
-    Route::get('/login','login')->middleware('alreadyLoggedIn');
+    Route::get('/', 'index')->middleware('alreadyLoggedIn');
+    Route::get('/login','login')->name('login')->middleware('alreadyLoggedIn');
+    Route::get('/forgot_password','forgot_password')->name('forgot_password')->middleware('alreadyLoggedIn');
+    Route::post('/forgot_password_act','forgot_password_act')->name('forgot_password_act')->middleware('alreadyLoggedIn');
+    Route::get('/validasi_forgot_password/{token}','validasi_forgot_password')->name('validasi_forgot_password')->middleware('alreadyLoggedIn');
+    Route::post('/validasi_forgot_password_act','validasi_forgot_password_act')->name('validasi_forgot_password_act')->middleware('alreadyLoggedIn');
     Route::post('/loginUser','loginUser')->name('loginUser');
     Route::get('/logout','logout');
 });

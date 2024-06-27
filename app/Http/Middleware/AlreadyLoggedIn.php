@@ -18,6 +18,15 @@ class AlreadyLoggedIn
         if(Session()->has('loginId') && (url('login') == $request->url())){
             return back()->with('fail','Anda harus logout terlebih dahulu.');
         }
+        if(Session()->has('loginId') && (url('index') == $request->url())){
+            return back()->with('fail','Anda harus logout terlebih dahulu.');
+        }
+        if(Session()->has('loginId') && (url('forgot_password') == $request->url())){
+            return back()->with('fail','Anda harus logout terlebih dahulu.');
+        }
+        if(Session()->has('loginId') && (url('validasi_forgot_password') == $request->url())){
+            return back()->with('fail','Anda harus logout terlebih dahulu.');
+        }
         return $next($request);
     }
 }

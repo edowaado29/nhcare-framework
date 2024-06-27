@@ -1,5 +1,13 @@
+<style>
+  .bg-nav{
+    background-image: url('{{ asset("assets/img/bg-nav.png") }}');
+    background-position-y: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
 <div class="min-height-300 position-fixed w-100" style="background: #73A578;"></div>
-  <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url(assets/img/bg-nav.png); background-position-y: 50%; background-repeat: no-repeat; background-size: cover;">
+  <div class="position-fixed w-100 min-height-300 top-0 bg-nav">
     <span class="mask bg-success opacity-7"></span>
   </div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
